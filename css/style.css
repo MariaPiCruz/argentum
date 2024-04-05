@@ -147,6 +147,7 @@ header {
     display: flex;
     justify-content: space-around;
     padding: 26px;
+    left: 0px;
 }
 
 /* Logo */
