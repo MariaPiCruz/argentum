@@ -1,4 +1,5 @@
 'use strict';
+
 /*****************************************/
 /* Determina cuando se carga la pagina   */
 /*****************************************/
@@ -8,7 +9,8 @@ window.addEventListener('load', function () {
 });
 
 /**********************************************/
-/* Cambia el estilo al menú al hacer scroll   */
+/* Cambia el estilo al menú y el boton de ir  */
+/* arriba al hacer scroll                     */
 /**********************************************/
 const header=document.querySelector('header');
 const irTop=document.querySelector('#irTop');
@@ -31,7 +33,9 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Evento al hacer click en el boton de ir para arriba
+/**************************************************/
+/* Evento al hacer click en el boton de ir arriba */
+/**************************************************/
 irTop.addEventListener("click", function () {
     // Hacemos scroll al tope de la página
     window.scrollTo({
@@ -40,8 +44,3 @@ irTop.addEventListener("click", function () {
     });
 });
 
-
-// Opciones de menú
-function irHome(){
-    
-}
