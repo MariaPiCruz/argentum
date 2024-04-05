@@ -1,5 +1,3 @@
-
-
 .center{
     margin: 0px auto;
 }
@@ -28,7 +26,7 @@
 }
 .sliders ul{
     display: flex;
-    width: 300%;
+    width: 400%;
 }
 
 .slider{
@@ -41,7 +39,7 @@
 
 .slider div{
     text-align: center;
-    width: 800px;
+    width: 80%;
     color: #fff;
 }
 
@@ -49,6 +47,12 @@
     font-size: 57px;
     font-weight: 100;
     margin-bottom: 40px;
+    width: 80%;
+    margin: 0px auto;
+}
+
+.slider .btn{
+    margin: 40px;
 }
 
 .slider1{
@@ -59,10 +63,14 @@
 
 .slider2{
     background-image: url("../images/slider-5-1920x1000.jpg");
+    background-position: center;
+    background-size: cover;
 }
 
 .slider3{
     background-image: url("../images/slider-6-1920x1000.jpg");
+    background-position: center;
+    background-size: cover;
 }
 /* Social buttoms*/
 .social-buttoms{
@@ -218,7 +226,6 @@
 .adventages{
     display: grid;
     margin: 20px auto;
-    max-width: 1000px;
     grid-template: 
         'header header header'
         'area1 phone area4'
@@ -276,8 +283,6 @@
 .content-galery{
     display: grid;
     grid-template-columns: repeat(3,1fr);
-    max-width: 1000px;
-    height: 806px;
     margin: 80px auto;
     gap: 20px;
 }
@@ -327,6 +332,10 @@
     flex-direction: column;
     align-items: center;
     padding: 10px;
+}
+
+.image4 img{
+    width: 100%;
 }
 
 .image5{
@@ -388,14 +397,14 @@
 /***************************************/
 .acercade{
     background-image: url('../images/mt-1858-content-bg02.jpg');
+    background-position: center;
+    background-size: cover;
     width: 100%;
-    height: 420px;
-    padding: 50px;
+    padding: 50px 0px;
 }
 
 .content-video{
     display: flex;
-    max-width: 1000px;
     margin: 0px auto;
 }
 
@@ -415,11 +424,15 @@
     margin-bottom: 20px;
 }
 
+#iframe-video{
+    width: 70%;
+    height: 315px;
+}
+
 /***************************************/
 /* Solicitud tarjeta                   */
 /***************************************/
 .content-solicitud{
-    max-width: 1000px;
     margin: 40px auto;
 }
 
@@ -434,8 +447,9 @@
     margin-bottom: 30px;
 }
 
-.panel-flex{
-    display: flex;
+.panel-pasos{
+    display: grid;
+    grid-template: 'pasos card';
 }
 
 .content-pasos{
@@ -443,6 +457,11 @@
     flex-direction: column;
     height: 50%;
     padding: 40px 10px 30px 0px;
+    grid-area: pasos;
+}
+
+.card-pasos{
+    grid-area: card;
 }
 
 .pasos{
@@ -469,4 +488,141 @@
 .desc-paso p{
     color: #000000;
     line-height: 1.4;
+}
+
+@media screen and (max-width: 1000px) {
+    /*Carrousel*/
+    .slider div div{
+        font-size: 37px;
+    }
+
+    /*seccion*/
+    .section-all{
+        grid-template-columns: repeat(2,1fr);
+        height: 100%;
+    }
+    /*ventajas*/
+    .adventages{
+        grid-template: 
+            'header header'
+            'area1 phone'
+            'area2 phone'
+            'area3 phone'
+            'area4 phone'
+            'area5 phone'
+            'area6 phone';
+    }
+    .grid-header{
+        grid-area: header;
+        padding: 50px 50px;
+    }
+    .grid-area1 .content-adventage {
+        flex-direction: row-reverse;
+    }
+    .grid-area2 .content-adventage {
+        flex-direction: row-reverse;
+    }
+    .grid-area3 .content-adventage {
+        flex-direction: row-reverse;
+    }
+    .grid-area1 .content-adventage .align-right{
+        text-align: left;
+    }
+    .grid-area2 .content-adventage .align-right{
+        text-align: left;
+    }
+    .grid-area3 .content-adventage .align-right{
+        text-align: left;
+    }
+    /*Acerca de*/
+    .content-video h3{
+        font-size: 24px;   
+    }
+    /*Solicitar tarjeta*/
+    .pasos h3{
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    /*Carrousel*/
+    .slider div div{
+        font-size: 27px;
+    }
+    /*seccion*/
+    .section-all{
+        grid-template-columns: repeat(1,1fr);
+        height: 100%;
+    }
+    /*Galery*/
+    .content-galery{
+        grid-template-columns: repeat(1,1fr);
+    }
+    .image1, .image2, .image3, .image4, .image5{
+        height: 300px;
+    }
+    .image4 img{
+        width: 50%;
+    }
+    /*ventajas*/
+    .adventages{
+        grid-template: 
+            'header'
+            'phone'
+            'area1'
+            'area2'
+            'area3'
+            'area4'
+            'area5'
+            'area6';
+    }
+    .grid-header{
+        grid-area: header;
+        padding: 50px 50px;
+    }
+    .grid-area1 .content-adventage {
+        flex-direction: row-reverse;
+    }
+    .grid-area2 .content-adventage {
+        flex-direction: row-reverse;
+    }
+    .grid-area3 .content-adventage {
+        flex-direction: row-reverse;
+    }
+    .grid-area1 .content-adventage .align-right{
+        text-align: left;
+    }
+    .grid-area2 .content-adventage .align-right{
+        text-align: left;
+    }
+    .grid-area3 .content-adventage .align-right{
+        text-align: left;
+    }
+    /* Video */
+    .content-video{
+        flex-direction: column;
+    }
+    .content-video div{
+        width: 100%;
+        text-align: center;
+    }
+    .content-video h3{
+        font-size: 16px;
+    }
+    #iframe-video{
+        width: 100%;
+    }
+    /*Solicitar tarjeta*/
+    .content-solicitud h4{
+        font-size: 24px;
+    }
+    .pasos h3{
+        font-size: 12px;
+    }
+    .panel-pasos{
+        grid-template: 'card''pasos';
+    }  
+    .desc-paso h4{
+        font-size: 18px;
+    }
 }
