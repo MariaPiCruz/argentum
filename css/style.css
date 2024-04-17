@@ -128,7 +128,7 @@ main{
 header {
     position: fixed;
     width: 100%;
-    z-index: 10;
+    z-index: 2000;
 }
 
 .header-dark {
@@ -162,7 +162,7 @@ header {
     gap: 50px;
 }
 
-#menu ul li {
+#menu a {
     padding: 10px 0px;
     font-size: 18px;
     font-weight: 300;
@@ -173,7 +173,7 @@ header {
 
 }
 
-#menu ul li:hover {
+#menu a:hover {
     border-color: #ffffff;
 }
 

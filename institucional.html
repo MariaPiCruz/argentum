@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BANCO ARGENTUM</title>
+    <link rel="icon" type="image/x-icon" href="logo.png">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:100,300,300i,400,700,900">
+    <link rel="stylesheet" href="css/fontawesome/css/all.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/institucional.css">
+</head>
+
+<body>
+    <!--Loading-->
+    <div class="preloader">
+        <div class="preloader-body">
+            <div class="cssload-container">
+                <div class="cssload-speeding-wheel"></div>
+            </div>
+            <p>Cargando...</p>
+        </div>
+    </div>
+    <!--Menu-->
+    <header>
+        <div id="menu">
+            <a href="#"><img src="images/argenntum.fw.png" alt=""></a>
+            <ul>
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+                <li>
+                    <a href="institucional.html">Institucional</a>
+                </li>
+                <li>
+                    <a href="">Servicios</a>
+                </li>
+                <li>
+                    <a href="">Contacto</a>
+                </li>
+            </ul>
+            <button class="btn">Online Banking</button>
+        </div>
+        <button class="btn-mnu" onclick="eventoMenu()" id="btnMnu">≡</button>
+    </header>
+
+    <main> <!--SACAR EL STYLE-->
+        <!-- No usar style.css: es solo para estilos globales que usan todas la paginas -->
+        <!-- Agregar un nuevo css para la pagina donde esten trabajando -->
+        <!-- El archivo script.js es para procedimientos globales. Agregar un archivo .js para la pagina que esten trabajando -->
+        <!--
+            Ejemplo: para la pagina contactos.html
+            
+            Podria ser: contactos.css y contactos.js
+        -->
+        <section class="fondo">
+            <div class="fondo-img">
+                <div class="fondo-epigrafe">
+                    <p>LIDERES EN SERVICIOS ECONOMICOS</p>
+                </div>
+                <div class="fondo-titulo">
+                    <h1>Sobre nosotros</h1>
+                </div>
+                <div class="fondo-texto">
+                    <p>En nuestro banco, cada cliente es una historia de éxito.</p>
+                    <p>Nuestro compromiso es trazar el camino hacia un futuro financiero sólido y seguro para todos.</p>
+                </div>
+            </div>
+        </section>
+        <section class="historia">
+            <div class="historia-titulo">
+                <h2>Nuestra Historia</h2>
+            </div>
+            <div class="grid">
+                <div class="container">
+                    <div class="card">
+                        <div class="imgBx">
+                            <img src="images/inicio.png" alt="">
+                        </div>
+                        <div class="contentBx">
+                            <h2>Inicio</h2>
+                            <div class="size">
+                                <h3>Banco Argentum comenzó su trayectoria en 1999. Aunque su sede se encuentra en
+                                    Estados
+                                    Unidos, su visión trasciende fronteras, aspirando a servir a organizaciones de todo
+                                    el
+                                    mundo.
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="card">
+                        <div class="imgBx">
+                            <img src="images/evolucion.png" alt="">
+                        </div>
+                        <div class="contentBx">
+                            <h2>Evolución</h2>
+                            <div class="size">
+                                <h3>Se transformó en un banco comercial moderno mediante sólidas medidas y una
+                                    aceleración
+                                    del desarrollo, promoviendo la exploración y una cultura del trabajo orientada a
+                                    resultados concretos.
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="card">
+                        <div class="imgBx">
+                            <img src="images/mundo.png" alt="">
+                        </div>
+                        <div class="contentBx">
+                            <h2>En el mundo</h2>
+                            <div class="size">
+                                <h3>A través de un continuo esfuerzo y un desarrollo estable, se consolidó como el banco
+                                    más
+                                    grande del mundo en términos de capitalización bursátil, depósitos y rentabilidad.
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="card">
+                        <div class="imgBx">
+                            <img src="images/innovacion.png" alt="">
+                        </div>
+                        <div class="contentBx">
+                            <h2>Innovación</h2>
+                            <div class="size">
+                                <h3>Nuestro banco no solo anticipa el futuro, lo crea. Con tecnología de punta y
+                                    servicios personalizados, estamos comprometidos a ofrecerte una experiencia bancaria
+                                    excepcional.
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="card">
+                        <div class="imgBx">
+                            <img src="images/alcance.png" alt="">
+                        </div>
+                        <div class="contentBx">
+                            <h2>Alcance</h2>
+                            <div class="size">
+                                <h3>Con una presencia global y una red de servicios sin precedentes, nuestro banco se
+                                    enorgullece de su alcance internacional. Ofrecemos soluciones financieras que
+                                    trascienden fronteras, conectando a personas y empresas en todo el mundo.
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="card">
+                        <div class="imgBx">
+                            <img src="images/estructura.png" alt="">
+                        </div>
+                        <div class="contentBx">
+                            <h2>Estructura</h2>
+                            <div class="size">
+                                <h3>Nuestro banco se destaca por una estructura robusta y flexible, diseñada para
+                                    adaptarse a las necesidades cambiantes de nuestros clientes. Con una base sólida y
+                                    su red de sucursales, garantizamos accesibilidad y eficiencia en cada interacción.
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <section class="identidad">
+            <div class="identidad-titulo">
+                <h2>Nuestra Identidad</h2>
+            </div>
+            <div class="card-identidad">
+                <img class="card__background" src="images/mision.jpg" alt="Imagen de una transacción bancaria">
+                <div class="card__content | flow">
+                    <div class="card__content--container | flow">
+                        <h2 class="card__title">Misión</h2>
+                        <p class="card__description">
+                            Ofrecer soluciones financieras innovadoras y accesibles que impulsen el crecimiento
+                            económico y el bienestar de nuestros clientes. Nos comprometemos a operar con integridad y
+                            responsabilidad, fomentando relaciones de confianza y apoyando a las comunidades donde
+                            operamos. Nuestro objetivo es ser el socio de confianza que nuestros clientes eligen para
+                            alcanzar sus metas financieras y contribuir al desarrollo sostenible de la sociedad.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-identidad">
+                <img class="card__background" src="images/vision.jpg" alt="Imagen de una transacción bancaria">
+                <div class="card__content | flow">
+                    <div class="card__content--container | flow">
+                        <h2 class="card__title">Visión</h2>
+                        <p class="card__description">
+                            En Banco Argentum, visualizamos un mundo donde cada individuo tiene el poder de alcanzar su
+                            máximo potencial financiero. Nuestra visión es ser el banco líder que innova constantemente
+                            para brindar soluciones financieras que no solo satisfagan, sino que también anticipen las
+                            necesidades de nuestros clientes. Nos esforzamos por construir relaciones duraderas basadas
+                            en la confianza y el apoyo mutuo, asegurando que cada paso que des hacia tus metas
+                            financieras sea firme y seguro
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-identidad">
+                    <img class="card__background" src="images/integridad.jpg"
+                        alt="Imagen de una transacción bancaria">
+                    <div class="card__content | flow">
+                        <div class="card__content--container | flow">
+                            <h2 class="card__title">Integridad</h2>
+                            <p class="card__description">
+                                La integridad es la piedra angular de nuestra identidad. Creemos firmemente que la
+                                honestidad y la transparencia son esenciales para construir una relación de confianza
+                                duradera con nuestros clientes. Nos comprometemos a actuar siempre con rectitud,
+                                ofreciendo productos y servicios financieros que reflejen nuestros altos estándares
+                                éticos. Al elegirnos, te aseguras un aliado que valora tu bienestar y se dedica a
+                                manejar tus finanzas con la mayor integridad. Ven y experimenta la diferencia que hace
+                                un banco que pone tus intereses primero.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-identidad">
+                    <img class="card__background" src="images/humanidad.jpg" alt="Imagen de una transacción bancaria">
+                    <div class="card__content | flow">
+                        <div class="card__content--container | flow">
+                            <h2 class="card__title">Humanidad</h2>
+                            <p class="card__description">
+                                En Banco Argentum, valoramos la humanidad por encima de todo. Entendemos que detrás de
+                                cada cuenta hay una historia, un sueño y una meta personal. Nos esforzamos por conectar
+                                de manera auténtica y compasiva con cada uno de nuestros clientes, reconociendo sus
+                                necesidades individuales y ofreciendo soluciones financieras con un toque humano.
+                                Creemos en el poder de la empatía para crear servicios más inclusivos y accesibles,
+                                asegurando que cada interacción sea más que una transacción: sea un paso hacia un futuro
+                                financiero más humano y solidario.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-identidad">
+                    <img class="card__background" src="images/prudencia.jpg" alt="Imagen de una transacción bancaria">
+                    <div class="card__content | flow">
+                        <div class="card__content--container | flow">
+                            <h2 class="card__title">Prudencia</h2>
+                            <p class="card__description">
+                                La prudencia es más que una palabra; es una promesa a nuestros clientes. Nos dedicamos a
+                                gestionar tus finanzas con sabiduría y cautela, asegurando que cada decisión tomada esté
+                                bien pensada y alinee tus objetivos con estrategias financieras sólidas. Nuestro enfoque
+                                prudente en inversiones y operaciones bancarias significa que puedes confiar en nosotros
+                                para proteger y hacer crecer tu patrimonio con integridad y responsabilidad.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-identidad">
+                    <img class="card__background" src="images/innovacion.jpg"
+                        alt="Imagen de una transacción bancaria">
+                    <div class="card__content | flow">
+                        <div class="card__content--container | flow">
+                            <h2 class="card__title">Innovación</h2>
+                            <p class="card__description">
+                                En Banco Argentum, la innovación es el motor que impulsa nuestro compromiso con la
+                                excelencia. Nos enorgullecemos de estar siempre a la vanguardia, ofreciendo productos y
+                                servicios que rompen moldes y establecen nuevos estándares en la industria financiera.
+                                Nuestro objetivo es anticiparnos a las tendencias y evolucionar constantemente para
+                                superar las expectativas de nuestros clientes. Al unirte a nosotros, te beneficiarás de
+                                soluciones financieras revolucionarias que te permitirán navegar el futuro económico con
+                                confianza y agilidad.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-identidad">
+                    <img class="card__background" src="images/excelencia.jpg"
+                        alt="Imagen de una transacción bancaria">
+                    <div class="card__content | flow">
+                        <div class="card__content--container | flow">
+                            <h2 class="card__title">Excelencia</h2>
+                            <p class="card__description">
+                                Perseguimos la excelencia en cada transacción, cada interacción y cada solución
+                                financiera que ofrecemos. Nuestro compromiso con la calidad superior es inquebrantable,
+                                y nos esforzamos por superar las expectativas de nuestros clientes a través de un
+                                servicio excepcional y productos innovadores. La excelencia no es solo nuestro objetivo,
+                                sino nuestra norma, garantizando que cada experiencia con nosotros sea sinónimo de
+                                confiabilidad, eficiencia y distinción.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="content-footer">
+            <div class="footer1">
+                <img src="images/argenntum.fw.png" alt="" style="height: 40px; margin-bottom: 10px;">
+                <p>Somos el establecimiento financiero líder que ofrece servicios bancarios internacionales de alta
+                    calidad. Siempre estamos listos para asociarnos con usted ofreciendo apoyo financiero total a
+                    individuos y empresas de todo el mundo.</p>
+            </div>
+            <div class=" footer2">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="">Institucional</a></li>
+                    <li><a href="">Servicios</a></li>
+                    <li><a href="">Contactos</a></li>
+                </ul>
+            </div>
+            <div class="footer3">
+                <h3>Contáctenos</h3>
+                <div class="contacto-item">
+                    <i class="fa-solid fa-location-dot"></i><span>Reconquista 266, C1003 ABF, Cdad. Autónoma de Buenos
+                        Aires</span>
+                </div>
+                <div class="contacto-item">
+                    <i class="fa-regular fa-clock"></i><span>Lunes a sábado de 8.00 a 18.00 horas. Domingo
+                        CERRADO</span>
+                </div>
+                <div class="contacto-item">
+                    <i class="fa-solid fa-phone"></i><span>0800-1234-5678</span>
+                </div>
+
+            </div>
+            <div class="footer4">
+                <h3>Regístrese para recibir actualizaciones</h3>
+                <input type="text" placeholder="Correo electrónico *" class="input-footer">
+                <button class="btn">Suscribir</button>
+            </div>
+        </div>
+        <div class="copy">
+            <div class="copyright">Copyright © 2024 Comisión 24170</div>
+        </div>
+    </footer>
+
+    <button id="irTop" class="circle active"><i class="fa-solid fa-chevron-up"></i></button>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
