@@ -6,9 +6,6 @@ GLOBALES
     --violetaClaro: #a371f7;
     --violetaOscuro: #271842;
     --lila: #faf4fb; 
-
-
-
 }
 html {
     box-sizing: border-box;
@@ -86,17 +83,22 @@ SECCION HISTORIA - CARDS - GRID
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  width: 100%;
+  max-width: 100%;
   gap: 2rem;
-  margin: 2.3rem;
+  place-content: center;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
 }
-@media (max-width: 1024px) {
+@media (max-width: 1030px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
-    margin-left: 5rem;
+    row-gap: 2rem;
+    column-gap: 0rem;
   }
 }
-@media (max-width: 768px) {
+@media (min-width: 700px) and (max-width: 1030px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
     column-gap: 1rem;
@@ -104,13 +106,12 @@ SECCION HISTORIA - CARDS - GRID
     row-gap: 2rem;
   }
 }
-@media (max-width: 480px) {
+@media (min-width: 350px) and (max-width: 700px) {
   .grid {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    margin: 0%;
+    justify-content: center;
   }
 }
 
@@ -295,13 +296,19 @@ SECCION HISTORIA - CARDS - GRID
     height: 400px;
   }
 }
-@media (max-width: 768px) {
+@media (min-width: 700px) and (max-width: 1030px) {
   .card-identidad {
     width: 600px;
     height: 350px;
   }
 }
-@media (max-width: 480px) {
+@media (min-width: 350px) and (max-width: 500px) {
+  .card-identidad {
+    width: 300px;
+    height: 380px;
+  }
+}
+@media (min-width: 500px) and (max-width: 700px) {
   .card-identidad {
     width: 400px;
     height: 300px;
@@ -339,12 +346,17 @@ SECCION HISTORIA - CARDS - GRID
     height: 95%;
   }
 }
-@media (max-width: 768px) {
+@media (min-width: 700px) and (max-width: 1024px) {
   .card__content {
     height: 95%;
   }
 }
-@media (max-width: 480px) {
+@media (min-width: 480px) and (max-width: 700px) {
+  .card__content {
+    height: 100%;
+  }
+}
+@media (min-width: 350px) and (max-width: 480px) {
   .card__content {
     height: 100%;
   }
