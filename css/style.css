@@ -162,6 +162,11 @@ header {
     gap: 50px;
 }
 
+#menu li{
+    display: flex;
+    align-items: center;
+}
+
 #menu a {
     padding: 10px 0px;
     font-size: 18px;
