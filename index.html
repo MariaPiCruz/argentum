@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BANCO ARGENNTUM</title>
+    <link rel="icon" type="image/x-icon" href="logo.png">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:100,300,300i,400,700,900">
+    <link rel="stylesheet" href="css/fontawesome/css/all.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/index.css">
+
+</head>
+
+<body>
+    <!--Loading-->
+    <div class="preloader">
+        <div class="preloader-body">
+            <div class="cssload-container">
+                <div class="cssload-speeding-wheel"></div>
+            </div>
+            <p>Cargando...</p>
+        </div>
+    </div>
+    <!--Menu-->
+    <header>
+        <div id="menu">
+            <a href="#"><img src="images/argenntum.fw.png" alt="logo"></a>
+            <ul>
+                <li>Home</li>
+                <li>Institucional</li>
+                <li>Servicios</li>
+                <li>Contactos</li>
+            </ul>
+            <button class="btn">Online Banking</button>
+        </div>
+        <button class="btn-mnu" onclick="eventoMenu()" id="btnMnu">≡</button>
+    </header>
+    <!--Carrousel-->
+    <div class="carrousel">
+        <div class="sliders">
+            <ul id="tira-sliders">
+                <li class="slider slider1">
+                    <div>
+                        <div>Donde usted conoce a su banco y su banco lo conoce a usted</div>
+                        <button class="btn">Saber m&aacute;s</button>
+                    </div>
+                </li>
+                <li class="slider slider2">
+                    <div>
+                        <div>Nuestra b&uacute;squeda para mejorar su econom&iacute;a comienza aqu&iacute;</div>
+                        <button class="btn">Saber m&aacute;s</button>
+                    </div>
+                </li>
+                <li class="slider slider3">
+                    <div>
+                        <div>La forma m&aacute;s r&aacute;pida de enviar dinero a todo el mundo</div>
+                        <button class="btn">Saber m&aacute;s</button>
+                    </div>
+                </li>
+                <li class="slider slider1">
+                    <div>
+                        <div>Donde usted conoce a su banco y su banco lo conoce a usted</div>
+                        <button class="btn">Saber m&aacute;s</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <ul class="social-buttoms">
+            <li><i class="fa-brands fa-twitter"></i></li>
+            <li><i class="fa-brands fa-facebook-f"></i></li>
+            <li><i class="fa-brands fa-square-instagram"></i></li>
+            <li><i class="fa-brands fa-facebook-messenger"></i></li>
+            <li><i class="fa-brands fa-linkedin-in"></i></li>
+        </ul>
+        <div class="contacts">
+            <div>
+                <i class="fa-solid fa-mobile-screen-button"></i>
+                <div class="txt-cell">0800-1234-5678</div>
+                <div class="txt-violeta">Solicitar una devolución de llamada</div>
+            </div>
+        </div>
+        <div class="pagination">
+            <div class="bullet-sliders">
+                <i id="bullet1" class="fa-solid fa-circle select" onclick="irSlider(2)"></i>
+                <i id="bullet2" class="fa-solid fa-circle" onclick="irSlider(0)"></i>
+                <i id="bullet3" class="fa-solid fa-circle" onclick="irSlider(1)"></i>
+            </div>
+        </div>
+    </div>
+    <!--Seccion-->
+    <div class="section-all">
+        <div class="section1">
+            <i class="fa-regular fa-credit-card"></i>
+            <h6>M&aacute;s de <span class="txt-bold">23.754</span> tarjetas emitidas</h6>
+            <p>Nuestro banco es un líder reconocido en la distribución de tarjetas de crédito. Emitimos m&aacute;s
+                de 5000 tarjetas cada año.</p>
+        </div>
+        <div class="section2">
+            <i class="fa-solid fa-money-bill"></i>
+            <h6>Hasta <span class="txt-bold">30%</span> de reembolso</h6>
+            <p>Ofrecemos una increíble cantidad de reembolso por pagos realizados con una de nuestras tarjetas de
+                crédito: azul, verde o naranja.</p>
+        </div>
+        <div class="section3">
+            <i class="fa-regular fa-credit-card"></i>
+            <h6>Hasta <span class="txt-bold">25%</span> por depósito</h6>
+            <p>Dot Bank ofrece varias ofertas de depósito en todas las monedas internacionales con una tasa de
+                interés de hasta el 25% para todos los clientes habituales.</p>
+        </div>
+        <div class="section4">
+            <p class="margin10">La mejor elección 2024</p>
+            <h6 class="margin10">Tarjetas de crédito y depósitos confiables y seguros para usted</h6>
+            <div style="width: 100%; text-align: center;">
+                <button class="btn"><i class="fa-regular fa-credit-card" style="font-size: 16px;"></i> Reservar una
+                    tarjeta</button>
+            </div>
+        </div>
+    </div>
+    <main>
+        <!--Ventajas-->
+        <div class="adventages content-max-width">
+            <div class="grid-header align-center">
+                <h2>La mejor opción bancaria</h2>
+                <p>Desde nuestra fundación, hemos sido la institución bancaria número uno para muchos clientes
+                    individuales y corporativos, tanto en EE. UU. como a nivel internacional. Ofrecemos a nuestros
+                    clientes una serie de beneficios.</p>
+            </div>
+            <div class="grid-phone">
+                <img src="images/index-1-1-309x582.png" alt="telefono">
+            </div>
+            <div class="grid-area1">
+                <div class="content-adventage">
+                    <div class="align-right">
+                        <h4>Varias sucursales</h4>
+                        <p>Tenemos oficinas en muchos países, incluidos EE. UU. y el Reino Unido.</p>
+                    </div>
+                    <div class="icon mercury-icon-globe-marker align-right"></div>
+                </div>
+            </div>
+            <div class="grid-area2">
+                <div class="content-adventage">
+                    <div class="align-right">
+                        <h4>Aplicaciones de banca móvil</h4>
+                        <p>Obtenga acceso instant&aacute;neo a su cuenta en cualquier dispositivo utilizando nuestras
+                            aplicaciones bancarias</p>
+                    </div>
+                    <div class="icon mercury-icon-touch align-right"></div>
+                </div>
+            </div>
+            <div class="grid-area3">
+                <div class="content-adventage">
+                    <div class="align-right">
+                        <h4>Soporte 24 horas al día, 7 días a la semana</h4>
+                        <p>Nuestro equipo de soporte siempre est&aacute; listo para ayudarlo a resolver cualquier
+                            problema bancario.</p>
+                    </div>
+                    <div class="icon mercury-icon-phone-24 align-right"></div>
+                </div>
+            </div>
+            <div class="grid-area4">
+                <div class="content-adventage">
+                    <div class="icon mercury-icon-social align-left"></div>
+                    <div class="align-left">
+                        <h4>Programas para familiares y amigos</h4>
+                        <p>Nuestro Banco cuenta con programas especiales con beneficios para familiares.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-area5">
+                <div class="content-adventage">
+                    <div class="icon mercury-icon-case align-left"></div>
+                    <div class="align-left">
+                        <h4>Perfil personal</h4>
+                        <p>Registre su perfil personal gratuito en línea para comenzar a utilizar nuestros servicios.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-area6">
+                <div class="content-adventage">
+                    <div class="icon mercury-icon-gears align-left"></div>
+                    <div class="align-left">
+                        <h4>Configuración de cuenta sencilla</h4>
+                        <p>Los clientes registrados pueden editar la configuración de la cuenta bancaria en 2 clics.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Galeria-->
+        <div class="content-galery content-max-width">
+            <div class="col-galery image1">
+                <div class="text-galery">
+                    <p class="p1">MAS QUE</p>
+                    <p class="p2">57830</p>
+                    <p class="p3">Tarjetas emitidas</p>
+                    <hr class="hr-green">
+                    <p class="p4">Nuestro banco es un líder reconocido en la distribución de tarjetas de crédito.
+                        Emitimos m&aacute;s de 5000 tarjetas cada año.</p>
+                </div>
+            </div>
+            <div class="col-galery">
+                <div class="image2">
+                    <div class="text-galery">
+                        <p class="p1">HASTA</p>
+                        <p class="p2">25%</p>
+                        <p class="p3">Para depósitos</p>
+                        <hr class="hr-green">
+                        <p class="p4">Nuestro Banco ofrece varios depósitos en todas las monedas internacionales con una
+                            tasa de interés de hasta el 25% para todos los clientes habituales.</p>
+                    </div>
+                </div>
+                <div class="image3">
+                    <div class="text-galery">
+                        <p class="p1">HASTA</p>
+                        <p class="p2">35%</p>
+                        <p class="p3">Devolución de dinero</p>
+                        <hr class="hr-green">
+                        <p class="p4">Ofrecemos una increíble cantidad de reembolso por pagos realizados con una de
+                            nuestras tarjetas de crédito: azul, verde o naranja.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-galery">
+                <div class="image4">
+                    <img src="images/mt-1858-home-img09.png" alt="tarjeta">
+                    <button class="btn-white">PEDIR UNA TARJETA</button>
+                </div>
+                <div class="image5">
+                    <div class="text-galery">
+                        <p class="p1">LA MEJOR DECISION</p>
+                        <p class="p2">2024</p>
+                        <hr class="hr-green">
+                        <p class="p4">Tarjetas de crédito y depósitos confiables y seguros para usted</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Acerca de-->
+        <div class="acercade">
+            <div class="content-video content-max-width">
+                <iframe id="iframe-video" src="https://www.youtube.com/embed/s9joTONFsv0?si=DiqTSX2J9OVc3zPy"
+                    title="YouTube video player" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <div>
+                    <h3>Algunas palabras sobre nuestro banco</h3>
+                    <button class="btn">Saber m&aacute;s</button>
+                </div>
+            </div>
+        </div>
+        <!--Solicitar tarjeta-->
+        <div class="content-solicitud content-max-width">
+            <img src="images/mt-2024_home_steps-icon01_5ebc0378afe17.png" alt="uno-dos-tres">
+            <h4>Proceso de solicitud r&aacute;pido y sencillo</h4>
+            <p>Estas incluyen estadísticas bancarias nacionales, estadísticas financieras externas y estadísticas
+                bancarias internacionales.</p>
+            <div class="panel-pasos">
+                <div class="content-pasos">
+                    <div class="pasos">
+                        <h3>Paso 1</h3>
+                        <img src="images/mt-2024_home_steps-icon02.png" alt="bullet"
+                            style="width: 18px; height: 18px;margin: 0px 20px;">
+                        <div class="desc-paso">
+                            <h4>Configuración de cuenta sencilla</h4>
+                            <p>Los clientes registrados pueden editar la configuración de la cuenta bancaria en 3 clics.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="pasos">
+                        <h3>Paso 2</h3>
+                        <img src="images/mt-2024_home_steps-icon02.png" alt="bullet"
+                            style="width: 18px; height: 18px;margin: 0px 20px;">
+                        <div class="desc-paso">
+                            <h4>Aplicaciones de banca móvil</h4>
+                            <p>Obtenga acceso instant&aacute;neo a su cuenta en cualquier dispositivo utilizando
+                                nuestras <br>aplicaciones bancarias.</p>
+                        </div>
+                    </div>
+                    <div class="pasos">
+                        <h3>Paso 3</h3>
+                        <img src="images/mt-2024_home_steps-icon02.png" alt="bullet"
+                            style="width: 18px; height: 18px;margin: 0px 20px;">
+                        <div class="desc-paso">
+                            <h4>Perfil personal</h4>
+                            <p>Registre su perfil personal gratuito en línea para comenzar a utilizar nuestros
+                                servicios.</p>
+                        </div>
+                    </div>
+                </div>
+                <img id="card-pasos" src="images/mt-2024_home_steps-img01.png" style="width: 100%" alt="tarjeta">
+            </div>
+        </div>
+    </main>
+    <!--Footer-->
+    <footer>
+        <div class="content-footer content-max-width">
+            <div class="footer1">
+                <img src="images/argenntum.fw.png" alt="logo" style="height: 40px; margin-bottom: 10px;">
+                <p>Somos el establecimiento financiero líder que ofrece servicios bancarios internacionales de alta
+                    calidad. Siempre estamos listos para asociarnos con usted ofreciendo apoyo financiero total a
+                    individuos y empresas de todo el mundo.</p>
+            </div>
+            <div class=" footer2">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="">Institucional</a></li>
+                    <li><a href="">Servicios</a></li>
+                    <li><a href="">Contactos</a></li>
+                </ul>
+            </div>
+            <div class="footer3">
+                <h3>Cont&aacute;ctenos</h3>
+                <div class="contacto-item">
+                    <i class="fa-solid fa-location-dot"></i><span>Reconquista 266, C1003 ABF, Cdad. Autónoma de Buenos
+                        Aires</span>
+                </div>
+                <div class="contacto-item">
+                    <i class="fa-regular fa-clock"></i><span>Lunes a s&aacute;bado de 8.00 a 18.00 horas. Domingo
+                        CERRADO</span>
+                </div>
+                <div class="contacto-item">
+                    <i class="fa-solid fa-phone"></i><span>0800-1234-5678</span>
+                </div>
+
+            </div>
+            <div class="footer4">
+                <h3>Regístrese para recibir actualizaciones</h3>
+                <input type="text" placeholder="Correo electrónico *" class="input-footer">
+                <button class="btn suscribir">Suscribir</button>
+            </div>
+        </div>
+        <div class="copy">
+            <div class="copyright content-max-width">Copyright © 2024 Comisión 24170</div>
+        </div>
+    </footer>
+
+    <button id="irTop" class="circle active"><i class="fa-solid fa-chevron-up"></i></button>
+
+    <script src="js/script.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>

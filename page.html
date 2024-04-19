@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BANCO ARGENNTUM</title>
+    <link rel="icon" type="image/x-icon" href="logo.png">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:100,300,300i,400,700,900">
+    <link rel="stylesheet" href="css/fontawesome/css/all.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!--Loading-->
+    <div class="preloader">
+        <div class="preloader-body">
+          <div class="cssload-container">
+            <div class="cssload-speeding-wheel"></div>
+          </div>
+          <p>Cargando...</p>
+        </div>
+      </div>
+    <!--Menu-->
+    <header class="header-dark-fijo">
+        <div id="menu">
+            <a href="#"><img src="images/argenntum.fw.png" alt=""></a>
+            <ul>
+                <li>Home</li>
+                <li>Institucional</li>
+                <li>Servicios</li>
+                <li>Contactos</li>
+            </ul>
+            <button class="btn">Online Banking</button>
+        </div>
+        <button class="btn-mnu" onclick="eventoMenu()" id="btnMnu">≡</button>
+    </header>
+
+    <main style="height: 1200px;"> <!--SACAR EL STYLE-->
+        <!-- No usar style.css: es solo para estilos globales que usan todas la paginas -->
+        <!-- Agregar un nuevo css para la pagina donde esten trabajando -->
+        <!-- El archivo script.js es para procedimientos globales. Agregar un archivo .js para la pagina que esten trabajando -->
+        <!--
+            Ejemplo: para la pagina contactos.html
+            
+            Podria ser: contactos.css y contactos.js
+        -->
+    </main>
+
+    <footer>
+        <div class="content-footer content-max-width">
+            <div class="footer1">
+                <img src="images/argenntum.fw.png" alt="" style="height: 40px; margin-bottom: 10px;">
+                <p>Somos el establecimiento financiero líder que ofrece servicios bancarios internacionales de alta
+                    calidad. Siempre estamos listos para asociarnos con usted ofreciendo apoyo financiero total a
+                    individuos y empresas de todo el mundo.</p>
+            </div>
+            <div class=" footer2">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="">Institucional</a></li>
+                    <li><a href="">Servicios</a></li>
+                    <li><a href="">Contactos</a></li>
+                </ul>
+            </div>
+            <div class="footer3">
+                <h3>Cont&aacute;ctenos</h3>
+                <div class="contacto-item">
+                    <i class="fa-solid fa-location-dot"></i><span>Reconquista 266, C1003 ABF, Cdad. Autónoma de Buenos
+                        Aires</span>
+                </div>
+                <div class="contacto-item">
+                    <i class="fa-regular fa-clock"></i><span>Lunes a s&aacute;bado de 8.00 a 18.00 horas. Domingo
+                        CERRADO</span>
+                </div>
+                <div class="contacto-item">
+                    <i class="fa-solid fa-phone"></i><span>0800-1234-5678</span>
+                </div>
+
+            </div>
+            <div class="footer4">
+                <h3>Regístrese para recibir actualizaciones</h3>
+                <input type="text" placeholder="Correo electrónico *" class="input-footer">
+                <button class="btn suscribir">Suscribir</button>
+            </div>
+        </div>
+        <div class="copy">
+            <div class="copyright content-max-width">Copyright © 2024 Comisión 24170</div>
+        </div>
+    </footer>
+
+    <button id="irTop" class="circle active"><i class="fa-solid fa-chevron-up"></i></button>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

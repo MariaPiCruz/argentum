@@ -1,0 +1,628 @@
+.center{
+    margin: 0px auto;
+}
+
+.align-right{
+    text-align: right;
+}
+
+.align-left{
+    text-align: left;
+}
+
+.align-center{
+    text-align: center;
+}
+
+/***************************************/
+/* CARROUSEL                           */
+/***************************************/
+.carrousel{
+    position: relative;
+}
+
+.sliders{
+    overflow-x: hidden;
+}
+.sliders ul{
+    display: flex;
+    width: 400%;
+}
+
+.slider{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slider div{
+    text-align: center;
+    width: 80%;
+    color: #fff;
+}
+
+.slider div div{
+    font-size: 57px;
+    font-weight: 100;
+    margin-bottom: 40px;
+    width: 80%;
+    margin: 0px auto;
+}
+
+.slider .btn{
+    margin: 40px;
+}
+
+.slider1{
+    background-image: url("../images/slider-4-1920x1000.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+.slider2{
+    background-image: url("../images/slider-5-1920x1000.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+.slider3{
+    background-image: url("../images/slider-6-1920x1000.jpg");
+    background-position: center;
+    background-size: cover;
+}
+/* Social buttoms*/
+.social-buttoms{
+    position: absolute;
+    width: 5%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    top: 0px;
+    list-style: none;
+}
+
+.social-buttoms li{
+    color: #fff;
+    font-weight: 100;
+    margin: 20px 40px;
+    cursor: pointer;
+}
+
+.social-buttoms li:hover{
+    color: #a371f7;
+    text-shadow: 0px 0px 3px rgba(255, 255, 255, 0.9);
+}
+
+/* Contacto */
+.contacts{
+    position: absolute;
+    bottom: 100px;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    width: 100%;
+    height: 80px;
+    color: #fff;
+    font-weight: 100;
+}
+
+.contacts i{
+    font-size: 30px;
+}
+
+.contacts div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.txt-violeta{
+    color: #ffffff;
+    font-weight: 300;
+}
+
+.txt-cell{
+    font-size: 22px;
+}
+
+/* Paginado*/
+.pagination{
+    position: absolute;
+    width: 5%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    top: 0px;
+    right: 0px;
+    list-style: none;
+}
+
+.bullet-sliders{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bullet-sliders i{
+    color: #fff;
+    font-size: 10px;
+    margin: 20px;
+    cursor: pointer;
+}
+
+.txt-bold{
+    font-weight: 700;
+}
+
+.bullet-sliders i.select{
+    color: #5c5b5b;
+}
+
+.bullet-sliders i:hover{
+    color: #a371f7;
+    text-shadow: 0px 0px 3px rgba(255, 255, 255, 0.9);
+}
+
+/***************************************/
+/* seccion                             */
+/***************************************/
+.section-all{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    height: 239px;
+    background-color: #7b59d0;
+}
+
+.section1, .section2, .section3, .section4{
+    padding: 25px;
+    color: #fff;
+    font-weight: 100;
+}
+
+.section-all i{
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.section-all h6{
+    margin-bottom: 10px;
+    font-weight: 100;
+    font-size: 18px;
+}
+
+.section-all p{
+    color: #d4d4d4;
+}
+
+.section2{
+    background: rgba(0,0,0,0.2);
+}
+.section3{
+    background: rgba(0,0,0,0.4);
+}
+.section4{
+    background: rgba(0,0,0,0.6);
+}
+
+.margin10{
+    margin-bottom: 10px;
+}
+
+/***************************************/
+/* Advantages                          */
+/***************************************/
+.icon{
+    font-size: 70px;
+    background: -webkit-linear-gradient(90deg, #7b59d0, #36f1f8);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: #36f1f8;
+}
+
+.adventages{
+    display: grid;
+    margin: 20px auto;
+    grid-template: 
+        'header header header'
+        'area1 phone area4'
+        'area2 phone area5'
+        'area3 phone area6';
+}
+
+.grid-header{
+    grid-area: header;
+    padding: 50px 250px;
+}
+.grid-phone{
+    grid-area: phone;
+    display: flex;
+    justify-content: center;
+}
+.grid-area1{
+    grid-area: area1;
+    display: flex;
+    align-items: center;
+}
+.grid-area2{
+    grid-area: area2;
+    display: flex;
+    align-items: center;
+}
+.grid-area3{
+    grid-area: area3;
+    display: flex;
+    align-items: center;
+}
+.grid-area4{
+    grid-area: area4;
+    display: flex;
+    align-items: center;
+}
+.grid-area5{
+    grid-area: area5;
+    display: flex;
+    align-items: center;
+}
+.grid-area6{
+    grid-area: area6;
+    display: flex;
+    align-items: center;
+}
+
+.content-adventage{
+    display: flex;
+    align-items: center;
+}
+/***************************************/
+/* Galery                              */
+/***************************************/
+.content-galery{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    margin: 80px auto;
+    gap: 20px;
+}
+
+.image1{
+    width: 100%;
+    height: 776px;
+    background-image: url('../images/mt-1858-home-img04.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: end;
+    padding: 30px;
+}
+
+.image2{
+    width: 100%;
+    height: 420px;
+    background-image: url('../images/mt-1858-home-img05.jpg');
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: end;
+    padding: 30px;
+}
+
+.image3{
+    width: 100%;
+    height: 336px;
+    background-image: url('../images/mt-1858-home-img06.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: end;
+    padding: 30px;
+}
+
+.image4{
+    width: 100%;
+    height: 295px;
+    background-image: url('../images/mt-1858-home-img07.jpg');
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+
+.image4 img{
+    width: 100%;
+}
+
+.image5{
+    width: 100%;
+    height: 461px;
+    background-image: url('../images/mt-1858-home-img08.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: end;
+    padding: 30px;
+}
+
+.text-galery{
+    color: #fff;
+    font-family: Roboto;
+}
+
+.text-galery p{
+    margin-bottom: 10px;
+}
+
+.text-galery .p1{
+    font-size: 12px;
+    font-weight: 900;
+}
+
+.text-galery .p2{
+    font-size: 56px;
+    font-weight: 900;
+}
+
+.text-galery .p3{
+    font-size: 24px;
+}
+
+.text-galery .p4{
+    font-size: 15px;
+    font-weight: 100;
+}
+
+.hr-green{
+    border: 3px solid #43a116;
+    width: 44px;
+    margin-bottom: 10px;
+}
+
+.btn-white{
+    border: 2px solid #fff;
+    background: none;
+    color: white;
+    padding: 20px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+/***************************************/
+/* Acerca de                         */
+/***************************************/
+.acercade{
+    background-image: url('../images/mt-1858-content-bg02.jpg');
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    padding: 50px 0px;
+}
+
+.content-video{
+    display: flex;
+    margin: 0px auto;
+}
+
+.content-video div{
+    width: 50%;
+    padding: 20px 40px;
+}
+
+.content-video h3{
+    font-size: 39px;
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+
+.content-video p{
+    line-height: 1.71429;
+    margin-bottom: 20px;
+}
+
+#iframe-video{
+    width: 70%;
+    height: 315px;
+}
+
+/***************************************/
+/* Solicitud tarjeta                   */
+/***************************************/
+.content-solicitud{
+    margin: 40px auto;
+}
+
+.content-solicitud h4{
+    font-size: 40px;
+    font-weight: 300;
+    color: #271842;
+    margin-bottom: 20px;
+}
+
+.content-solicitud p{
+    margin-bottom: 30px;
+}
+
+.panel-pasos{
+    display: grid;
+    grid-template: 'pasos card';
+}
+
+.content-pasos{
+    display: flex;
+    flex-direction: column;
+    height: 50%;
+    padding: 40px 10px 30px 0px;
+    grid-area: pasos;
+}
+
+.card-pasos{
+    grid-area: card;
+}
+
+.pasos{
+    display: flex;
+}
+
+.pasos h3{
+    font-size: 14px;
+    color: #2d2d2d;
+    width: 60px;
+}
+
+.desc-paso{
+    width: auto;
+}
+
+.desc-paso h4{
+    font-size: 18px;
+    color: #2d2d2d;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.desc-paso p{
+    color: #000000;
+    line-height: 1.4;
+}
+
+@media screen and (max-width: 1000px) {
+    /*Carrousel*/
+    .slider div div{
+        font-size: 37px;
+    }
+
+    /*seccion*/
+    .section-all{
+        grid-template-columns: repeat(2,1fr);
+        height: 100%;
+    }
+    /*ventajas*/
+    .adventages{
+        grid-template: 
+            'header header'
+            'area1 phone'
+            'area2 phone'
+            'area3 phone'
+            'area4 phone'
+            'area5 phone'
+            'area6 phone';
+    }
+    .grid-header{
+        grid-area: header;
+        padding: 50px 50px;
+    }
+    .grid-area1 .content-adventage {
+        flex-direction: row-reverse;
+    }
+    .grid-area2 .content-adventage {
+        flex-direction: row-reverse;
+    }
+    .grid-area3 .content-adventage {
+        flex-direction: row-reverse;
+    }
+    .grid-area1 .content-adventage .align-right{
+        text-align: left;
+    }
+    .grid-area2 .content-adventage .align-right{
+        text-align: left;
+    }
+    .grid-area3 .content-adventage .align-right{
+        text-align: left;
+    }
+    /*Acerca de*/
+    .content-video h3{
+        font-size: 24px;   
+    }
+    /*Solicitar tarjeta*/
+    .pasos h3{
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    /*Carrousel*/
+    .slider div div{
+        font-size: 27px;
+    }
+    /*seccion*/
+    .section-all{
+        grid-template-columns: repeat(1,1fr);
+        height: 100%;
+    }
+    /*Galery*/
+    .content-galery{
+        grid-template-columns: repeat(1,1fr);
+    }
+    .image1, .image2, .image3, .image4, .image5{
+        height: 300px;
+    }
+    .image4 img{
+        width: 50%;
+    }
+    /*ventajas*/
+    .adventages{
+        grid-template: 
+            'header'
+            'phone'
+            'area1'
+            'area2'
+            'area3'
+            'area4'
+            'area5'
+            'area6';
+    }
+    .grid-header{
+        grid-area: header;
+        padding: 50px 50px;
+    }
+    .grid-area1 .content-adventage {
+        flex-direction: row-reverse;
+    }
+    .grid-area2 .content-adventage {
+        flex-direction: row-reverse;
+    }
+    .grid-area3 .content-adventage {
+        flex-direction: row-reverse;
+    }
+    .grid-area1 .content-adventage .align-right{
+        text-align: left;
+    }
+    .grid-area2 .content-adventage .align-right{
+        text-align: left;
+    }
+    .grid-area3 .content-adventage .align-right{
+        text-align: left;
+    }
+    /* Video */
+    .content-video{
+        flex-direction: column;
+    }
+    .content-video div{
+        width: 100%;
+        text-align: center;
+    }
+    .content-video h3{
+        font-size: 16px;
+    }
+    #iframe-video{
+        width: 100%;
+    }
+    /*Solicitar tarjeta*/
+    .content-solicitud h4{
+        font-size: 24px;
+    }
+    .pasos h3{
+        font-size: 12px;
+    }
+    .panel-pasos{
+        grid-template: 'card''pasos';
+    }  
+    .desc-paso h4{
+        font-size: 18px;
+    }
+}
