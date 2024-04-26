@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BANCO ARGENTUM</title>
+    <link rel="icon" type="image/x-icon" href="logo.png">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:100,300,300i,400,700,900">
+    <link rel="stylesheet" href="css/fontawesome/css/all.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/contacto.css">
+</head>
+
+<body>
+    <!--Header-->
+    <header>
+        <div id="menu">
+            <a href="index.html"><img src="images/argenntum.fw.png" alt=""></a>
+            <ul>
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+                <li>
+                    <a href="institucional.html">Institucional</a>
+                </li>
+                <li>
+                    <a href="">Servicios</a>
+                </li>
+                <li>
+                    <a href="contacto.html">Contacto</a>
+                </li>
+            </ul>
+            <button class="btn">Online Banking</button>
+        </div>
+        <button class="btn-mnu" onclick="eventoMenu()" id="btnMnu">≡</button>
+    </header>
+
+    <!--Main-->
+    <main>
+        <!--Fondo Principal-->
+        <section class="fondo">
+            <div class="fondo-img">
+                <div class="fondo-epigrafe">
+                    <p>¡ESTAMOS CON VOS CUANDO NOS NECESITAS!</p>
+                </div>
+                <div class="fondo-titulo">
+                    <h1>Contactános</h1>
+                </div>
+                <div class="fondo-texto">
+                    <p>Nuestro equipo de expertos está a tu disposición.</p>
+                    <p>Nos comprometemos a brindarte la mejor atención.</p>
+                </div>
+            </div>
+        </section>
+
+        <!--Titulo principal-->
+        <div class="contacto-titulo">
+            <h2>Resolvé tus dudas todos los días y en cualquier horario</h2>
+        </div>
+
+        <section class="contenedor-general">
+        <!--Seccion de Cards-->
+        <section class="cards">
+            <div class="contenedor-cards">
+                <div class="card-sucursal">
+                    <h2>Visitá nuestra sucursal</h2>
+                    <div class="card-texto">
+                        <p>Recordá que ahí te brindaremos ayuda de manera presencial, podemos encontrarnos de Lunes a
+                            Sábado de 08.00 a 18.00 horas.</p>
+                    </div>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3283.9735414318593!2d-58.37507302347655!3d-34.604830557558245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccad2a65fbba9%3A0x6b586b27075e06f!2sReconquista%20266%2C%20C1003%20San%20Nicolas%2C%20Cdad.%20Aut%C3%B3noma%20de%20Buenos%20Aires!5e0!3m2!1ses!2sar!4v1714070361606!5m2!1ses!2sar"
+                        width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+
+                <div class="card-call">
+                    <h2>Llámanos y te atenderemos con gusto</h2>
+                    <div class="card-texto">
+                        <p>Nuestro Centro de Atención al Cliente está a tu disposición para atender todas tus consultas.
+                            Llamanos al 0800-1234-5678, de lunes a viernes o en días hábiles, de 08:00 a 18:00.</p>
+                        <img src="images/call-center.jpg" alt="Imagen de Call Center">
+                    </div>
+                </div>
+
+                <div class="card-redes">
+                    <h2>Hablanos por nuestras redes sociales</h2>
+                    <div class="card-texto">
+                        <p>Escribinos por cualquiera de nuestras redes sociales con un mensaje privado.</p>
+                        <div class="redes-iconos">
+                            <i class="fa-brands fa-twitter"></i>
+                            <i class="fa-brands fa-facebook-f"></i>
+                            <i class="fa-brands fa-square-instagram"></i>
+                            <i class="fa-brands fa-facebook-messenger"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--Seccion de Formulario-->
+        <section class="cards">
+            <div class="card-mail">
+                <h2>Mandanos un mail</h2>
+                <div class="card-mail-texto">
+                    <p>Completá el siguiente formulario web y te responderemos por mail.</p>
+                </div>
+                <div class="formulario-consulta">
+                    <h3>Formulario de Consulta</h3>
+                    <p>Todos los campos son obligatorios salvo que se indique lo contrario.</p>
+                </div>
+                <div class="formulario-contenido">
+                    <form action="" method="post">
+                        <fieldset>
+                            <div class="contenedor-cuil">
+                                <label for="cuil">CUIL</label>
+                                <select name="cuilPrefijo" id="cuilPrefijo">
+                                    <option value="1" selected>20</option>
+                                    <option value="2">23</option>
+                                    <option value="3">24</option>
+                                    <option value="4">27</option>
+                                </select>  
+                                <input type="text" name="cuil" id="cuil" required size="10" placeholder="11222333">
+                                <input type="text" name="cuilSufijo" id="cuilSufijo" required size="1" placeholder="7">
+                            </div>
+
+                            <div class="contenedor-apellido">
+                                <label for="apellido">Apellido/s</label>
+                                <input type="text" name="apellido" id="apellido" required size="20" placeholder="Juan">
+                            </div>
+
+                            <div class="contenedor-nombre">
+                                <label for="nombre">Nombre/s</label>
+                                <input type="text" name="nombre" id="nombre" required size="20" placeholder="Perez">
+                            </div>
+                            
+                            <div class="contenedor-correo">
+                                <label for="correo">Correo</label>
+                                <input type="email" name="correo" id="correo" placeholder="correo@dominio.com">
+                            </div>
+
+                            <div class="contenedor-telefono">
+                                <label for="telefono">Telefono</label>
+                                <input type="text" name="telefono" id="telefono" required size="20" placeholder="+54 11 45678901">
+                            </div>
+
+                            <div class="contenedor-consulta">
+                                <label for="consultaTipo">Tipo de Consulta</label>
+                                <select name="consultaTipo" id="consultaTipo">
+                                    <option value="1" selected>Consulta</option>
+                                    <option value="2">Reclamo</option>
+                                </select>
+                            </div>
+
+                            <div class="contenedor-texto">
+                                <label for="consultaTexto">Escribí tu consulta</label>
+                                <textarea name="consultaTexto" id="consultaTexto" cols="30" rows="10" placeholder="¡Te responderemos lo antes posible!"></textarea>
+                            </div>
+                        </fieldset>
+                    </form>
+                    <div class="footer-formulario">
+                        <p>Por favor, corroborá los datos ingresados antes de enviar. De esta manera, recibirás en tu casilla de mail un link de confirmacion de tu Consulta o Reclamo.</p>
+                        <input type="submit" value="Enviar datos">
+                    </div>
+                </div>
+            </div>
+        </section>
+        </section>
+
+    </main>
+
+    <!--Footer-->
+    <footer>
+        <div class="content-footer content-max-width">
+            <div class="footer1">
+                <img src="images/argenntum.fw.png" alt="logo" style="height: 40px; margin-bottom: 10px;">
+                <p>Somos el establecimiento financiero líder que ofrece servicios bancarios internacionales de alta
+                    calidad. Siempre estamos listos para asociarnos con usted ofreciendo apoyo financiero total a
+                    individuos y empresas de todo el mundo.</p>
+            </div>
+            <div class=" footer2">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="institucional.html">Institucional</a></li>
+                    <li><a href="">Servicios</a></li>
+                    <li><a href="contacto.html">Contactos</a></li>
+                </ul>
+            </div>
+            <div class="footer3">
+                <h3>Cont&aacute;ctenos</h3>
+                <div class="contacto-item">
+                    <i class="fa-solid fa-location-dot"></i><span>Reconquista 266, C1003 ABF, Cdad. Autónoma de Buenos
+                        Aires</span>
+                </div>
+                <div class="contacto-item">
+                    <i class="fa-regular fa-clock"></i><span>Lunes a s&aacute;bado de 8.00 a 18.00 horas. Domingo
+                        CERRADO</span>
+                </div>
+                <div class="contacto-item">
+                    <i class="fa-solid fa-phone"></i><span>0800-1234-5678</span>
+                </div>
+
+            </div>
+            <div class="footer4">
+                <h3>Regístrese para recibir actualizaciones</h3>
+                <input type="text" placeholder="Correo electrónico *" class="input-footer">
+                <button class="btn suscribir">Suscribir</button>
+            </div>
+        </div>
+        <div class="copy">
+            <div class="copyright content-max-width">Copyright © 2024 Comisión 24170</div>
+        </div>
+    </footer>
+
+    <button id="irTop" class="circle active"><i class="fa-solid fa-chevron-up"></i></button>
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>
