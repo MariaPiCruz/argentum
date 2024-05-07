@@ -202,8 +202,11 @@ SECCION HISTORIA - CARDS - GRID
 }
 .container .card .contentBx p {
     color: #FFFFFF;
+    font-size: 0.6rem;
+    text-transform: uppercase;
 }
-.container .card .contentBx .size, 
+
+.container .card .contentBx .size , 
 .container .card .contentBx .color {
   display: flex;
   justify-content: center;
@@ -218,6 +221,9 @@ SECCION HISTORIA - CARDS - GRID
   opacity: 1;
   visibility: visible;
   transition-delay: 0.5s;
+}
+.container .card:hover .contentBx p {
+  visibility: hidden;
 }
 
 
@@ -246,9 +252,6 @@ SECCION HISTORIA - CARDS - GRID
   cursor: pointer;
 }
 
-.container .card .contentBx .size span:hover {
-  background: #9BDC28;
-}
 
 .image {
   width: 320px;
@@ -373,6 +376,11 @@ SECCION HISTORIA - CARDS - GRID
   width: fit-content;
   width: -moz-fit-content; /* Prefijo necesario para Firefox  */
 }
+.card__plus {
+  color: #FFFFFF;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+}
 .card__description {
   color: var(--white);
 }
@@ -406,11 +414,11 @@ SECCION HISTORIA - CARDS - GRID
     transition: transform 500ms ease-in;
   }
 
-  .card__content--container > :not(.card__title) {
+  .card__content--container > :not(.card__title, .card__plus) {
     opacity: 0;
     transition: transform 500ms ease-out, opacity 500ms ease-out;
   }
-
+  
   .card-identidad:hover,
   .card-identidad:focus-within {
     transform: scale(1.05);
@@ -441,7 +449,9 @@ SECCION HISTORIA - CARDS - GRID
     transition: opacity 500ms ease-in;
     transition-delay: 1000ms;
   }
-
+  .card-identidad:hover .card__content--container .card__plus{
+    opacity: 0;
+  }
   .card-identidad:hover .card__title::after,
   .card-identidad:focus-within .card__title::after {
     opacity: 1;
