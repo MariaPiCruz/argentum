@@ -75,9 +75,9 @@
                         <p>Todos los campos son obligatorios salvo que se indique lo contrario.</p>
                     </div>
                     <div class="formulario-contenido">
-                        <form action="" method="post">
+                        <form action="" method ="post" id="form">
                             <fieldset>
-                                <div class="contenedor-cuil">
+                                <div class="contenedor-cuil lista-imputs">
                                     <label for="cuil">CUIL</label>
                                     <select name="cuilPrefijo" id="cuilPrefijo">
                                         <option value="1" selected>20</option>
@@ -85,34 +85,35 @@
                                         <option value="3">24</option>
                                         <option value="4">27</option>
                                     </select>
-                                    <input type="text" name="cuil" id="cuil" required size="10" placeholder="11222333">
-                                    <input type="text" name="cuilSufijo" id="cuilSufijo" required size="1"
-                                        placeholder="7">
+                                    <input type="text" name="cuil" id="cuil" size="10" placeholder="11222333">
+                                    <input type="text" name="cuilSufijo" id="cuilSufijo" size="1" placeholder="7">
                                 </div>
 
-                                <div class="contenedor-apellido">
+                                <div class="contenedor-apellido lista-imputs">
                                     <label for="apellido">Apellido/s</label>
-                                    <input type="text" name="apellido" id="apellido" required size="20"
-                                        placeholder="Juan">
+                                    <input type="text" name="apellido" id="apellido" size="20" placeholder="Juan">
+                                    <p class="mensajeError"></p>
                                 </div>
 
-                                <div class="contenedor-nombre">
+                                <div class="contenedor-nombre lista-imputs">
                                     <label for="nombre">Nombre/s</label>
-                                    <input type="text" name="nombre" id="nombre" required size="20" placeholder="Perez">
+                                    <input type="text" name="nombre" id="nombre" size="20" placeholder="Perez">
+                                    <p class="mensajeError"></p>
                                 </div>
 
-                                <div class="contenedor-correo">
+                                <div class="contenedor-correo lista-imputs">
                                     <label for="correo">Correo</label>
                                     <input type="email" name="correo" id="correo" placeholder="correo@dominio.com">
+                                    <p class="mensajeError"></p>
                                 </div>
 
-                                <div class="contenedor-telefono">
+                                <div class="contenedor-telefono lista-imputs">
                                     <label for="telefono">Telefono</label>
-                                    <input type="text" name="telefono" id="telefono" required size="20"
-                                        placeholder="+54 11 45678901">
+                                    <input type="text" name="telefono" id="telefono" size="20" placeholder="1145678901">
+                                    <p class="mensajeError"></p>
                                 </div>
 
-                                <div class="contenedor-consulta">
+                                <div class="contenedor-consulta lista-imputs">
                                     <label for="consultaTipo">Tipo de Consulta</label>
                                     <select name="consultaTipo" id="consultaTipo">
                                         <option value="1" selected>Consulta</option>
@@ -120,17 +121,17 @@
                                     </select>
                                 </div>
 
-                                <div class="contenedor-texto">
+                                <div class="contenedor-texto lista-imputs">
                                     <label for="consultaTexto">Escribí tu consulta</label>
-                                    <textarea name="consultaTexto" id="consultaTexto" cols="30" rows="10"
-                                        placeholder="¡Te responderemos lo antes posible!"></textarea>
+                                    <textarea name="consultaTexto" id="consultaTexto" cols="30" rows="10" placeholder="¡Te responderemos lo antes posible!"></textarea>
+                                    <p class="mensajeError"></p>
                                 </div>
                             </fieldset>
                         </form>
                         <div class="footer-formulario">
                             <p>Por favor, corroborá los datos ingresados antes de enviar. De esta manera, recibirás en
                                 tu casilla de mail un link de confirmacion de tu Consulta o Reclamo.</p>
-                            <input type="submit" value="Enviar datos">
+                            <input type="submit" value="Enviar">
                         </div>
                     </div>
                 </div>
@@ -177,6 +178,7 @@
                 </div>
             </section>
         </section>
+
     </main>
 
     <!--Footer-->
@@ -232,6 +234,7 @@
 
     <button id="irTop" class="circle active"><i class="fa-solid fa-chevron-up"></i></button>
     <script src="js/script.js"></script>
+    <script src="js/contacto.js"></script>
 </body>
 
 </html>

@@ -301,4 +301,12 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color:#271842;
 }
+
+.mensajeError{
+    width: 200px;
+    text-align: center;
+    margin: auto;
+    color: #271842;
+    padding: 10px;
+}
   
