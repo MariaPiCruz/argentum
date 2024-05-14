@@ -112,7 +112,7 @@ main {
     line-height: 1.6;
 }
 
-.card-sucursal, .card-call, .card-redes, .card-mail {
+.card-sucursal, .card-call, .card-redes, .card-mail{
     flex: 1;
     margin: 10px;
     padding: 20px;
@@ -123,7 +123,7 @@ main {
 }
 
 .card-sucursal:hover, .card-call:hover, .card-redes:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra más intensa al pasar el mouse */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .card-sucursal{
@@ -143,18 +143,17 @@ main {
 } 
 @media (orientation: portrait) {
     .google-map-iframe {
-      height: 300px; /* Establece la altura en modo vertical */
+      height: 300px;
     }
 }
   
 @media (orientation: landscape) {
     .google-map-iframe {
-      height: 200px; /* Establece la altura en modo horizontal */
+      height: 200px;
     }
 }
 @media (touch-screen) {
     .google-map-iframe {
-      /* Habilita el zoom táctil */
       touch-action: manipulation;
     }
 } 
@@ -230,6 +229,12 @@ main {
     line-height: 1.6;
 }
 
+.formulario-contenido {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 fieldset {
     border: none;
     padding: 0;
@@ -243,7 +248,7 @@ label {
     font-weight: bold;
 }
   
-.contenedor-cuil, .contenedor-apellido, .contenedor-nombre, .contenedor-correo, .contenedor-telefono, .contenedor-consulta, .contenedor-texto {
+.contenedor-cuil, .contenedor-apellido, .contenedor-nombre, .contenedor-correo, .contenedor-telefono, .contenedor-consulta, .contenedor-texto{
     margin-bottom: 15px;
 }
   
@@ -260,7 +265,7 @@ select#cuilPrefijo {
     margin-right: 5px;
 }
   
-input[type="text"]#cuil, input[type="text"]#cuilSufijo {
+input[type="text"]#cuil, input[type="text"]#cuilSufijo{
     width: 50%;
     padding: 8px;
     border: 1px solid #ccc;
@@ -296,3 +301,4 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color:#271842;
 }
+  
