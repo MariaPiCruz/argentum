@@ -5,51 +5,88 @@ const apellido = document.getElementById("apellido");
 const nombre = document.getElementById("nombre");
 const correo = document.getElementById("correo");
 const telefono = document.getElementById("telefono");
+const consultaTipo = document.getElementById("consultaTipo");
 const consultaTexto = document.getElementById("consultaTexto");
 const form = document.getElementById("form");
 const listaImputs = document.querySelectorAll(".lista-imputs");
 
-
 form.addEventListener("submit", (e) => {
     e.preventDefault();
+    let condicion = validacionForm();
+    if(condicion){
+        enviarFormulario();
+    }
 
-    //Sirve para borrar la etiqueta p (ultimo hijo de cada clase lista-imputs)
-    listaImputs.forEach((element) => {
+});
+
+function validacionForm(){
+    let condicion = true;
+
+    listaImputs.forEach ((element) => {
         element.lastElementChild.innerHTML = "";
     })
 
     //Validacion de que los campos no esten vacios y su tamaño no sea menor a 1
-    if (cuil.value.length < 1 || cuil.value.trim() == "" || cuil.value.length > 8){
-        mostrarMensajeError("cuil", "DNI no valido.");
+    if (cuil.value.length != 8 || cuil.value.trim() == "" || cuil.value.length > 8){
+        mostrarMensaje("contenedor-cuil", "DNI no valido.");
+        condicion = false;
     }
 
-    if (cuilSufijo.value.length > 1 || cuilSufijo.value.trim() == ""){
-        mostrarMensajeError("cuilSufijo", "Solo puede contener un sólo número.");
+    if (cuilSufijo.value.length != 1 || cuilSufijo.value.trim() == ""){
+        mostrarMensaje("contenedor-cuil", "El Sufijo del CUIL debe ser un solo número.");
+        condicion = false;
+    }
+
+    if (cuil.value.trim() == "" && cuilSufijo.value.trim() == ""){
+        mostrarMensaje("contenedor-cuil", "Por favor, complete estos datos.");
+        condicion = false;
     }
     
     if (apellido.value.length < 1 || apellido.value.trim() == ""){
-        mostrarMensajeError("apellido", "Apellido no valido.");
+        mostrarMensaje("contenedor-apellido", "Apellido no valido.");
+        condicion = false;
     }
 
     if (nombre.value.length < 1 || nombre.value.trim() == ""){
-        mostrarMensajeError("nombre", "Nombre no valido.");
+        mostrarMensaje("contenedor-nombre", "Nombre no valido.");
+        condicion = false;
     }
 
     if (correo.value.length < 1 || correo.value.trim() == ""){
-        mostrarMensajeError("correo", "Correo no valido.");
+        mostrarMensaje("contenedor-correo", "Correo no valido.");
+        condicion = false;
     }
 
-    if (telefono.value.length != 11 || telefono.value.trim() == ""){
-        mostrarMensajeError("telefono", "Telefono no valido.");
+    if (validarEmail(correo)){
+        mostrarMensaje("contenedor-correo", "Correo no valido.");
+        condicion = false;
+    }
+
+    if (telefono.value.length > 11 || telefono.value.trim() == ""){
+        mostrarMensaje("contenedor-telefono", "Telefono no valido.");
+        condicion = false;
     }
 
     if (consultaTexto.value.trim() == ""){
-        mostrarMensajeError("consultaTexto", "Escriba una consulta.");
+        mostrarMensaje("contenedor-consultaTexto", "Escriba una consulta.");
+        condicion = false;
     }
-});
 
-function mostrarMensajeError(idInput, mensaje){
-    let elemento = document.querySelector(`.${idInput}`);
+    return condicion;
+}
+
+function validarEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+function enviarFormulario(){
+    form.reset();
+    mostrarMensaje("footer-formulario", "Formulario enviado con éxito :)");
+}
+
+function mostrarMensaje(claseInput, mensaje){
+    let elemento = document.querySelector(`.${claseInput}`);
     elemento.lastElementChild.innerHTML = mensaje;
 };
 
@@ -88,4 +125,3 @@ function soloLetras(){
       event.preventDefault();
     }
 }
-

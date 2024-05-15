@@ -250,6 +250,7 @@ label {
   
 .contenedor-cuil, .contenedor-apellido, .contenedor-nombre, .contenedor-correo, .contenedor-telefono, .contenedor-consulta, .contenedor-texto{
     margin-bottom: 15px;
+
 }
   
 .contenedor-cuil {
@@ -302,11 +303,11 @@ input[type="submit"]:hover {
     background-color:#271842;
 }
 
-.mensajeError{
+.mensaje{
     width: 200px;
     text-align: center;
     margin: auto;
     color: #271842;
     padding: 10px;
+    font-weight: bold;
 }
-  

@@ -75,7 +75,7 @@
                         <p>Todos los campos son obligatorios salvo que se indique lo contrario.</p>
                     </div>
                     <div class="formulario-contenido">
-                        <form action="" method ="post" id="form">
+                        <form action="" id="form">
                             <fieldset>
                                 <div class="contenedor-cuil lista-imputs">
                                     <label for="cuil">CUIL</label>
@@ -85,32 +85,33 @@
                                         <option value="3">24</option>
                                         <option value="4">27</option>
                                     </select>
-                                    <input type="text" name="cuil" id="cuil" size="10" placeholder="11222333">
+                                    <input type="text" name="cuil" id="cuil" size="8" placeholder="11222333">
                                     <input type="text" name="cuilSufijo" id="cuilSufijo" size="1" placeholder="7">
+                                    <p class="mensaje"></p>
                                 </div>
 
                                 <div class="contenedor-apellido lista-imputs">
                                     <label for="apellido">Apellido/s</label>
                                     <input type="text" name="apellido" id="apellido" size="20" placeholder="Juan">
-                                    <p class="mensajeError"></p>
+                                    <p class="mensaje"></p>
                                 </div>
 
                                 <div class="contenedor-nombre lista-imputs">
                                     <label for="nombre">Nombre/s</label>
                                     <input type="text" name="nombre" id="nombre" size="20" placeholder="Perez">
-                                    <p class="mensajeError"></p>
+                                    <p class="mensaje"></p>
                                 </div>
 
                                 <div class="contenedor-correo lista-imputs">
                                     <label for="correo">Correo</label>
                                     <input type="email" name="correo" id="correo" placeholder="correo@dominio.com">
-                                    <p class="mensajeError"></p>
+                                    <p class="mensaje"></p>
                                 </div>
 
                                 <div class="contenedor-telefono lista-imputs">
                                     <label for="telefono">Telefono</label>
                                     <input type="text" name="telefono" id="telefono" size="20" placeholder="1145678901">
-                                    <p class="mensajeError"></p>
+                                    <p class="mensaje"></p>
                                 </div>
 
                                 <div class="contenedor-consulta lista-imputs">
@@ -120,19 +121,21 @@
                                         <option value="2">Reclamo</option>
                                     </select>
                                 </div>
-
                                 <div class="contenedor-texto lista-imputs">
                                     <label for="consultaTexto">Escribí tu consulta</label>
                                     <textarea name="consultaTexto" id="consultaTexto" cols="30" rows="10" placeholder="¡Te responderemos lo antes posible!"></textarea>
-                                    <p class="mensajeError"></p>
+                                    <p class="mensaje"></p>
+                                </div>
+
+                                <div class="footer-formulario">
+                                    <p>Por favor, corroborá los datos ingresados antes de enviar. De esta manera, recibirás en
+                                        tu casilla de mail un link de confirmacion de tu Consulta o Reclamo.</p>
+                                    <input type="submit" value="Enviar">
+                                    <p class="mensaje"></p>
                                 </div>
                             </fieldset>
                         </form>
-                        <div class="footer-formulario">
-                            <p>Por favor, corroborá los datos ingresados antes de enviar. De esta manera, recibirás en
-                                tu casilla de mail un link de confirmacion de tu Consulta o Reclamo.</p>
-                            <input type="submit" value="Enviar">
-                        </div>
+
                     </div>
                 </div>
             </section>
