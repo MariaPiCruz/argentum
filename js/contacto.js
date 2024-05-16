@@ -21,7 +21,6 @@ form.addEventListener("submit", (e) => {
 function validacionForm(){
     let condicion = true;
 
-    //Validacion de que los campos no esten vacios y su tamaño no sea menor a 1
     if (cuil.value.length != 8 || cuil.value.trim() == "" || cuil.value.length > 8){
         mostrarMensaje("contenedor-cuil", "DNI no valido.");
         condicion = false;
@@ -67,8 +66,6 @@ function validacionForm(){
     if (validarEmail(correo)){
         mostrarMensaje("contenedor-correo", "Correo no valido.");
         condicion = false;
-    }else{
-        limpiarMensaje("contenedor-correo");
     }
 
     if (telefono.value.length > 11 || telefono.value.trim() == ""){
@@ -114,12 +111,24 @@ function limpiarInputs(){
 //Labels que sólo aceptan numeros
 telefono.addEventListener('keypress', (event) => {
     soloNumeros();
+    const tamanio = telefono.value.length;
+    if(tamanio>=11){
+        event.preventDefault();
+    }
 });
 cuil.addEventListener('keypress', (event) => {
     soloNumeros();
+    const tamanio = cuil.value.length;
+    if(tamanio>=8){
+        event.preventDefault();
+    }
 });
 cuilSufijo.addEventListener('keypress', (event) => {
     soloNumeros();
+    const tamanio = cuilSufijo.value.length;
+    if(tamanio>=1){
+        event.preventDefault();
+    }
 });
 function soloNumeros(){
     const keyCode = event.keyCode;
