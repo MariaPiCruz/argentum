@@ -12,7 +12,7 @@ main {
     margin: auto 2em;
 }
 
-/*Imagen Principal*/
+/*Imagen principal*/
 .fondo-img {
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(../images/contact-us.jpg);
     width: 100%;
@@ -53,8 +53,6 @@ main {
     font-weight: lighter;
     font-style: normal;
 }
-
-
 
 /*Titulo*/
 .contacto-titulo{
@@ -156,6 +154,7 @@ main {
     font-size: 1.5em;
     font-weight: 300;
     line-height: 1.6;
+    text-align: center;
 }
 
 .formulario-consulta {
@@ -187,14 +186,6 @@ fieldset {
     border: none;
     padding: 0;
 }
-
-label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 1em;
-    text-align: left;
-    font-weight: bold;
-}
   
 .contenedor-cuil, .contenedor-apellido, .contenedor-nombre, .contenedor-correo, .contenedor-telefono, .contenedor-consulta, .contenedor-texto{
     margin-bottom: 15px;
@@ -205,6 +196,19 @@ label {
     flex-wrap: wrap;
     gap: 10px;
     align-items: center;
+}
+
+.footer-formulario p{
+    font-size: 1em;
+    margin: 10px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1em;
+    text-align: left;
+    font-weight: bold;
 }
   
 select#cuilPrefijo{
@@ -222,21 +226,13 @@ input[type="text"]#cuil, input[type="text"]#cuilSufijo{
     margin: 0 5px;
 }
 
-input{
+input[type="text"], input[type="email"], input[type="number"], select#consultaTipo, textarea{
+    width: 100%;
     font-size: 1em;
     margin-top: 0.5em;
     border-radius: 4px;
-}
-
-input[type="text"], input[type="email"], input[type="number"], select, textarea {
-    width: 100%;
     padding: 0.5em;
     border: 1px solid #ccc;
-}
-
-.footer-formulario p{
-    font-size: 1em;
-    margin: 10px;
 }
   
 input[type="submit"] {
@@ -261,20 +257,24 @@ input[type="submit"]:hover {
     font-weight: bold;
 }
 
-
-
-@media (min-width: 350px) and (max-width: 700px) {
-    .grid {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-}
-
 @media screen and (max-width: 768px){
+    .grid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .cards{
+        margin: 0;
+      }
+      select#cuilPrefijo{
+        width: 100%;
+    }
+    input[type="text"]#cuil, input[type="text"]#cuilSufijo{
+        width: 100%;
+    }
     input[type="text"], input[type="email"], input[type="number"], select, textarea {
-        width: 20em;
+        width: 100%;
     }
     .imagen-tarjeta {
         width: 100%;
@@ -293,35 +293,11 @@ input[type="submit"]:hover {
 }
 
 @media screen and (max-width: 425px){
-    input[type="text"], input[type="email"], input[type="number"], select, textarea {
-        width: 18em;
-    }
-    .cards{
-        margin: 0;
-    }
-    select#cuilPrefijo{
-        width: 5em;
-    }
-    input[type="text"]#cuil, input[type="text"]#cuilSufijo{
-        width: 10em;
-    }
     .fondo-texto {
         padding: 0rem 0.8rem;
     }
     .fondo-titulo {
         font-size: 1.8rem;
-    }
-}
-
-@media screen and (max-width: 375px){
-    input[type="text"], input[type="email"], input[type="number"], select, textarea {
-        width: 15em;
-    }
-}
-
-@media screen and (max-width: 320px){
-    input[type="text"], input[type="email"], input[type="number"], select, textarea {
-        width: 13em;
     }
 }
 
