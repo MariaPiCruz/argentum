@@ -8,13 +8,13 @@ main {
     background-color: #F4F4F4;
 }
 
-.contenedor-general{
+.contenedor-general {
     margin: auto 2em;
 }
 
 /*Imagen principal*/
 .fondo-img {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(../images/contact-us.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../images/contact-us.jpg);
     width: 100%;
     height: 600px;
     background-position: center center;
@@ -26,9 +26,11 @@ main {
     align-items: center;
 }
 
-.fondo-epigrafe, .fondo-titulo, .fondo-texto {
+.fondo-epigrafe,
+.fondo-titulo,
+.fondo-texto {
     text-align: center;
-    color: white;   
+    color: white;
 }
 
 .fondo-epigrafe {
@@ -55,7 +57,7 @@ main {
 }
 
 /*Titulo*/
-.contacto-titulo{
+.contacto-titulo {
     text-align: center;
     padding: 2rem;
     font-size: 30px;
@@ -64,12 +66,12 @@ main {
 }
 
 /*Cards*/
-.cards{
+.cards {
     margin: 0 4em;
     justify-content: space-between;
 }
 
-.contenedor-cards{
+.contenedor-cards {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -77,21 +79,24 @@ main {
     margin: 0 auto;
 }
 
-.contenedor-cards h2{
+.contenedor-cards h2 {
     margin: 30px 0px;
     font-size: 30px;
     font-weight: 1000;
     color: #271842;
 }
 
-.contenedor-cards p{
+.contenedor-cards p {
     margin-bottom: 20px;
     font-size: 20px;
     font-weight: 300;
     line-height: 1.6;
 }
 
-.card-sucursal, .card-call, .card-redes, .card-mail{
+.card-sucursal,
+.card-call,
+.card-redes,
+.card-mail {
     flex: 1;
     margin: 10px;
     padding: 20px;
@@ -100,11 +105,13 @@ main {
     position: relative;
 }
 
-.card-sucursal:hover, .card-call:hover, .card-redes:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+.card-sucursal:hover,
+.card-call:hover,
+.card-redes:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.card-sucursal{
+.card-sucursal {
     background-color: #E6E6FA;
 }
 
@@ -112,9 +119,9 @@ main {
     width: 100%;
     height: 300px;
     border-radius: 10px;
-} 
+}
 
-.card-call{
+.card-call {
     background-color: #D3D3FD;
 }
 
@@ -123,10 +130,10 @@ main {
     border-radius: 10px;
 }
 
-.card-redes{
+.card-redes {
     background-color: #C0C0FF;
 }
-  
+
 .redes-iconos i {
     font-size: 50px;
     color: #fff;
@@ -134,13 +141,13 @@ main {
     text-align: center;
     margin: 30px;
 }
-  
+
 .redes-iconos i:hover {
     color: #333;
 }
 
 /*Formulario*/
-.card-mail h2{
+.card-mail h2 {
     background-color: #C0C0FF;
     padding: 20px 0px;
     font-size: 2em;
@@ -149,7 +156,7 @@ main {
     text-align: center;
 }
 
-.card-mail-texto p{
+.card-mail-texto p {
     padding: 10px 0px;
     font-size: 1.5em;
     font-weight: 300;
@@ -161,24 +168,24 @@ main {
     text-align: left;
 }
 
-.formulario-consulta h3{
+.formulario-consulta h3 {
     font-size: 2em;
     color: #271842;
 }
 
-.formulario-consulta p{
+.formulario-consulta p {
     font-size: 1em;
     font-style: italic;
     line-height: 1.6;
 }
 
-.formulario-contenido{
+.formulario-contenido {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.footer-formulario{
+.footer-formulario {
     text-align: center;
 }
 
@@ -186,19 +193,25 @@ fieldset {
     border: none;
     padding: 0;
 }
-  
-.contenedor-cuil, .contenedor-apellido, .contenedor-nombre, .contenedor-correo, .contenedor-telefono, .contenedor-consulta, .contenedor-texto{
+
+.contenedor-cuil,
+.contenedor-apellido,
+.contenedor-nombre,
+.contenedor-correo,
+.contenedor-telefono,
+.contenedor-consulta,
+.contenedor-texto {
     margin-bottom: 15px;
 }
-  
-.contenedor-cuil{
+
+.contenedor-cuil {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     align-items: center;
 }
 
-.footer-formulario p{
+.footer-formulario p {
     font-size: 1em;
     margin: 10px;
 }
@@ -210,23 +223,28 @@ label {
     text-align: left;
     font-weight: bold;
 }
-  
-select#cuilPrefijo{
+
+select#cuilPrefijo {
     width: 20em;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
     margin-right: 5px;
 }
-  
-input[type="text"]#cuil, input[type="text"]#cuilSufijo{
+
+input[type="text"]#cuil,
+input[type="text"]#cuilSufijo {
     width: 20em;
     padding: 8px;
     border: 1px solid #ccc;
     margin: 0 5px;
 }
 
-input[type="text"], input[type="email"], input[type="number"], select#consultaTipo, textarea{
+input[type="text"],
+input[type="email"],
+input[type="number"],
+select#consultaTipo,
+textarea {
     width: 100%;
     font-size: 1em;
     margin-top: 0.5em;
@@ -234,7 +252,7 @@ input[type="text"], input[type="email"], input[type="number"], select#consultaTi
     padding: 0.5em;
     border: 1px solid #ccc;
 }
-  
+
 input[type="submit"] {
     background-color: #333;
     color: #fff;
@@ -243,12 +261,12 @@ input[type="submit"] {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-  
+
 input[type="submit"]:hover {
-    background-color:#271842;
+    background-color: #271842;
 }
 
-.mensaje{
+.mensaje {
     width: 200px;
     text-align: center;
     margin: auto;
@@ -257,45 +275,56 @@ input[type="submit"]:hover {
     font-weight: bold;
 }
 
-@media screen and (max-width: 768px){
-    .grid {
+@media screen and (max-width: 768px) {
+    .cards {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-      }
-      .cards{
         margin: 0;
-      }
-      select#cuilPrefijo{
+    }
+
+    select#cuilPrefijo {
         width: 100%;
     }
-    input[type="text"]#cuil, input[type="text"]#cuilSufijo{
+
+    input[type="text"]#cuil,
+    input[type="text"]#cuilSufijo {
         width: 100%;
     }
-    input[type="text"], input[type="email"], input[type="number"], select, textarea {
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    select,
+    textarea {
         width: 100%;
     }
+
     .imagen-tarjeta {
         width: 100%;
         height: auto;
     }
+
     .google-map-iframe {
         width: 90%;
         height: 300px;
     }
+
     .fondo-texto {
         padding: 0rem 0.8rem;
     }
+
     .fondo-titulo {
         font-size: 2.5rem;
     }
 }
 
-@media screen and (max-width: 425px){
+@media screen and (max-width: 425px) {
     .fondo-texto {
         padding: 0rem 0.8rem;
     }
+
     .fondo-titulo {
         font-size: 1.8rem;
     }
@@ -303,17 +332,18 @@ input[type="submit"]:hover {
 
 @media (orientation: portrait) {
     .google-map-iframe {
-      height: 300px;
+        height: 300px;
     }
 }
-  
+
 @media (orientation: landscape) {
     .google-map-iframe {
-      height: 200px;
+        height: 200px;
     }
 }
+
 @media (touch-screen) {
     .google-map-iframe {
-      touch-action: manipulation;
+        touch-action: manipulation;
     }
 }
