@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banco Argentum - Home Banking</title>
+    <link rel="icon" type="image/x-icon" href="logo.png">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:100,300,300i,400,700,900">
+    <link rel="stylesheet" href="css/fontawesome/css/all.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/inicio.css">
+</head>
+
+<body>
+    <header>
+        <div class="bar-title">
+            <div class="panel-title-flex">
+                <img src="images/argenntum.fw.png" height="30px" alt="Banco Argentum">
+                <div class="panel-login-flex">
+                    <div>
+                        <p class="font-name" id="nombreUsuario"></p>
+                    </div>
+                    <i class="fa-solid fa-gear font-icon"></i>
+                    <button class="btn" onclick="window.location.href='loguin.html'">Salir</button>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <ul class="menu">
+                <li class="mnu" onclick="window.location.href='inicio.html'"><span class="fa-solid fa-house-user"></span> Inicio</li>
+                <li class="mnu" onclick="window.location.href='transfer.html'"><span class="fa-light fa-money-bill-transfer"></span> Transferencias</li>
+                <li class="mnu"><span class="fa-thin fa-money-check-dollar"></span> Pagos</li>
+                <li class="mnu"><span class="fa-thin fa-file-invoice-dollar"></span> Recargas</li>
+                <li class="mnu"><span class="fa-thin fa-money-bill-trend-up"></span>Inversiones</li>
+                <li class="mnu"><span class="fa-solid fa-shield-halved"></span> Seguros</li>
+                <li class="mnu"><span class="fa-solid fa-clipboard-question"></span> Consultas y Solicitudes</li>
+                <li class="mnu"><span class="fa-solid fa-bars"></span> Más</li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="section">
+            <div>
+                <h2 id="txtHola">Hola, <b>Nestor</b></h2>
+            </div>
+            <div>
+                <h3>Estado de cuenta <span class="fa-solid fa-eye-slash" id="viewSaldo"
+                        onclick="changeViewSaldo()"></span></h3>
+            </div>
+            <div class="section-flex" id="section-cuentas">
+                <div class="card">
+                    <h4>Caja de Ahorro en Pesos</h4>
+                    <p>084-123456 / 3</p>
+                    <div class="card-saldo">$ <b>380.400,00</b></div>
+                    <div class="card-dashed oculto">$ <b>--- --- --</b></div>
+                    <div class="card-icon-flex">
+                        <a href="movimientos.html"><i class="fa-solid fa-money-bill-transfer"></i> Ver Movimientos</a>
+                        <a href="#" onclick="verAliasCbu('pesos')"><i class="fa-solid fa-share-nodes"></i> CBU / Alias</a>
+
+                    </div>
+                </div>
+                <div class="card">
+                    <h4>Caja de Ahorro en USD</h4>
+                    <p>084-123456 / 3</p>
+                    <div class="card-saldo">$<b>0,00</b></div>
+                    <div class="card-dashed oculto">$ <b>--- --- --</b></div>
+                    <div class="card-icon-flex">
+                        <a href="#"><i class="fa-solid fa-money-bill-transfer"></i> Ver Movimientos</a>
+                        <a href="#" onclick="verAliasCbu('dolar')"><i class="fa-solid fa-share-nodes"></i> CBU / Alias</a>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div>
+                <h3>Tarjetas <span class="fa-solid fa-eye-slash" id="viewTarjetas"
+                        onclick="changeViewTarjetas()"></span></h3>
+            </div>
+            <div class="section-flex">
+                <div class="card">
+                    <h4>Tarjeta Débito</h4>
+                    <div class="card-line-flex">
+                        <p>Número de tarjeta</p>
+                        <p><b>****2745</b></p>
+                    </div>
+                    <div class="card-line-flex">
+                        <p>Límite de extracción</p>
+                        <p><b>$150.000</b></p>
+                    </div>
+                    <p><b>Consumos</b></p>
+                    <div class="card-line-flex align-end">
+                        <p>Vigencia hasta 08/25</p>
+                        <img src="images/visaDebito.png" width="40px" alt="Visa Débito">
+                    </div>
+                </div>
+                <div class="card">
+                    <h4>Consumo periodo actual</h4>
+                    <div>
+                        <div class="card-consumo">$<b>17.600,00</b></div>
+                        <div class="card-dashed-consumo oculto">$ <b>--- --- --</b></div>
+                        <p>****2745</p>
+                    </div>
+                    <div class="card-line-flex align-end">
+                        <p>Vence 11/28 | Cierre 28/06</p>
+                        <img src="images/visa.png" width="40px" alt="Visa Crédito">
+                    </div>
+                </div>
+                <div class="card">
+                    <h4>Consumo periodo actual</h4>
+                    <div>
+                        <div class="card-consumo">$<b>0,00</b></div>
+                        <div class="card-dashed-consumo oculto">$ <b>--- --- --</b></div>
+                        <p>****58909</p>
+                    </div>
+                    <div class="card-line-flex align-end">
+                        <p>Vence 11/28 | Cierre 28/06</p>
+                        <img src="images/American-Express.png" width="40px" alt="Visa Crédito">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div>
+                <h3>Ofertas</h3>
+                <div class="card" style="width: 50%;">
+                    <h4>Préstamos</h4>
+                    <p>Te damos hasta $800.000 para que hagas lo que quieras.</p>
+                    <button class="btn">LO QUIERO</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="overlay" style="display: none;" id="modal-CBUAlias">
+        <div class="modal-CBUAlias">
+            <div class="modal-header">
+                <div class="card-line-flex">
+                    <h4>DATOS DE CUENTA</h4>
+                    <button class="btn-circle" onclick="cerrarModalDC()">x</button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-text-line">
+                    <p class="modal-text" id="modal-text">Caja de Ahorro en Pesos</p>
+                    <p class="modal-label">Tipo de cuenta</p>
+                </div>
+                <div class="modal-text-line">
+                    <p class="modal-text">084-123456 / 3</p>
+                    <p class="modal-label">Número de cuenta</p>
+                </div>
+                <div class="modal-text-line">
+                    <p class="modal-text">0650030602000080904070</p>
+                    <p class="modal-label">CBU</p>
+                </div>
+                <div class="modal-text-line">
+                    <div class="card-line-flex">
+                        <p class="modal-text" contenteditable="false" id="txtAlias">TEXTO.BASICO.CLARIN</p>
+                        <span class="fa-solid fa-pencil" onclick="editAlias()"></span>
+                    </div>
+                    <p class="modal-label">Alias</p>
+                </div>
+                <button class="btn" id="btn-CopyData" onclick="copiarAlPortapapeles()"><span class="fa-regular fa-copy"></span> COPIAR DATOS</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/inicio.js"></script>
+</body>
+
+</html>
