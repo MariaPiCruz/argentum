@@ -298,3 +298,41 @@ function limpiarCamposTransfer(){
     concepto.value = "";
     referencia.value = "";
 };
+
+function transferir(){
+    let destinatario_id = document.querySelector('#txtId');
+    let destinatario = document.querySelector('#txtDestinatario');
+    let importe = document.querySelector('#txtImporte');
+    let origen = document.querySelector('#cboCuentas');
+    let concepto = document.querySelector('#cboConcepto');
+    let referencia = document.querySelector('#txtReferencia');
+    
+    const params = new FormData();
+    params.append('cliente', sessionStorage.getItem('cuil'));
+    params.append('destinatario_id', destinatario_id.value);
+    params.append('destinatario', destinatario.value);
+    params.append('importe', importe.value);
+    params.append('origen', origen.value);
+    params.append('concepto', concepto.value);
+    params.append('referencia', referencia.value);
+    params.append('fecha', ahora());
+
+    fetch(url+'transferir',
+        {
+            method: 'POST', 
+            body: params,
+            headers: {
+                "accept": 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.status==0){
+                alert(data.response);
+            }else{
+                alert(data.response);
+            }
+        });
+
+    cerrarModalTransfer();    
+};

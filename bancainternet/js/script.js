@@ -44,4 +44,18 @@ function convertAndFormatDate(dateString) {
     const formattedDate = `${day}-${month}-${year}`;
 
     return formattedDate;
+};
+
+function ahora() {
+    const ahora = new Date();
+
+    const year = ahora.getFullYear();
+    const month = String(ahora.getMonth() + 1).padStart(2, '0'); // Los meses van de 0 a 11
+    const day = String(ahora.getDate()).padStart(2, '0');
+
+    const hours = String(ahora.getHours()).padStart(2, '0');
+    const minutes = String(ahora.getMinutes()).padStart(2, '0');
+    const seconds = String(ahora.getSeconds()).padStart(2, '0');
+
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
