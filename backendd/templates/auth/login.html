@@ -1,0 +1,27 @@
+{% extends 'auth/auth_layout.html' %}
+{% block title %} {{ title }} {% endblock %}
+{% block content%}
+<div class="logo">
+    <img src="{{url_for('static', filename='images/argenntum.fw.png')}}" alt="">
+</div>
+<div class="login">
+    {% include "includes/alert.html" %}
+    <h1>Home banking</h1>
+    <div class="links">
+        <a href="{{ url_for('login') }}" class="active">Inicio Sesión</a>
+        <a href="{{ url_for('register') }}">Registro</a>
+    </div>
+    <form action="{{ url_for('login') }}" method="post">
+        <label for="username">
+            <i class="fas fa-user"></i>
+        </label>
+        <input type="text" name="username" placeholder="Usuario" id="username" required>
+        <label for="password">
+            <i class="fas fa-lock"></i>
+        </label>
+        <input type="password" name="password" placeholder="Contraseña" id="password" required>
+        <div class="msg">{{ msg }}</div>
+        <input type="submit" value="Ir">
+    </form>
+</div>
+{% endblock %}
