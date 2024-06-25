@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banco Argentum - Home Banking</title>
+    <link rel="icon" type="image/x-icon" href="../static/images/logo.png">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:100,300,300i,400,700,900">
+    <link rel="stylesheet" href="../static/fontawesome/css/all.css">
+    <link rel="stylesheet" href="../static/css/fonts.css">
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <link rel="stylesheet" href="../static/css/transfer.css">
+</head>
+
+<body>
+    <header>
+        <div class="bar-title">
+            <div class="panel-title-flex">
+                <img src="../static/images/argenntum.fw.png" height="30px" alt="Banco Argentum">
+                <div class="panel-login-flex">
+                    <div>
+                        <p class="font-name" id="nombreUsuario"></p>
+                    </div>
+                    <i class="fa-solid fa-gear font-icon"></i>
+                    <button class="btn" onclick="window.location.href='loguin.html'">Salir</button>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <ul class="menu">
+                <li class="mnu" onclick="window.location.href='inicio.html'"><span class="fa-solid fa-house-user"></span> Inicio</li>
+                <li class="mnu"><span class="fa-light fa-money-bill-transfer"></span> Transferencias</li>
+                <li class="mnu"><span class="fa-thin fa-money-check-dollar"></span> Pagos</li>
+                <li class="mnu"><span class="fa-thin fa-file-invoice-dollar"></span> Recargas</li>
+                <li class="mnu"><span class="fa-thin fa-money-bill-trend-up"></span>Inversiones</li>
+                <li class="mnu"><span class="fa-solid fa-shield-halved"></span> Seguros</li>
+                <li class="mnu"><span class="fa-solid fa-clipboard-question"></span> Consultas y Solicitudes</li>
+                <li class="mnu"><span class="fa-solid fa-bars"></span> Más</li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="section">
+            <div class="section-flex row-between">
+                <h3>Agenda</h3>
+                <button class="btn" onclick="showModalDestinatario('A')">Nuevo Destinatario</button>
+            </div>
+            <section class="section-agenda">
+                <div class="table-agenda" id="table-agenda">
+                    <div class="grid-item text-bold">Descripción/Nombre</div>
+                    <div class="grid-item text-bold">CBU/CVU</div>
+                    <div class="grid-item text-bold">Tipo de cuenta</div>
+                    <div class="grid-item text-bold"></div>
+                    <div class="grid-item">0</div>
+                    <div class="grid-item">0</div>
+                    <div class="grid-item">0</div>
+                    <div class="grid-item">
+                        <span class="fa-solid fa-pencil icon-grid" title="Modificar"></span>
+                        <span class="fa-solid fa-trash icon-grid" title="Eliminar"></span>
+                        <span class="fa-solid fa-money-bill-transfer icon-grid" title="Tranferir"></span>
+                    </div>
+                </div>
+
+            </section>
+        </section>
+    </main>
+
+    <!-- Modal Destinatario -->
+    <div class="overlay" style="display: none;" id="modal-destinatario">
+        <div class="modal-destinatario">
+            <div class="modal-header">
+                <div class="modal-line-flex">
+                    <h4 id="modal-tit-detinatario"></h4>
+                    <button class="btn-circle" onclick="cerrarModalDestinatario()">x</button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-text-line">
+                    <label for="txtNombre">Nombre:</label>
+                    <input type="text" class="input" id="txtNombre">
+                </div>
+                <input type="hidden" id="txtOper">
+                <input type="hidden" id="txtId">
+                <div class="modal-text-line">
+                    <label for="txtCuil">Cuil:</label>
+                    <input type="text" class="input" id="txtCuil">
+                </div>
+                <div class="modal-text-line">
+                    <label for="txteMail">Correo electrónico:</label>
+                    <input type="text" class="input" id="txteMail">
+                </div>
+                <div class="modal-text-line">
+                    <label for="cboBancos">Banco:</label>
+                    <select class="input" id="cboBancos"></select>
+                </div>
+                <div class="modal-text-line">
+                    <label for="txtCBU">CBU:</label>
+                    <input type="text" class="input" id="txtCBU">
+                </div>
+                <div class="modal-text-line">
+                    <label for="txtAlias">Alias:</label>
+                    <input type="text" class="input" id="txtAlias">
+                </div>
+                <div class="modal-text-line">
+                    <label for="cboMoneda">Moneda:</label>
+                    <select class="input" id="cboMoneda">
+                        <option value="1">Pesos</option>
+                        <option value="2">Dolar</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn cancel" onclick="cerrarModalDestinatario()">Cancelar</button>
+                <button class="btn" onclick="guardarDatos()" id="btnGrabar">Agregar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Transferencia -->
+    <div class="overlay" style="display: none;" id="modal-transfer">
+        <div class="modal-transfer">
+            <div class="modal-header">
+                <div class="modal-line-flex">
+                    <h4 id="modal-tit-detinatario">TRANSFERENCIA</h4>
+                    <button class="btn-circle" onclick="cerrarModalTransfer()">x</button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-text-line">
+                    <label for="txtDestinatario">Enviar dinero a:</label>
+                    <input type="text" class="input" id="txtDestinatario" readonly>
+                </div>
+                <input type="hidden" id="txtId">
+                <div class="modal-text-line">
+                    <label for="txtImporte">Importe:</label>
+                    <input type="text" class="input" id="txtImporte">
+                </div>
+                <div class="modal-text-line">
+                    <label for="cboCuentas">Origen:</label>
+                    <select class="input" id="cboCuentas"></select>
+                </div>
+                <div class="modal-text-line">
+                    <label for="cboConcepto">Concepto:</label>
+                    <select class="input" id="cboConcepto">
+                        <option value=""></option>
+                        <option value="Varios">Varios</option>
+                        <option value="Alquiler">Alquiler</option>
+                        <option value="Cuota">Cuota</option>
+                        <option value="Expensas">Expensas</option>
+                        <option value="Factura">Factura</option>
+                        <option value="Prestamo">Prestamo</option>
+                        <option value="Seguro">Seguro</option>
+                        <option value="Honorarios">Honorarios</option>
+                        <option value="Haberes">Haberes</option>
+                        <option value="Inmobiliarias">Inmobiliarias</option>
+                        <option value="Reintegro de obras sociales o prepagas">Reintegro de obras sociales o prepagas</option>
+                        <option value="Siniestros de seguros">Siniestros de seguros</option>
+                        <option value="Aportes de capital">Aportes de capital</option>
+                    </select>
+                </div>
+                <div class="modal-text-line">
+                    <label for="txtReferencia">Referencia:</label>
+                    <input type="text" class="input" id="txtReferencia">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn cancel" onclick="cerrarModalTransfer()">Cancelar</button>
+                <button class="btn" onclick="transferir()" id="btnTranferir">Transferir</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+
+    </footer>
+
+    <script src="../static/js/scripts.js"></script>
+    <script src="../static/js/transfer.js"></script>
+</body>
+
+</html>

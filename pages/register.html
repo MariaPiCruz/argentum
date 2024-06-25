@@ -20,10 +20,34 @@
         </div>
         <form action="" method="post" autocomplete="off" class="register" id="formulario">
             <div class="form-item">
+                <label for="nombre">
+                    <i class="fas fa-user"></i>
+                </label>
+            <input type="text" name="nombre" placeholder="Nombre" id="nombre" required>
+            </div>
+            <div class="form-item">
+                <label for="apellido">
+                    <i class="fas fa-user"></i>
+                </label>
+            <input type="text" name="apellido" placeholder="Apellido" id="apellido" required>
+            </div>
+            <div class="form-item">
+                <label for="dni">
+                    <i class="fas fa-user"></i>
+                </label>
+            <input type="text" name="dni" placeholder="Dni" id="dni" required>
+            </div>
+            <div class="form-item">
+                <label for="cuil">
+                    <i class="fas fa-user"></i>
+                </label>
+            <input type="text" name="cuil" placeholder="Cuil" id="cuil" required>
+            </div>
+            <div class="form-item">
                 <label for="username">
                     <i class="fas fa-user"></i>
                 </label>
-            <input type="text" name="username" placeholder="Usuario" id="username" required>
+            <input type="text" name="username" placeholder="Username" id="username" required>
             </div>
             <div class="form-item">
                 <label for="password">
@@ -53,7 +77,7 @@
             var formData = new FormData(this);
     
             // Realizamos la solicitud POST al servidor
-            fetch(URL + 'accounts', {
+            fetch(URL + 'clientes', {
                 method: 'POST',
                 body: formData // Aquí enviamos formData. Dado que formData puede contener archivos, no se utiliza JSON.
             })
@@ -82,6 +106,10 @@
 
                 // Limpiar el formulario en ambos casos (éxito o error)
                 .finally(function () {
+                    document.getElementById('nombre').value = "";
+                    document.getElementById('apellido').value = "";
+                    document.getElementById('dni').value = "";
+                    document.getElementById('cbu').value = "";
                     document.getElementById('username').value = "";
                     document.getElementById('password').value = "";
                     document.getElementById('email').value = "";

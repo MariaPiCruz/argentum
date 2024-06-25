@@ -1,0 +1,174 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Roboto;
+}
+
+body{
+    background-color: #EBEFF2;
+}
+
+a{
+    text-decoration: none;
+    color: #181818;
+}
+
+li{
+    list-style: none;
+}
+
+.btn {
+    padding: 3px 30px;
+    border: 1px solid #a371f7;
+    border-radius: 40px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.5;
+    cursor: pointer;
+    background: linear-gradient(to bottom, #a371f7, #7b59d0);
+}
+
+.cancel{
+    background: linear-gradient(to bottom, #ffffff, #cccccc);
+    color: #000;
+}
+
+.btn-circle {
+    padding: 5px 10px;
+    border: 1px solid #a371f7;
+    border-radius: 50%;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.5;
+    cursor: pointer;
+    background: linear-gradient(to bottom, #a371f7, #7b59d0);
+}
+
+.btn:hover, .btn-circle:hover{
+    background: none;
+    background-color: #fff;
+    color: #7b59d0;
+    border: 1px solid #6247A6;
+}
+
+.section{
+    margin: 30px 10%;
+}
+
+.oculto{
+    display: none;
+}
+
+.align-end{
+    align-items: end;
+}
+
+.text-bold{
+    font-weight: bold;
+}
+
+.section-flex{
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+}
+
+.row-between{
+    justify-content: space-between;
+}
+
+/* BAR TITLE*/
+.bar-title{
+    background-color: #6247A6;
+    padding: 10px;
+}
+
+.panel-title-flex{
+    display: flex;
+    margin: 0 10%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.panel-login-flex{
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.font-name{
+    font-size: 12px;
+    text-align: right;
+    color: #ffffff;
+}
+
+
+.font-ult-acceso{
+    font-size: 10px;
+    text-align: right;
+    color: #ffffff;
+}
+
+.font-icon{
+    font-size: 20px;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+nav{
+    background-color: #181818;
+}
+
+.menu{
+    display: flex;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 300;
+    margin: 0px 10%;
+}
+
+.mnu{
+    padding: 14px 20px;
+    cursor: pointer;
+}
+
+.mnu:hover{
+    background-color: #ffffff;
+    color: black;
+}
+
+.overlay{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-CBUAlias{
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px black;
+}
+
+.txt-align-left{
+    text-align: left;
+}
+
+.txt-align-center{
+    text-align: center;
+}
+
+.txt-align-right{
+    text-align: right;
+}

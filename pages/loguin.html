@@ -44,7 +44,7 @@
           var formData = new FormData(this);
   
           // Realizamos la solicitud POST al servidor
-          fetch(URL + 'accounts', {
+          fetch(URL + 'cuentas', {
               method: 'POST',
               body: formData // Aquí enviamos formData. Dado que formData puede contener archivos, no se utiliza JSON.
           })
@@ -65,6 +65,7 @@
               .then(function (data) {
                   alert('ingresaste correctamente.');
                   //redirigir al home
+                  window.location.href = 'inicio.html';
               })
 
               // En caso de error, mostramos una alerta con un mensaje de error.
