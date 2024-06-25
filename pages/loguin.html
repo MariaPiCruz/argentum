@@ -34,6 +34,7 @@
       </form>
     </div>
     <script>
+      
       const URL = "http://127.0.0.1:5000/";
       
 
@@ -63,9 +64,11 @@
 
               //Respuesta OK, muestra una alerta informando que el producto se agregó correctamente y limpia los campos del formulario para que puedan ser utilizados para un nuevo producto.
               .then(function (data) {
-                  alert('ingresaste correctamente.');
+                  // alert('ingresaste correctamente.');
                   //redirigir al home
-                  window.location.href = 'inicio.html';
+                  // window.location.href = 'inicio.html';
+                  console.log(data);
+                  //guardar info en sesion
               })
 
               // En caso de error, mostramos una alerta con un mensaje de error.

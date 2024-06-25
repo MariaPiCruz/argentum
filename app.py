@@ -32,7 +32,7 @@ class Conexion:
             database=database
         )
 
-        self.cursor = self.conn.cursor(dictionary=True)
+        self.cursor = self.conn.cursor()
 
         self.cursor.execute('''CREATE TABLE IF NOT EXISTS clientes (
             id int NOT NULL AUTO_INCREMENT,
@@ -45,7 +45,7 @@ class Conexion:
             saldo decimal(10,2) NOT NULL,
             PRIMARY KEY (`id`)
             ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-            /*!40101 SET character_set_client = @saved_cs_client */;''')
+            /*!40101 SET character_set_client = @saved_cs_client */;''', multi=True)
         self.conn.commit()
 
         self.cursor.execute('''CREATE TABLE IF NOT EXISTS cuentas (
@@ -53,21 +53,23 @@ class Conexion:
             username varchar(45) NOT NULL,
             password varchar(45) NOT NULL,
             idCliente int NOT NULL,
+            email varchar(45) NOT NULL,
             PRIMARY KEY (`id`),
             KEY `cliente_cuentas_idx` (`idCliente`),
             CONSTRAINT `cliente_cuentas` FOREIGN KEY (`idCliente`) REFERENCES `clientes` (`id`)
             ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-            /*!40101 SET character_set_client = @saved_cs_client */;''')
+            /*!40101 SET character_set_client = @saved_cs_client */;''', multi=True)
         
         self.conn.commit()
     
-    def agregar_cuenta(self, username, email, password):
-        sql = "INSERT INTO cuentas (username, password, idCliente) VALUES (%s, %s, %s)"
-        valores = (username, email, password)
+    def agregar_cuenta(self, username, password, idCliente, email):
+        sql = "INSERT INTO cuentas (username, password, idCliente, email) VALUES (%s, %s, %s, %s);"
+        valores = (username, password, idCliente, email)
 
         self.cursor.execute(sql,valores)
         self.conn.commit()
-        return self.cursor.lastrowid
+        nueva_cuenta_id = self.cursor.lastrowid
+        return nueva_cuenta_id
     
     def agregar_cliente(self, nombre, apellido, dni, cuil, cbu, alias, saldo):
         sql = "insert into clientes (nombre, apellido, dni, cuil, cbu, alias, saldo) values (%s, %s, %s, %s, %s, %s, %s);"
@@ -77,15 +79,22 @@ class Conexion:
 
         self.cursor.execute(sql,valores)
         self.conn.commit()
-        id = self.cursor.execute("SELECT LAST_INSERT_ID();")
-        return id
+        nuevo_cliente_id = self.cursor.lastrowid
+        return nuevo_cliente_id
 
     def consultar_cuenta(self, username, password):
-        self.cursor.execute(f"SELECT * FROM accounts WHERE username = '{username}' and password = '{password}'")
+        self.cursor.execute(f"SELECT * FROM cuentas WHERE username = '{username}' and password = '{password}'")
         return self.cursor.fetchone()
+    
+    def consultar_cliente_por_id(self, cliente_id):
+        sql = "SELECT * FROM clientes WHERE id = %s"
+        valores = (cliente_id,)
+        self.cursor.execute(sql, valores)
+        cliente = self.cursor.fetchone()
+        return cliente
 
     def modificar_cuenta(self, id, nuevo_username, nuevo_email, nueva_password):
-        sql = "UPDATE accounts SET username = %s, email = %s, password = %s WHERE id = %s"
+        sql = "UPDATE cuentas SET username = %s, email = %s, password = %s WHERE id = %s"
         valores = (nuevo_username, nuevo_email, nueva_password, id)
 
         self.cursor.execute(sql, valores)
@@ -95,15 +104,12 @@ class Conexion:
 
 
     def eliminar_cuenta(self, id):
-        self.cursor.execute(f"DELETE FROM accounts WHERE id = {id}")
+        self.cursor.execute(f"DELETE FROM cuentas WHERE id = {id}")
         self.conn.commit()
         return self.cursor.rowcount > 0
 
 # Programa principal
 conexion = Conexion(host='localhost', user='root', password='1234', database='argentum')
-
-
-
 
 
 @app.route("/cuentas", methods=["POST"])
@@ -112,10 +118,13 @@ def loguin():
     password = request.form['password']
     cuenta = conexion.consultar_cuenta(username, password)
     if cuenta:
-        return jsonify(cuenta)
+        cliente_id = cuenta[3] 
+        cliente_info = conexion.consultar_cliente_por_id(cliente_id)
+        return jsonify({"cuenta": cuenta, "cliente_info": cliente_info})
     else:
         return jsonify({"mensaje": "Datos incorrectos."}), 500
-        
+
+
 
 
 def calcular_digito_verificador(base, factores):
@@ -125,8 +134,9 @@ def calcular_digito_verificador(base, factores):
 
 def generar_cbu():
     # Generar los primeros 7 dígitos del CBU (código de entidad y sucursal)
-    entidad = random.randint(1, 999).zfill(3)
-    sucursal = random.randint(1, 9999).zfill(4)
+    entidad = str(random.randint(1, 999)).zfill(3)
+    sucursal = str(random.randint(1, 9999)).zfill(4)
+
     base1 = f'{entidad}{sucursal}'
 
     # Calcular el dígito verificador del código de entidad y sucursal
@@ -134,7 +144,7 @@ def generar_cbu():
     verificador1 = calcular_digito_verificador(base1, factores1)
 
     # Generar los primeros 13 dígitos del número de cuenta
-    numero_cuenta = random.randint(1, 9999999999999).zfill(13)
+    numero_cuenta = str(random.randint(1, 9999999999999)).zfill(13)
 
     # Calcular el dígito verificador del número de cuenta
     factores2 = [3, 9, 7, 1, 3, 9, 7, 1, 3, 9, 7, 1, 3]
@@ -163,20 +173,26 @@ def agregar_cliente():
     cbu = generar_cbu()
     alias = generar_alias()
     saldo = 0
-    nuevo_cliente = conexion.agregar_cliente(nombre, apellido, dni, cuil, cbu, alias, saldo)
-    if nuevo_cliente:
-        agregar_cuenta(nuevo_cliente)
+    
+    # Agregar el cliente a la base de datos
+    nuevo_cliente_id = conexion.agregar_cliente(nombre, apellido, dni, cuil, cbu, alias, saldo)
 
-
-def agregar_cuenta(id):
-    username = request.form['username']
-    email = request.form['email']
-    password = request.form['password']
-    nueva_cuenta = conexion.agregar_cuenta(username, email, password, id)
-    if nueva_cuenta:    
-        return jsonify({"mensaje": "Cuenta creada correctamente."}), 201
+    if nuevo_cliente_id:
+        # Generar datos para la cuenta
+        username = request.form['username']
+        email = request.form['email']
+        password = request.form['password']
+        
+        # Agregar la cuenta asociada al cliente
+        nueva_cuenta_id = conexion.agregar_cuenta(username, password, nuevo_cliente_id, email)
+        
+        if nueva_cuenta_id:
+            return jsonify({"mensaje": "Cliente y cuenta creados correctamente."}), 201
+        else:
+            return jsonify({"mensaje": "Error al crear la cuenta."}), 500
     else:
-        return jsonify({"mensaje": "Error al crear la cuenta."}), 500
+        return jsonify({"mensaje": "Error al crear el cliente."}), 500
+
 
 
 if __name__ == "__main__":
