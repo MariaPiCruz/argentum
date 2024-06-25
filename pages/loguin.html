@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Argentum-Loguin</title>
+    <link rel="stylesheet" href="../static/css/loguin.css" />
+    <script
+      src="https://kit.fontawesome.com/2f8ba933a8.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="form-container">
+      <h1>Home Banking</h1>
+
+      <div class="links">
+        <a href="#" class="active">Inicio sesión</a>
+        <a href="register.html">Registro</a>
+      </div>
+      <form action="" id="formulario">
+        <div class="form-item">
+          <label for="username"><i class="fas fa-user"></i></label>
+          <input type="text" placeholder="Usuario" id="username" name="username" />
+        </div>
+
+        <div class="form-item">
+          <label for="password"><i class="fas fa-lock"></i></label>
+          <input type="password" placeholder="Contraseña" id="password" name="password" />
+        </div>
+
+        <div class="msg" id="msg"></div>
+        <input type="submit" value="Ingresar" />
+      </form>
+    </div>
+    <script>
+      const URL = "http://127.0.0.1:5000/";
+      
+
+      // Capturamos el evento de envío del formulario
+      document.getElementById('formulario').addEventListener('submit', function (event) {
+          event.preventDefault(); // Evitamos que se envie el form 
+
+          var formData = new FormData(this);
+  
+          // Realizamos la solicitud POST al servidor
+          fetch(URL + 'accounts', {
+              method: 'POST',
+              body: formData // Aquí enviamos formData. Dado que formData puede contener archivos, no se utiliza JSON.
+          })
+
+          //Después de realizar la solicitud POST, se utiliza el método then() para manejar la respuesta del servidor.
+          .then(function (response) {
+                  if (response.ok) { 
+                      //Si la respuesta es exitosa, convierte los datos de la respuesta a formato JSON.
+                      return response.json(); 
+                  } else {
+                      // Si hubo un error, lanzar explícitamente una excepción
+                      // para ser "catcheada" más adelante
+                      throw new Error('Error al ingresar.');
+                  }
+          })
+
+              //Respuesta OK, muestra una alerta informando que el producto se agregó correctamente y limpia los campos del formulario para que puedan ser utilizados para un nuevo producto.
+              .then(function (data) {
+                  alert('ingresaste correctamente.');
+                  //redirigir al home
+              })
+
+              // En caso de error, mostramos una alerta con un mensaje de error.
+              .catch(function (error) {
+                  alert('Error al ingresar.');
+              })
+
+              // Limpiar el formulario en ambos casos (éxito o error)
+              .finally(function () {
+                  document.getElementById('username').value = "";
+                  document.getElementById('password').value = "";
+              });
+      })
+  </script>
+  </body>
+</html>
