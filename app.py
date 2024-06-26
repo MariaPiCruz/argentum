@@ -34,6 +34,19 @@ class Conexion:
 
         self.cursor = self.conn.cursor()
 
+        # Intentamos seleccionar la base de datos
+        try:
+            self.cursor.execute(f"USE {database}")
+        except mysql.connector.Error as err:
+# Si la base de datos no existe, la creamos
+
+            if err.errno == mysql.connector.errorcode.ER_BAD_DB_ERROR:
+                self.cursor.execute(f"CREATE DATABASE {database}")
+                self.conn.database = database
+            else:
+                raise err
+# Una vez que la base de datos está establecida, creamos la tabla si no existe
+
         self.cursor.execute('''CREATE TABLE IF NOT EXISTS clientes (
             id int NOT NULL AUTO_INCREMENT,
             nombre varchar(45) NOT NULL,
@@ -44,9 +57,11 @@ class Conexion:
             alias varchar(45) NOT NULL,
             saldo decimal(10,2) NOT NULL,
             PRIMARY KEY (`id`)
-            ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-            /*!40101 SET character_set_client = @saved_cs_client */;''', multi=True)
+            ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8''')
         self.conn.commit()
+        # Cerrar el cursor inicial y abrir uno nuevo con el parámetro dictionary=True
+        self.cursor.close()
+        self.cursor = self.conn.cursor(dictionary=True)
 
         self.cursor.execute('''CREATE TABLE IF NOT EXISTS cuentas (
             id int NOT NULL AUTO_INCREMENT,
@@ -57,13 +72,15 @@ class Conexion:
             PRIMARY KEY (`id`),
             KEY `cliente_cuentas_idx` (`idCliente`),
             CONSTRAINT `cliente_cuentas` FOREIGN KEY (`idCliente`) REFERENCES `clientes` (`id`)
-            ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-            /*!40101 SET character_set_client = @saved_cs_client */;''', multi=True)
+            ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8''')
         
         self.conn.commit()
+        # Cerrar el cursor inicial y abrir uno nuevo con el parámetro dictionary=True
+        self.cursor.close()
+        self.cursor = self.conn.cursor(dictionary=True)
     
     def agregar_cuenta(self, username, password, idCliente, email):
-        sql = "INSERT INTO cuentas (username, password, idCliente, email) VALUES (%s, %s, %s, %s);"
+        sql = "INSERT INTO cuentas (username, password, idCliente, email) VALUES (%s, %s, %s, %s)"
         valores = (username, password, idCliente, email)
 
         self.cursor.execute(sql,valores)
@@ -72,7 +89,7 @@ class Conexion:
         return nueva_cuenta_id
     
     def agregar_cliente(self, nombre, apellido, dni, cuil, cbu, alias, saldo):
-        sql = "insert into clientes (nombre, apellido, dni, cuil, cbu, alias, saldo) values (%s, %s, %s, %s, %s, %s, %s);"
+        sql = "INSERT INTO  clientes (nombre, apellido, dni, cuil, cbu, alias, saldo) values (%s, %s, %s, %s, %s, %s, %s)"
 
 
         valores = (nombre, apellido, dni, cuil, cbu, alias, saldo)
@@ -85,6 +102,7 @@ class Conexion:
     def consultar_cuenta(self, username, password):
         self.cursor.execute(f"SELECT * FROM cuentas WHERE username = '{username}' and password = '{password}'")
         return self.cursor.fetchone()
+        
     
     def consultar_cliente_por_id(self, cliente_id):
         sql = "SELECT * FROM clientes WHERE id = %s"
@@ -100,7 +118,7 @@ class Conexion:
         self.cursor.execute(sql, valores)
         self.conn.commit()
         return self.cursor.rowcount > 0
-    
+        
 
 
     def eliminar_cuenta(self, id):
