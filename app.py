@@ -56,12 +56,18 @@ class Conexion:
             cbu varchar(45) NOT NULL,
             alias varchar(45) NOT NULL,
             saldo decimal(10,2) NOT NULL,
-            PRIMARY KEY (`id`)
-            ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8''')
+            idTarjeta int NOT NULL,
+            idTipoCuenta int NOT NULL,
+            PRIMARY KEY (`id`),
+            KEY `cliente_tarjeta_idx` (`idTarjeta`),
+            KEY `cliente_cuenta_idx` (`idTipoCuenta`),
+            CONSTRAINT `cliente_cuenta` FOREIGN KEY (`idTipoCuenta`) REFERENCES `tipocuentas` (`id`),
+            CONSTRAINT `cliente_tarjeta` FOREIGN KEY (`idTarjeta`) REFERENCES `tarjetas` (`id`)
+            ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;''')
         self.conn.commit()
         # Cerrar el cursor inicial y abrir uno nuevo con el parámetro dictionary=True
-        self.cursor.close()
-        self.cursor = self.conn.cursor(dictionary=True)
+        # self.cursor.close() #no me podes cerrar el cursor aca xq todavia falta ejecutar otra accion
+        # # self.cursor = self.conn.cursor(dictionary=True) #no me podes poner el dictionary en true, porque no estamos manejando los datos como diccionarios.
 
         self.cursor.execute('''CREATE TABLE IF NOT EXISTS cuentas (
             id int NOT NULL AUTO_INCREMENT,
@@ -75,9 +81,37 @@ class Conexion:
             ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8''')
         
         self.conn.commit()
-        # Cerrar el cursor inicial y abrir uno nuevo con el parámetro dictionary=True
-        self.cursor.close()
-        self.cursor = self.conn.cursor(dictionary=True)
+
+        self.cursor.execute('''CREATE TABLE IF NOT EXISTS `tarjetas` (
+            `id` int NOT NULL AUTO_INCREMENT,
+            `nroTarjeta` varchar(45) NOT NULL,
+            `vencimiento` varchar(45) NOT NULL,
+            `codigo` varchar(3) NOT NULL,
+            `tipo` varchar(50) NOT NULL,
+            `fechaInicio` varchar(45) NOT NULL,
+            PRIMARY KEY (`id`)
+            ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;''')
+        
+        self.conn.commit()
+        
+        self.cursor.execute('''INSERT INTO `tarjetas` (nroTarjeta, vencimiento, codigo, tipo, fechaInicio) VALUES ('4000123456789101','2026-08-01','123','VISA Debito','2020-07-01'),('4000987654321011','2026-08-01','987','VISA Credito','2020-07-01'),('377798765444332','2026-08-01','997','AMERICAN EXPRESS','2020-07-01');''')
+        self.conn.commit()
+        
+
+        self.cursor.execute('''CREATE TABLE IF NOT EXISTS `tipocuentas` (
+        `id` int NOT NULL AUTO_INCREMENT,
+        `tipoCuenta` varchar(45) NOT NULL,
+        `nroCuenta` varchar(45) NOT NULL,
+        PRIMARY KEY (`id`)
+        ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;''')
+        self.conn.commit()
+
+        self.cursor.execute('''INSERT INTO `tipocuentas` (tipoCuenta, nroCuenta) VALUES ('Caja de Ahorro en Pesos','0650030602000080904070'),('Caja de Ahorro en USD','084-123456 / 3');''')
+        self.conn.commit()
+        
+        self.cursor.close() #el cursor lo cerramos recien aca una vez que se ejecutaron las dos acciones.
+        
+        self.cursor = self.conn.cursor() #y ahora si volvemos a abrir el cursor, pero sin el dictionary en true.
     
     def agregar_cuenta(self, username, password, idCliente, email):
         sql = "INSERT INTO cuentas (username, password, idCliente, email) VALUES (%s, %s, %s, %s)"
@@ -88,11 +122,11 @@ class Conexion:
         nueva_cuenta_id = self.cursor.lastrowid
         return nueva_cuenta_id
     
-    def agregar_cliente(self, nombre, apellido, dni, cuil, cbu, alias, saldo):
-        sql = "INSERT INTO  clientes (nombre, apellido, dni, cuil, cbu, alias, saldo) values (%s, %s, %s, %s, %s, %s, %s)"
+    def agregar_cliente(self, nombre, apellido, dni, cuil, cbu, alias, saldo, idTarjeta, idTipoCuenta):
+        sql = "INSERT INTO  clientes (nombre, apellido, dni, cuil, cbu, alias, saldo, idTarjeta, idTipoCuenta) values (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
 
 
-        valores = (nombre, apellido, dni, cuil, cbu, alias, saldo)
+        valores = (nombre, apellido, dni, cuil, cbu, alias, saldo, idTarjeta, idTipoCuenta)
 
         self.cursor.execute(sql,valores)
         self.conn.commit()
@@ -125,6 +159,19 @@ class Conexion:
         self.cursor.execute(f"DELETE FROM cuentas WHERE id = {id}")
         self.conn.commit()
         return self.cursor.rowcount > 0
+    
+
+    def consultar_datos_cuenta_bancaria(self, idCliente):
+        sql = "select tipoCuenta, nroCuenta from clientes, tipoCuentas where tipoCuentas.id = clientes.idTipoCuenta and clientes.id = %s;"
+        valores = (idCliente,)
+        self.cursor.execute(sql, valores)
+        tipoCuenta = self.cursor.fetchone()
+        return tipoCuenta
+    
+    def consultar_datos_tarjeta(self, idCliente):
+        self.cursor.execute(f"select nroTarjeta, vencimiento, codigo, tipo, fechaInicio from clientes, tarjetas where tarjetas.id = clientes.idTarjeta and clientes.id = {idCliente};")
+        tarjeta = self.cursor.fetchone()
+        return tarjeta
 
 # Programa principal
 conexion = Conexion(host='localhost', user='root', password='1234', database='argentum')
@@ -191,9 +238,12 @@ def agregar_cliente():
     cbu = generar_cbu()
     alias = generar_alias()
     saldo = 0
+    idTarjeta = 1
+    idTipoCuenta = 1
+
     
     # Agregar el cliente a la base de datos
-    nuevo_cliente_id = conexion.agregar_cliente(nombre, apellido, dni, cuil, cbu, alias, saldo)
+    nuevo_cliente_id = conexion.agregar_cliente(nombre, apellido, dni, cuil, cbu, alias, saldo, idTarjeta, idTipoCuenta)
 
     if nuevo_cliente_id:
         # Generar datos para la cuenta
@@ -210,6 +260,24 @@ def agregar_cliente():
             return jsonify({"mensaje": "Error al crear la cuenta."}), 500
     else:
         return jsonify({"mensaje": "Error al crear el cliente."}), 500
+    
+
+@app.route("/tipoCuenta/<int:idCliente>", methods=["GET"])
+def mostrar_datos_cuenta(idCliente):
+    tipoCuenta = conexion.consultar_datos_cuenta_bancaria(idCliente)
+    if tipoCuenta:
+        return jsonify(tipoCuenta)
+    else:
+        return "Cuenta no encontrada", 404
+    
+
+@app.route("/tipoTarjeta/<int:idCliente>", methods=["GET"])
+def mostrar_datos_tarjeta(idCliente):
+    tarjeta = conexion.consultar_datos_tarjeta(idCliente)
+    if tarjeta:
+        return jsonify(tarjeta)
+    else:
+        return "Tarjeta no encontrada", 404
 
 
 

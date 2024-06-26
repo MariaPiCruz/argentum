@@ -34,6 +34,13 @@
       </form>
     </div>
     <script>
+
+      document.addEventListener('DOMContentLoaded', function () {
+            let usuarioAutenticado = sessionStorage.getItem('usuario_autenticado');
+            if (usuarioAutenticado === 'true') {
+                window.location.href = 'inicio.html'; // Redirigir al home
+            }
+      });
       
       const URL = "http://127.0.0.1:5000/";
       
@@ -65,10 +72,17 @@
               //Respuesta OK, muestra una alerta informando que el producto se agregó correctamente y limpia los campos del formulario para que puedan ser utilizados para un nuevo producto.
               .then(function (data) {
                   // alert('ingresaste correctamente.');
-                  //redirigir al home
-                  // window.location.href = 'inicio.html';
+                  
                   console.log(data);
                   //guardar info en sesion
+                  sessionStorage.setItem("cliente_info", JSON.stringify(data.cliente_info));
+                  sessionStorage.setItem("cuenta", JSON.stringify(data.cuenta));
+                  // Después de la autenticación exitosa
+                  sessionStorage.setItem('usuario_autenticado', 'true');
+
+
+                  //redirigir al home
+                  window.location.href = 'inicio.html';
               })
 
               // En caso de error, mostramos una alerta con un mensaje de error.

@@ -7,7 +7,7 @@
     sans-serif;
 }
 body {
-  background-image: url("images/fondo_login.jpg");
+  background-image: url("../images/fondo_login.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   margin: 0;

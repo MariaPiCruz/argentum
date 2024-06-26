@@ -23,7 +23,7 @@
                         <p class="font-name" id="nombreUsuario"></p>
                     </div>
                     <i class="fa-solid fa-gear font-icon"></i>
-                    <button class="btn" onclick="window.location.href='loguin.html'">Salir</button>
+                    <button class="btn" onclick="logout()">Salir</button>
                 </div>
             </div>
         </div>
@@ -51,7 +51,7 @@
                         onclick="changeViewSaldo()"></span></h3>
             </div>
             <div class="section-flex" id="section-cuentas">
-                <div class="card">
+                <!-- <div class="card">
                     <h4>Caja de Ahorro en Pesos</h4>
                     <p>084-123456 / 3</p>
                     <div class="card-saldo">$ <b>380.400,00</b></div>
@@ -72,7 +72,7 @@
                         <a href="#" onclick="verAliasCbu('dolar')"><i class="fa-solid fa-share-nodes"></i> CBU / Alias</a>
 
                     </div>
-                </div>
+                </div> -->
             </div>
         </section>
         <section class="section">
@@ -80,8 +80,8 @@
                 <h3>Tarjetas <span class="fa-solid fa-eye-slash" id="viewTarjetas"
                         onclick="changeViewTarjetas()"></span></h3>
             </div>
-            <div class="section-flex">
-                <div class="card">
+            <div class="section-flex" id="section-tarjetas">
+                <!-- <div class="card">
                     <h4>Tarjeta Débito</h4>
                     <div class="card-line-flex">
                         <p>Número de tarjeta</p>
@@ -120,7 +120,7 @@
                         <p>Vence 11/28 | Cierre 28/06</p>
                         <img src="../static/images/American-Express.png" width="40px" alt="Visa Crédito">
                     </div>
-                </div>
+                </div> -->
             </div>
         </section>
         <section class="section">
@@ -145,20 +145,20 @@
             </div>
             <div class="modal-body">
                 <div class="modal-text-line">
-                    <p class="modal-text" id="modal-text">Caja de Ahorro en Pesos</p>
+                    <p class="modal-text" id="modal-text"></p>
                     <p class="modal-label">Tipo de cuenta</p>
                 </div>
                 <div class="modal-text-line">
-                    <p class="modal-text">084-123456 / 3</p>
+                    <p class="modal-text" id="modal-text-nroCuenta"></p>
                     <p class="modal-label">Número de cuenta</p>
                 </div>
                 <div class="modal-text-line">
-                    <p class="modal-text">0650030602000080904070</p>
+                    <p class="modal-text" id="modal-text-cbu"></p>
                     <p class="modal-label">CBU</p>
                 </div>
                 <div class="modal-text-line">
                     <div class="card-line-flex">
-                        <p class="modal-text" contenteditable="false" id="txtAlias">TEXTO.BASICO.CLARIN</p>
+                        <p class="modal-text" contenteditable="false" id="txtAlias"></p>
                         <span class="fa-solid fa-pencil" onclick="editAlias()"></span>
                     </div>
                     <p class="modal-label">Alias</p>
