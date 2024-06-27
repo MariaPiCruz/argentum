@@ -92,8 +92,8 @@ class Conexion:
         
         self.conn.commit()
         
-        self.cursor.execute('''INSERT INTO `tarjetas` (nroTarjeta, vencimiento, codigo, tipo, fechaInicio) VALUES ('4000123456789101','2026-08-01','123','VISA Debito','2020-07-01'),('4000987654321011','2026-08-01','987','VISA Credito','2020-07-01'),('377798765444332','2026-08-01','997','AMERICAN EXPRESS','2020-07-01');''')
-        self.conn.commit()
+        #self.cursor.execute('''INSERT INTO `tarjetas` (nroTarjeta, vencimiento, codigo, tipo, fechaInicio) VALUES ('4000123456789101','2026-08-01','123','VISA Debito','2020-07-01'),('4000987654321011','2026-08-01','987','VISA Credito','2020-07-01'),('377798765444332','2026-08-01','997','AMERICAN EXPRESS','2020-07-01');''')
+        #self.conn.commit()
         
 
         self.cursor.execute('''CREATE TABLE IF NOT EXISTS `tipocuentas` (
@@ -104,26 +104,28 @@ class Conexion:
         ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;''')
         self.conn.commit()
 
-        self.cursor.execute('''INSERT INTO `tipocuentas` (tipoCuenta, nroCuenta) VALUES ('Caja de Ahorro en Pesos','0650030602000080904070'),('Caja de Ahorro en USD','084-123456 / 3');''')
-        self.conn.commit()
-
+        #self.cursor.execute('''INSERT INTO `tipocuentas` (tipoCuenta, nroCuenta) VALUES ('Caja de Ahorro en Pesos','0650030602000080904070'),('Caja de Ahorro en USD','084-123456 / 3');''')
+        #self.conn.commit()
+        self.cursor.close() #el cursor lo cerramos recien aca una vez que se ejecutaron las dos acciones.
+        self.cursor = self.conn.cursor()
+        
         # --- TABLA DESTINATARIOS (AGENDA) ---
-
-        self.cursor.execute('''CREATE TABLE IF NOT EXISTS `destinatarios` (
-        `idDestinatario` int NOT NULL AUTO_INCREMENT,
-        `destinatario` varchar(45) NOT NULL,
-	    `cbu` varchar(45) NOT NULL,
-        `alias` varchar(45) NOT NULL,
-	    `idCliente` int,
-	    PRIMARY KEY (`idDestinatario`),
-        KEY `cliente_destinatarios_idx` (`idCliente`),
-        CONSTRAINT `cliente_destinatarios` FOREIGN KEY (`idCliente`) REFERENCES `clientes` (`id`)
-        ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;''')
-        self.conn.commit()
-
+        
+        #self.cursor.execute('''CREATE TABLE IF NOT EXISTS `destinatarios` (
+        #`idDestinatario` int NOT NULL AUTO_INCREMENT,
+        #`destinatario` varchar(45) NOT NULL,
+	    #`cbu` varchar(45) NOT NULL,
+        #`alias` varchar(45) NOT NULL,
+	   #`idCliente` int,
+	    #PRIMARY KEY (`idDestinatario`),
+        #KEY `cliente_destinatarios_idx` (`idCliente`),
+        #CONSTRAINT `cliente_destinatarios` FOREIGN KEY (`idCliente`) REFERENCES `clientes` (`id`)
+        #) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;''')
+       # self.conn.commit()
+        
         # --- FIN TABLA DESTINATARIOS (AGENDA) ---
 
-        self.cursor.close() #el cursor lo cerramos recien aca una vez que se ejecutaron las dos acciones.
+        
     
     def agregar_cuenta(self, username, password, idCliente, email):
         sql = "INSERT INTO cuentas (username, password, idCliente, email) VALUES (%s, %s, %s, %s)"
@@ -180,9 +182,8 @@ class Conexion:
         self.cursor.execute(f"select nroTarjeta, vencimiento, codigo, tipo, fechaInicio from clientes, tarjetas where tarjetas.id = clientes.idTarjeta and clientes.id = {idCliente};")
         tarjeta = self.cursor.fetchone()
         return tarjeta
-    
+    '''
     # --- MÉTODOS PARA DESTINATARIOS (AGENDA) ---
-    
     def agregar_destinatario(self, descripcion, cbu, alias, idCliente):
         sql = "INSERT INTO destinatarios (descripcion, cbu, alias, idCliente) VALUES (%s, %s, %s, %s)"
         valores = (descripcion, cbu, alias, idCliente)
@@ -191,7 +192,7 @@ class Conexion:
         self.conn.commit()
         nuevo_destinatario_id = self.cursor.lastrowid
         return nuevo_destinatario_id
-    '''
+    
     def consultar_destinatarios(self, idCliente):
         sql = "SELECT d.descripcion, d.cbu, d.alias FROM destinatarios d RIGHT JOIN clientes c ON d.idCliente = c.id WHERE idCliente = %s;"
         valores = (idCliente,)
@@ -219,7 +220,7 @@ class Conexion:
 # ----------------------------------------
 # ---------- PROGRAMA PRINCIPAL ----------
 # ----------------------------------------
-conexion = Conexion(host='localhost', user='root', password='1234', database='argentum')
+conexion = Conexion(host='localhost', user='root', password='', database='argentum')
 
 
 @app.route("/cuentas", methods=["POST"])
@@ -319,7 +320,7 @@ def mostrar_datos_tarjeta(idCliente):
     else:
         return "Tarjeta no encontrada", 404
 
-
+'''
 # --- RUTAS PARA AGENDA ---
 
 @app.route("/destinatarios", methods=["POST"])
@@ -347,6 +348,7 @@ def mostrar_agenda(idCliente):
         return "Agenda vacía", 404
     
 # --- FIN RUTAS AGENDA ---
+'''
 
 if __name__ == "__main__":
     app.run(debug=True)
