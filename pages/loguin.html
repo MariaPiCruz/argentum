@@ -1,101 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Argentum-Loguin</title>
+    <title>Argentum-Login</title>
     <link rel="stylesheet" href="../static/css/loguin.css" />
-    <script
-      src="https://kit.fontawesome.com/2f8ba933a8.js"
-      crossorigin="anonymous"
-    ></script>
-  </head>
-  <body>
+    <script src="https://kit.fontawesome.com/2f8ba933a8.js" crossorigin="anonymous"></script>
+</head>
+<body>
     <div class="form-container">
-      <h1>Home Banking</h1>
+        <h1>Home Banking</h1>
 
-      <div class="links">
-        <a href="#" class="active">Inicio sesión</a>
-        <a href="register.html">Registro</a>
-      </div>
-      <form action="" id="formulario">
-        <div class="form-item">
-          <label for="username"><i class="fas fa-user"></i></label>
-          <input type="text" placeholder="Usuario" id="username" name="username" />
+        <div class="links">
+            <a href="#" class="active">Inicio sesión</a>
+            <a href="register.html">Registro</a>
         </div>
+        <form action="" id="formulario">
+            <div class="form-item">
+                <label for="username"><i class="fas fa-user"></i></label>
+                <input type="text" placeholder="Usuario" id="username" name="username" />
+            </div>
 
-        <div class="form-item">
-          <label for="password"><i class="fas fa-lock"></i></label>
-          <input type="password" placeholder="Contraseña" id="password" name="password" />
-        </div>
+            <div class="form-item">
+                <label for="password"><i class="fas fa-lock"></i></label>
+                <input type="password" placeholder="Contraseña" id="password" name="password" />
+            </div>
 
-        <div class="msg" id="msg"></div>
-        <input type="submit" value="Ingresar" />
-      </form>
+            <div class="msg" id="msg"></div>
+            <input type="submit" value="Ingresar" />
+        </form>
     </div>
     <script>
-
-      document.addEventListener('DOMContentLoaded', function () {
+        let cliente = {};
+        document.addEventListener('DOMContentLoaded', function () {
             let usuarioAutenticado = sessionStorage.getItem('usuario_autenticado');
             if (usuarioAutenticado === 'true') {
-                window.location.href = 'inicio.html'; // Redirigir al home
+                window.location.href = 'inicio.html';
             }
-      });
-      
-      const URL = "http://127.0.0.1:5000/";
-      
+        });
 
-      // Capturamos el evento de envío del formulario
-      document.getElementById('formulario').addEventListener('submit', function (event) {
-          event.preventDefault(); // Evitamos que se envie el form 
+        const URL = "http://127.0.0.1:5000/";
 
-          var formData = new FormData(this);
-  
-          // Realizamos la solicitud POST al servidor
-          fetch(URL + 'cuentas', {
-              method: 'POST',
-              body: formData // Aquí enviamos formData. Dado que formData puede contener archivos, no se utiliza JSON.
-          })
+        document.getElementById('formulario').addEventListener('submit', function (event) {
+            event.preventDefault();
 
-          //Después de realizar la solicitud POST, se utiliza el método then() para manejar la respuesta del servidor.
-          .then(function (response) {
-                  if (response.ok) { 
-                      //Si la respuesta es exitosa, convierte los datos de la respuesta a formato JSON.
-                      return response.json(); 
-                  } else {
-                      // Si hubo un error, lanzar explícitamente una excepción
-                      // para ser "catcheada" más adelante
-                      throw new Error('Error al ingresar.');
-                  }
-          })
+            var formData = new FormData(this);
 
-              //Respuesta OK, muestra una alerta informando que el producto se agregó correctamente y limpia los campos del formulario para que puedan ser utilizados para un nuevo producto.
-              .then(function (data) {
-                  // alert('ingresaste correctamente.');
-                  
-                  console.log(data);
-                  //guardar info en sesion
-                  sessionStorage.setItem("cliente_info", JSON.stringify(data.cliente_info));
-                  sessionStorage.setItem("cuenta", JSON.stringify(data.cuenta));
-                  // Después de la autenticación exitosa
-                  sessionStorage.setItem('usuario_autenticado', 'true');
+            fetch(URL + 'cuentas', {
+                method: 'POST',
+                body: formData
+            })
+            .then(function (response) {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Error al ingresar.');
+                }
+            })
+            .then(function (data) {
+                cliente.idCliente = data.cliente_info[0];
+                cliente.nombreCliente = data.cliente_info[1];
+                cliente.apellidoCliente = data.cliente_info[2];
+                cliente.cbu = data.cliente_info[5];
+                cliente.alias = data.cliente_info[6];
+                cliente.saldo = data.cliente_info[7];
+                
+                return ObtenerDatosCuenta();
+            })
+            .then(function (datosCuenta) {
+                cliente.tipoCuenta = datosCuenta[0]; 
+                cliente.nroCuenta = datosCuenta[1]; 
+                sessionStorage.setItem("cliente_info", JSON.stringify(cliente));
+                sessionStorage.setItem('usuario_autenticado', 'true');
+                window.location.href = 'inicio.html';
+            })
+            .catch(function (error) {
+                alert(error.message);
+            })
+            .finally(function () {
+                document.getElementById('username').value = "";
+                document.getElementById('password').value = "";
+            });
+        });
 
+        async function ObtenerDatosCuenta() {
+            const response = await fetch(URL + "tipoCuenta/" + cliente.idCliente);
 
-                  //redirigir al home
-                  window.location.href = 'inicio.html';
-              })
+            if (!response.ok) {
+                throw new Error("Error al obtener los datos de la cuenta.");
+            }
 
-              // En caso de error, mostramos una alerta con un mensaje de error.
-              .catch(function (error) {
-                  alert('Error al ingresar.');
-              })
-
-              // Limpiar el formulario en ambos casos (éxito o error)
-              .finally(function () {
-                  document.getElementById('username').value = "";
-                  document.getElementById('password').value = "";
-              });
-      })
-  </script>
-  </body>
+            const data = await response.json();
+            console.log("Datos de cuenta bancaria:", data);
+            return data;
+        }
+    </script>
+</body>
 </html>

@@ -72,6 +72,8 @@ function logout() {
   sessionStorage.removeItem("usuario_autenticado");
   sessionStorage.removeItem("cliente_info");
   sessionStorage.removeItem("cuenta");
+  sessionStorage.removeItem("datosCuenta")  
+  sessionStorage.removeItem("datosTarjeta")
   //redirigir al loguin
   window.location.href = 'loguin.html';
 }
