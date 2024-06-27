@@ -45,7 +45,7 @@
         <section class="section">
             <div class="section-flex row-between">
                 <h3>Agenda</h3>
-                <button class="btn" onclick="showModalDestinatario('A')">Nuevo Destinatario</button>
+                <button class="btn" onclick="showModalDestinatario('A')">Agregar Destinatario</button>
             </div>
             <section class="section-agenda">
                 <div class="table-agenda" id="table-agenda">
@@ -78,23 +78,11 @@
             </div>
             <div class="modal-body">
                 <div class="modal-text-line">
-                    <label for="txtNombre">Nombre:</label>
+                    <label for="txtNombre">Descripción:</label>
                     <input type="text" class="input" id="txtNombre">
                 </div>
                 <input type="hidden" id="txtOper">
                 <input type="hidden" id="txtId">
-                <div class="modal-text-line">
-                    <label for="txtCuil">Cuil:</label>
-                    <input type="text" class="input" id="txtCuil">
-                </div>
-                <div class="modal-text-line">
-                    <label for="txteMail">Correo electrónico:</label>
-                    <input type="text" class="input" id="txteMail">
-                </div>
-                <div class="modal-text-line">
-                    <label for="cboBancos">Banco:</label>
-                    <select class="input" id="cboBancos"></select>
-                </div>
                 <div class="modal-text-line">
                     <label for="txtCBU">CBU:</label>
                     <input type="text" class="input" id="txtCBU">
@@ -103,13 +91,7 @@
                     <label for="txtAlias">Alias:</label>
                     <input type="text" class="input" id="txtAlias">
                 </div>
-                <div class="modal-text-line">
-                    <label for="cboMoneda">Moneda:</label>
-                    <select class="input" id="cboMoneda">
-                        <option value="1">Pesos</option>
-                        <option value="2">Dolar</option>
-                    </select>
-                </div>
+                
             </div>
             <div class="modal-footer">
                 <button class="btn cancel" onclick="cerrarModalDestinatario()">Cancelar</button>

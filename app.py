@@ -108,10 +108,20 @@ class Conexion:
 
         self.cursor.execute('''INSERT INTO `tipocuentas` (tipoCuenta, nroCuenta) VALUES ('Caja de Ahorro en Pesos','0650030602000080904070'),('Caja de Ahorro en USD','084-123456 / 3');''')
         self.conn.commit()
-        
+
+        #CREAR TABLA DESTINATARIO AQUI
+        self.cursor.execute('''CREATE TABLE IF NOT EXISTS destinatarios (
+        idDestinatario int NOT NULL AUTO_INCREMENT,
+        destinatario varchar(45) NOT NULL,
+	    cbu varchar(45) NOT NULL,
+        alias varchar(45) NOT NULL,
+	    idCliente int,
+	    PRIMARY KEY (`idDestinatario`),
+        KEY `cliente_destinatarios_idx` (`idCliente`),
+        CONSTRAINT `cliente_destinatarios` FOREIGN KEY (`idCliente`) REFERENCES `clientes` (`id`)) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;''') #y ahora si volvemos a abrir el cursor, pero sin el dictionary en true.
+        self.conn.commit()
+
         self.cursor.close() #el cursor lo cerramos recien aca una vez que se ejecutaron las dos acciones.
-        
-        self.cursor = self.conn.cursor() #y ahora si volvemos a abrir el cursor, pero sin el dictionary en true.
     
     def agregar_cuenta(self, username, password, idCliente, email):
         sql = "INSERT INTO cuentas (username, password, idCliente, email) VALUES (%s, %s, %s, %s)"
@@ -172,6 +182,36 @@ class Conexion:
         self.cursor.execute(f"select nroTarjeta, vencimiento, codigo, tipo, fechaInicio from clientes, tarjetas where tarjetas.id = clientes.idTarjeta and clientes.id = {idCliente};")
         tarjeta = self.cursor.fetchone()
         return tarjeta
+    
+####################################################################################################   
+"""
+   
+    
+    def agregar_destinatario(self, descripcion, cbu, alias, idCliente):
+        sql = "INSERT INTO destinatarios (descripcion, cbu, alias, idCliente) VALUES (%s, %s, %s, %s)"
+        valores = (descripcion, cbu, alias, idCliente)
+
+        self.cursor.execute(sql,valores)
+        self.conn.commit()
+        nuevo_destinatario_id = self.cursor.lastrowid
+        return nuevo_destinatario_id
+
+    def consultar_destinatarios(self, idCliente):
+        sql = "SELECT d.descripcion, d.cbu, d.alias FROM destinatarios d RIGHT JOIN clientes c ON d.idCliente = c.id WHERE idCliente = %s;"
+        valores = (idCliente,)
+        self.cursor.execute(sql, valores)
+        destinatarios = self.cursor.fetchone()
+        return destinatarios
+
+
+    def modificar_destinatario(self, descripcion, cbu, alias):
+        sql = "UPDATE destinatarios SET descripcion = %s, cbu = %s, alias = %s WHERE id = %s"
+        valores = (nuevo_username, nuevo_email, nueva_password, id)
+
+        self.cursor.execute(sql, valores)
+        self.conn.commit()
+        return self.cursor.rowcount > 0
+"""
 
 # Programa principal
 conexion = Conexion(host='localhost', user='root', password='1234', database='argentum')
@@ -273,13 +313,18 @@ def mostrar_datos_cuenta(idCliente):
 
 @app.route("/tipoTarjeta/<int:idCliente>", methods=["GET"])
 def mostrar_datos_tarjeta(idCliente):
-    tarjeta = conexion.consultar_datos_tarjeta(idCliente)
+    tarjeta = conexion.consultar_datos_tarjeta(idCliente) 
     if tarjeta:
         return jsonify(tarjeta)
     else:
         return "Tarjeta no encontrada", 404
 
 
+# DEF AGREGAR_DESTINATARIO
+# DEF CONSULTAR_DESTINATARIO
+# DEF MODIFICAR_DESTINATARIO
+# DEF ELIMINAR_DESTINATARIO
+# (CREACION DE TABLA  idcliente iddestinatario descripcion CBU Alias)
 
 if __name__ == "__main__":
     app.run(debug=True)
