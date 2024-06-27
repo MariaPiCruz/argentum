@@ -14,8 +14,6 @@ import random
 import string
 
 
-
-
 #--------------------------------------------------------------------
 
 app = Flask(__name__)
@@ -109,17 +107,21 @@ class Conexion:
         self.cursor.execute('''INSERT INTO `tipocuentas` (tipoCuenta, nroCuenta) VALUES ('Caja de Ahorro en Pesos','0650030602000080904070'),('Caja de Ahorro en USD','084-123456 / 3');''')
         self.conn.commit()
 
-        #CREAR TABLA DESTINATARIO AQUI
-        self.cursor.execute('''CREATE TABLE IF NOT EXISTS destinatarios (
-        idDestinatario int NOT NULL AUTO_INCREMENT,
-        destinatario varchar(45) NOT NULL,
-	    cbu varchar(45) NOT NULL,
-        alias varchar(45) NOT NULL,
-	    idCliente int,
+        # --- TABLA DESTINATARIOS (AGENDA) ---
+
+        self.cursor.execute('''CREATE TABLE IF NOT EXISTS `destinatarios` (
+        `idDestinatario` int NOT NULL AUTO_INCREMENT,
+        `destinatario` varchar(45) NOT NULL,
+	    `cbu` varchar(45) NOT NULL,
+        `alias` varchar(45) NOT NULL,
+	    `idCliente` int,
 	    PRIMARY KEY (`idDestinatario`),
         KEY `cliente_destinatarios_idx` (`idCliente`),
-        CONSTRAINT `cliente_destinatarios` FOREIGN KEY (`idCliente`) REFERENCES `clientes` (`id`)) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;''') #y ahora si volvemos a abrir el cursor, pero sin el dictionary en true.
+        CONSTRAINT `cliente_destinatarios` FOREIGN KEY (`idCliente`) REFERENCES `clientes` (`id`)
+        ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;''')
         self.conn.commit()
+
+        # --- FIN TABLA DESTINATARIOS (AGENDA) ---
 
         self.cursor.close() #el cursor lo cerramos recien aca una vez que se ejecutaron las dos acciones.
     
@@ -134,8 +136,6 @@ class Conexion:
     
     def agregar_cliente(self, nombre, apellido, dni, cuil, cbu, alias, saldo, idTarjeta, idTipoCuenta):
         sql = "INSERT INTO  clientes (nombre, apellido, dni, cuil, cbu, alias, saldo, idTarjeta, idTipoCuenta) values (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-
-
         valores = (nombre, apellido, dni, cuil, cbu, alias, saldo, idTarjeta, idTipoCuenta)
 
         self.cursor.execute(sql,valores)
@@ -163,8 +163,6 @@ class Conexion:
         self.conn.commit()
         return self.cursor.rowcount > 0
         
-
-
     def eliminar_cuenta(self, id):
         self.cursor.execute(f"DELETE FROM cuentas WHERE id = {id}")
         self.conn.commit()
@@ -183,9 +181,7 @@ class Conexion:
         tarjeta = self.cursor.fetchone()
         return tarjeta
     
-####################################################################################################   
-"""
-   
+    # --- MÉTODOS PARA DESTINATARIOS (AGENDA) ---
     
     def agregar_destinatario(self, descripcion, cbu, alias, idCliente):
         sql = "INSERT INTO destinatarios (descripcion, cbu, alias, idCliente) VALUES (%s, %s, %s, %s)"
@@ -195,25 +191,34 @@ class Conexion:
         self.conn.commit()
         nuevo_destinatario_id = self.cursor.lastrowid
         return nuevo_destinatario_id
-
+    '''
     def consultar_destinatarios(self, idCliente):
         sql = "SELECT d.descripcion, d.cbu, d.alias FROM destinatarios d RIGHT JOIN clientes c ON d.idCliente = c.id WHERE idCliente = %s;"
         valores = (idCliente,)
+
         self.cursor.execute(sql, valores)
         destinatarios = self.cursor.fetchone()
         return destinatarios
+    
+    def eliminar_destinatario(self, idDestinatario):
+        self.cursor.execute(f"DELETE FROM destinatarios WHERE idDestinatario = {idDestinatario}")
 
+        self.conn.commit()
+        return self.cursor.rowcount > 0
 
-    def modificar_destinatario(self, descripcion, cbu, alias):
-        sql = "UPDATE destinatarios SET descripcion = %s, cbu = %s, alias = %s WHERE id = %s"
-        valores = (nuevo_username, nuevo_email, nueva_password, id)
+    def modificar_destinatario(self, idDestinatario, nueva_descripcion, nuevo_cbu, nuevo_alias):
+        sql = "UPDATE destinatarios SET descripcion = %s, cbu = %s, alias = %s WHERE idDestinatario = %s"
+        valores = (nueva_descripcion,nuevo_cbu,nuevo_alias,idDestinatario)
 
         self.cursor.execute(sql, valores)
         self.conn.commit()
-        return self.cursor.rowcount > 0
-"""
+        return self.cursor.rowcount > 0 
+    '''
+    # --- FIN METODOS DESTINATARIOS (AGENDA) ---
 
-# Programa principal
+# ----------------------------------------
+# ---------- PROGRAMA PRINCIPAL ----------
+# ----------------------------------------
 conexion = Conexion(host='localhost', user='root', password='1234', database='argentum')
 
 
@@ -228,9 +233,6 @@ def loguin():
         return jsonify({"cuenta": cuenta, "cliente_info": cliente_info})
     else:
         return jsonify({"mensaje": "Datos incorrectos."}), 500
-
-
-
 
 def calcular_digito_verificador(base, factores):
     suma = sum(int(d) * f for d, f in zip(base, factores))
@@ -258,8 +260,6 @@ def generar_cbu():
     # Formar el CBU completo
     cbu = f'{base1}{verificador1}{numero_cuenta}{verificador2}'
     return cbu
-
-
 
 
 def generar_alias(longitud_min=6, longitud_max=20):
@@ -320,11 +320,33 @@ def mostrar_datos_tarjeta(idCliente):
         return "Tarjeta no encontrada", 404
 
 
-# DEF AGREGAR_DESTINATARIO
-# DEF CONSULTAR_DESTINATARIO
-# DEF MODIFICAR_DESTINATARIO
-# DEF ELIMINAR_DESTINATARIO
-# (CREACION DE TABLA  idcliente iddestinatario descripcion CBU Alias)
+# --- RUTAS PARA AGENDA ---
+
+@app.route("/destinatarios", methods=["POST"])
+def agregar_destinatario():
+    descripcion = request.form['descripcion']
+    cbu = request.form['cbu']
+    alias = request.form['alias']
+    idCliente = request.args.get('idCliente')
+
+    # Agregar el destinatario a la base de datos
+    nuevo_destinatario_id = conexion.agregar_destinatario(descripcion,cbu,alias,idCliente)
+
+    # Pregunto si fue exitosa la operacion
+    if nuevo_destinatario_id:
+        return jsonify({"mensaje": "Destinatario agregado a la Agenda."}), 201
+    else:
+        return jsonify({"mensaje": "Error al agregar el destinatario."}), 500
+
+@app.route("/destinatarios/<int:idCliente>", methods=["GET"])
+def mostrar_agenda(idCliente):
+    agenda = conexion.consultar_destinatarios(idCliente)
+    if agenda:
+        return jsonify(agenda)
+    else:
+        return "Agenda vacía", 404
+    
+# --- FIN RUTAS AGENDA ---
 
 if __name__ == "__main__":
     app.run(debug=True)
