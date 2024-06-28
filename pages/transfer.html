@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Banco Argentum - Home Banking</title>
+    <title>Banco Argentum - Transferencias</title>
     <link rel="icon" type="image/x-icon" href="../static/images/logo.png">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:100,300,300i,400,700,900">
     <link rel="stylesheet" href="../static/fontawesome/css/all.css">
@@ -46,13 +46,13 @@
     <main>
         <section class="section">
             <div class="section-flex row-between">
-                <h3>Agenda</h3>
+                <h3>Agenda de Contactos</h3>
                 <a href="destinatario.html"><button class="btn">Nuevo Destinatario</button></a>
-
             </div>
             <section class="section-agenda">
                 <div class="table-agenda" id="table-agenda">
                     <table id="tabla-destinatarios">
+
                         <thead>
                             <tr>
                                 <th>Descripción</th>
@@ -60,9 +60,10 @@
                                 <th>Alias</th>
                             </tr>
                         </thead>
-                        <tbody id="tabla-body">
 
+                        <tbody id="tabla-body">
                         </tbody>
+
                     </table>
                     <!--
                     <div class="grid-item text-bold">Descripción/Nombre</div>
@@ -83,7 +84,7 @@
         </section>
     </main>
 
-    <!-- Modal Destinatario -->
+    <!-- Modal Destinatario
     <div class="overlay" style="display: none;" id="modal-destinatario">
         <div class="modal-destinatario">
             <div class="modal-header">
@@ -97,115 +98,109 @@
             <input type="submit" value="Agregar" />
             </form>
 
-            <!--<div class="modal-footer">
+            <<div class="modal-footer">
                 <button class="btn cancel" onclick="cerrarModalDestinatario()">Cancelar</button>
                 <button class="btn" onclick="guardarDatos()" id="btnGrabar">Agregar</button>
+        </div>
+    </div>
+    </div>-->
+    <!-- Modal Transferencia -->
+    <div class="overlay" style="display: none;" id="modal-transfer">
+        <div class="modal-transfer">
+            <div class="modal-header">
+                <div class="modal-line-flex">
+                    <h4 id="modal-tit-detinatario">TRANSFERENCIA</h4>
+                    <button class="btn-circle" onclick="cerrarModalTransfer()">x</button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-text-line">
+                    <label for="txtDestinatario">Enviar dinero a:</label>
+                    <input type="text" class="input" id="txtDestinatario" readonly>
+                </div>
+                <input type="hidden" id="txtId">
+                <div class="modal-text-line">
+                    <label for="txtImporte">Importe:</label>
+                    <input type="text" class="input" id="txtImporte">
+                </div>
+                <div class="modal-text-line">
+                    <label for="cboCuentas">Origen:</label>
+                    <select class="input" id="cboCuentas"></select>
+                </div>
+                <div class="modal-text-line">
+                    <label for="cboConcepto">Concepto:</label>
+                    <select class="input" id="cboConcepto">
+                        <option value=""></option>
+                        <option value="Varios">Varios</option>
+                        <option value="Alquiler">Alquiler</option>
+                        <option value="Cuota">Cuota</option>
+                        <option value="Expensas">Expensas</option>
+                        <option value="Factura">Factura</option>
+                        <option value="Prestamo">Prestamo</option>
+                        <option value="Seguro">Seguro</option>
+                        <option value="Honorarios">Honorarios</option>
+                        <option value="Haberes">Haberes</option>
+                        <option value="Inmobiliarias">Inmobiliarias</option>
+                        <option value="Reintegro de obras sociales o prepagas">Reintegro de obras sociales o
+                            prepagas</option>
+                        <option value="Siniestros de seguros">Siniestros de seguros</option>
+                        <option value="Aportes de capital">Aportes de capital</option>
+                    </select>
+                </div>
+                <div class="modal-text-line">
+                    <label for="txtReferencia">Referencia:</label>
+                    <input type="text" class="input" id="txtReferencia">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn cancel" onclick="cerrarModalTransfer()">Cancelar</button>
+                <button class="btn" onclick="transferir()" id="btnTranferir">Transferir</button>
             </div>
         </div>
     </div>
--->
-            <!-- Modal Transferencia -->
-            <div class="overlay" style="display: none;" id="modal-transfer">
-                <div class="modal-transfer">
-                    <div class="modal-header">
-                        <div class="modal-line-flex">
-                            <h4 id="modal-tit-detinatario">TRANSFERENCIA</h4>
-                            <button class="btn-circle" onclick="cerrarModalTransfer()">x</button>
-                        </div>
-                    </div>
-                    <div class="modal-body">
-                        <div class="modal-text-line">
-                            <label for="txtDestinatario">Enviar dinero a:</label>
-                            <input type="text" class="input" id="txtDestinatario" readonly>
-                        </div>
-                        <input type="hidden" id="txtId">
-                        <div class="modal-text-line">
-                            <label for="txtImporte">Importe:</label>
-                            <input type="text" class="input" id="txtImporte">
-                        </div>
-                        <div class="modal-text-line">
-                            <label for="cboCuentas">Origen:</label>
-                            <select class="input" id="cboCuentas"></select>
-                        </div>
-                        <div class="modal-text-line">
-                            <label for="cboConcepto">Concepto:</label>
-                            <select class="input" id="cboConcepto">
-                                <option value=""></option>
-                                <option value="Varios">Varios</option>
-                                <option value="Alquiler">Alquiler</option>
-                                <option value="Cuota">Cuota</option>
-                                <option value="Expensas">Expensas</option>
-                                <option value="Factura">Factura</option>
-                                <option value="Prestamo">Prestamo</option>
-                                <option value="Seguro">Seguro</option>
-                                <option value="Honorarios">Honorarios</option>
-                                <option value="Haberes">Haberes</option>
-                                <option value="Inmobiliarias">Inmobiliarias</option>
-                                <option value="Reintegro de obras sociales o prepagas">Reintegro de obras sociales o
-                                    prepagas</option>
-                                <option value="Siniestros de seguros">Siniestros de seguros</option>
-                                <option value="Aportes de capital">Aportes de capital</option>
-                            </select>
-                        </div>
-                        <div class="modal-text-line">
-                            <label for="txtReferencia">Referencia:</label>
-                            <input type="text" class="input" id="txtReferencia">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn cancel" onclick="cerrarModalTransfer()">Cancelar</button>
-                        <button class="btn" onclick="transferir()" id="btnTranferir">Transferir</button>
-                    </div>
-                </div>
-            </div>
 
-            <footer>
+    <footer>
 
-            </footer>
+    </footer>
 
-            <script>
-                const URL = "http://127.0.0.1:5000/"
-                // Al subir al servidor, deberá utilizarse la siguiente ruta.
-                //USUARIO debe ser reemplazado por el nombre de usuario de Pythonanywhere
-                //const URL = "https://USUARIO.pythonanywhere.com/"
-                // Realizamos la solicitud GET al servidor para obtener todos losproductos.
-                let cliente = JSON.parse(sessionStorage.getItem("cliente_info"))
+    <script>
+        const URL = "http://127.0.0.1:5000/"
+        let cliente = JSON.parse(sessionStorage.getItem("cliente_info"))
 
-                fetch(URL + 'destinatarios/' + cliente.idCliente)
-                    .then(function (response) {
-                        if (response.ok) {
-                            //Si la respuesta es exitosa (response.ok), convierte el cuerpo de la respuesta de formato JSON a un objeto JavaScript y pasa estos datos a la siguiente promesa then.
-                            return response.json();
-                        } else {
-                            // Si hubo un error, lanzar explícitamente una excepción para ser "catcheada" más adelante
+        //OBTENER TABLA DE DESTINATARIOS
+        fetch(URL + 'destinatarios/' + cliente.idCliente)
 
-                            throw new Error('Error al obtener los destinatarios.');
-                        }
-                    })
-                    //Esta función maneja los datos convertidos del JSON.
-                    .then(function (data) {
-                        console.log(data)
-                        let tableAgenda =
-                            document.getElementById('tabla-body'); //Selecciona el elemento del DOM donde se mostrarán los productos.
+            .then(function (response) {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Error al obtener los destinatarios.');
+                }
+            })
+            //Esta función maneja los datos convertidos del JSON.
+            .then(function (data) {
+                console.log(data)
+                let tableAgenda =
+                    document.getElementById('tabla-body');
 
-                        // Iteramos sobre cada producto y agregamos filas a la tabla
+                for (let destinatario of data) {
+                    let fila = document.createElement('tr');
+                    fila.innerHTML = '<td>' + destinatario[0] + '</td>' + '<td>' + destinatario[1] + '</td>' + '<td align="right">' + destinatario[2] + '</td>' + '<td>' + '<span class="fa-solid fa-pencil icon-grid" title="Modificar"></span><span class="fa-solid fa-trash icon-grid" title="Eliminar"></span><span class="fa-solid fa-money-bill-transfer icon-grid" title="Tranferir"></span>' + '</td>';
+                    tableAgenda.appendChild(fila);
+                }
+            })
+            
+            .catch(function (error) {
+                alert('Error al obtener destinatarios.');
+            });
+        
+        //ELIMINAR UN DESTINATARIO
 
-                        for (let destinatario of data) {
-                            let fila = document.createElement('tr'); //Crea una nueva fila de tabla (<tr>) para cada producto.
-                            fila.innerHTML = '<td>' + destinatario[0] + '</td>' + '<td>' + destinatario[1] + '</td>' + '<td align="right">' + destinatario[2] + '</td>' + '<td>'+ '<span class="fa-solid fa-pencil icon-grid" title="Modificar"></span><span class="fa-solid fa-trash icon-grid" title="Eliminar"></span><span class="fa-solid fa-money-bill-transfer icon-grid" title="Tranferir"></span>'+ '</td>';
-                            //Al subir al servidor, deberá utilizarse la siguiente ruta. USUARIO debe ser reemplazado por el nombre de usuario de Pythonanywhere
-                            //Una vez que se crea la fila con el contenido del producto, se agrega a la tabla utilizando el método appendChild delelemento tablaProductos.
 
-                            tableAgenda.appendChild(fila);
-                        }
-                    })
-                    //Captura y maneja errores, mostrando una alerta en caso de error al obtener los productos.
-                    .catch(function (error) {
-                        // Código para manejar errores
-                        alert('Error al obtener destinatarios.');
-                    });
-            </script>
+        //MODIFICAR UN DESTINATARIO
+        
 
+    </script>
 </body>
 
 </html>
