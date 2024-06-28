@@ -192,7 +192,7 @@ class Conexion:
     #           METODO MOSTRAR DESTINATARIO
     # ------------------------------------------------  
     def consultar_destinatarios(self, idCliente):
-        sql = "SELECT d.descripcion, d.cbu, d.alias FROM destinatarios d RIGHT JOIN clientes c ON d.idCliente = c.id WHERE idCliente = %s;"
+        sql = "SELECT d.idDestinatario, d.descripcion, d.cbu, d.alias FROM destinatarios d RIGHT JOIN clientes c ON d.idCliente = c.id WHERE idCliente = %s;"
         valores = (idCliente,)
         self.cursor.execute(sql, valores)
         destinatarios = self.cursor.fetchall()
@@ -214,7 +214,7 @@ class Conexion:
         self.conn.commit()
         return self.cursor.rowcount > 0 
     # ------------------------------------------------  
-    #           METODO MOSTRAR UN DESTINATARIO
+    #           METODO CONSULTAR DESTINATARIO
     # ------------------------------------------------ 
     def consultar_un_destinatario(self, idDestinatario):
         sql = "SELECT descripcion, cbu, alias FROM destinatarios WHERE idDestinatario = %s;"
@@ -354,7 +354,7 @@ def mostrar_agenda(idCliente):
 # ------------------------------------------------  
 #           RUTEO ELIMINAR DESTINATARIO
 # ------------------------------------------------
-'''
+
 @app.route("/destinatarios/<int:idDestinatario>", methods=["DELETE"])
 def eliminar_destinatario(idDestinatario):
     destinatario = conexion.eliminar_destinatario(idDestinatario)
@@ -362,14 +362,19 @@ def eliminar_destinatario(idDestinatario):
         return jsonify({"mensaje": "Contacto eliminado"}), 200
     else:
         return jsonify({"mensaje": "Error al eliminar el contacto"}), 500
-'''
+
 # ------------------------------------------------  
 #           RUTEO MODIFICAR DESTINATARIO
 # ------------------------------------------------ 
+@app.route("/destinatarios/<int:idDestinatario>", methods=["PUT"])
+def modificar_destinatario(idDestinatario):
+    nueva_descripcion = request.form['descripcion']
+    nuevo_cbu = request.form['cbu']
+    nuevo_alias = request.form['alias']
 
 
 # ------------------------------------------------  
-#           RUTEO DATOS DE UN DESTINATARIO
+#           RUTEO BUSCAR UN DESTINATARIO
 # ------------------------------------------------ 
 
 if __name__ == "__main__":

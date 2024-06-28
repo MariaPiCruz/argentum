@@ -55,6 +55,7 @@
 
                         <thead>
                             <tr>
+                                <th>Código</th>
                                 <th>Descripción</th>
                                 <th>CBU</th>
                                 <th>Alias</th>
@@ -185,7 +186,7 @@
 
                 for (let destinatario of data) {
                     let fila = document.createElement('tr');
-                    fila.innerHTML = '<td>' + destinatario[0] + '</td>' + '<td>' + destinatario[1] + '</td>' + '<td align="right">' + destinatario[2] + '</td>' + '<td>' + '<span class="fa-solid fa-pencil icon-grid" title="Modificar"></span><span class="fa-solid fa-trash icon-grid" title="Eliminar"></span><span class="fa-solid fa-money-bill-transfer icon-grid" title="Tranferir"></span>' + '</td>';
+                    fila.innerHTML = '<td>' + destinatario[0] + '</td>' + '<td>' + destinatario[1] + '</td>' + '<td>' + destinatario[2] + '</td>' + '<td align="right">' + destinatario[3] + '</td>' + '<td>' + '<span class="fa-solid fa-pencil icon-grid" title="Modificar" id="icono-modificar"></span><span class="fa-solid fa-trash icon-grid" title="Eliminar" id="icono-eliminar"></span><span class="fa-solid fa-money-bill-transfer icon-grid" title="Tranferir"></span>' + '</td>';
                     tableAgenda.appendChild(fila);
                 }
             })
