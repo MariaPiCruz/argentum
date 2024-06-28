@@ -1,0 +1,58 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "segoe ui", roboto, oxygen,
+      ubuntu, cantarell, "fira sans", "droid sans", "helvetica neue", Arial,
+      sans-serif;
+  }
+  .form-container {
+    backdrop-filter: blur(2.4px) saturate(148%);
+    -webkit-backdrop-filter: blur(2.4px) saturate(148%);
+    background-color: rgba(255, 255, 255, 0.41);
+    border-radius: 12px;
+    border: 1px solid rgba(209, 213, 219, 0.3);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    /*background-color: #ffffff;
+      box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);*/
+    margin: 100px auto;
+  }
+  .form-container form {
+    margin: auto;
+    padding-top: 20px;
+  }
+  .form-item {
+    display: flex;
+  }
+  .form-container form label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .form-container input {
+    width: 310px;
+    height: 50px;
+    border: 1px solid #dee0e4;
+    margin-bottom: 20px;
+    padding: 0 15px;
+  }
+  .form-container input[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    background-color: #6247a6;
+    border: 0;
+    cursor: pointer;
+    font-weight: bold;
+    color: #ffffff;
+    transition: background-color 0.2s;
+    border-radius: 0 0 5px 5px;
+  }
+  .form-container input[type="submit"]:hover {
+    background-color: #7b59d0;
+    transition: background-color 0.2s;
+  }
+  

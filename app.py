@@ -14,6 +14,8 @@ import random
 import string
 
 
+
+
 #--------------------------------------------------------------------
 
 app = Flask(__name__)
@@ -92,8 +94,8 @@ class Conexion:
         
         self.conn.commit()
         
-        #self.cursor.execute('''INSERT INTO `tarjetas` (nroTarjeta, vencimiento, codigo, tipo, fechaInicio) VALUES ('4000123456789101','2026-08-01','123','VISA Debito','2020-07-01'),('4000987654321011','2026-08-01','987','VISA Credito','2020-07-01'),('377798765444332','2026-08-01','997','AMERICAN EXPRESS','2020-07-01');''')
-        #self.conn.commit()
+        # self.cursor.execute('''INSERT INTO `tarjetas` (nroTarjeta, vencimiento, codigo, tipo, fechaInicio) VALUES ('4000123456789101','2026-08-01','123','VISA Debito','2020-07-01'),('4000987654321011','2026-08-01','987','VISA Credito','2020-07-01'),('377798765444332','2026-08-01','997','AMERICAN EXPRESS','2020-07-01');''')
+        # self.conn.commit()
         
 
         self.cursor.execute('''CREATE TABLE IF NOT EXISTS `tipocuentas` (
@@ -104,28 +106,28 @@ class Conexion:
         ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;''')
         self.conn.commit()
 
-        #self.cursor.execute('''INSERT INTO `tipocuentas` (tipoCuenta, nroCuenta) VALUES ('Caja de Ahorro en Pesos','0650030602000080904070'),('Caja de Ahorro en USD','084-123456 / 3');''')
-        #self.conn.commit()
-        self.cursor.close() #el cursor lo cerramos recien aca una vez que se ejecutaron las dos acciones.
-        self.cursor = self.conn.cursor()
-        
-        # --- TABLA DESTINATARIOS (AGENDA) ---
-        
-        #self.cursor.execute('''CREATE TABLE IF NOT EXISTS `destinatarios` (
-        #`idDestinatario` int NOT NULL AUTO_INCREMENT,
-        #`destinatario` varchar(45) NOT NULL,
-	    #`cbu` varchar(45) NOT NULL,
-        #`alias` varchar(45) NOT NULL,
-	   #`idCliente` int,
-	    #PRIMARY KEY (`idDestinatario`),
-        #KEY `cliente_destinatarios_idx` (`idCliente`),
-        #CONSTRAINT `cliente_destinatarios` FOREIGN KEY (`idCliente`) REFERENCES `clientes` (`id`)
-        #) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;''')
-       # self.conn.commit()
-        
-        # --- FIN TABLA DESTINATARIOS (AGENDA) ---
+        # self.cursor.execute('''INSERT INTO `tipocuentas` (tipoCuenta, nroCuenta) VALUES ('Caja de Ahorro en Pesos','0650030602000080904070'),('Caja de Ahorro en USD','084-123456 / 3');''')
+        # self.conn.commit()
 
+##################################################
+#CREACION TABLA DESTINATARIO
+##################################################
+        self.cursor.execute('''CREATE TABLE IF NOT EXISTS `destinatarios`(
+        `idDestinatario` int NOT NULL AUTO_INCREMENT,
+        `destinatario` varchar(45) NOT NULL,
+	    `cbu` varchar(45) NOT NULL,
+        `alias` varchar(45) NOT NULL,
+	    `idCliente` int,
+	    PRIMARY KEY (`idDestinatario`),
+        KEY `cliente_destinatarios_idx` (`idCliente`),
+        CONSTRAINT `cliente_destinatarios` FOREIGN KEY (`idCliente`) REFERENCES clientes (`id`)
+        ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;''')
+        self.conn.commit()
+
+
+        self.cursor.close() #el cursor lo cerramos recien aca una vez que se ejecutaron las dos acciones.
         
+        self.cursor = self.conn.cursor() #y ahora si volvemos a abrir el cursor, pero sin el dictionary en true.
     
     def agregar_cuenta(self, username, password, idCliente, email):
         sql = "INSERT INTO cuentas (username, password, idCliente, email) VALUES (%s, %s, %s, %s)"
@@ -138,6 +140,8 @@ class Conexion:
     
     def agregar_cliente(self, nombre, apellido, dni, cuil, cbu, alias, saldo, idTarjeta, idTipoCuenta):
         sql = "INSERT INTO  clientes (nombre, apellido, dni, cuil, cbu, alias, saldo, idTarjeta, idTipoCuenta) values (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+
+
         valores = (nombre, apellido, dni, cuil, cbu, alias, saldo, idTarjeta, idTipoCuenta)
 
         self.cursor.execute(sql,valores)
@@ -165,6 +169,8 @@ class Conexion:
         self.conn.commit()
         return self.cursor.rowcount > 0
         
+
+
     def eliminar_cuenta(self, id):
         self.cursor.execute(f"DELETE FROM cuentas WHERE id = {id}")
         self.conn.commit()
@@ -179,12 +185,16 @@ class Conexion:
         return tipoCuenta
     
     def consultar_datos_tarjeta(self, idCliente):
-        self.cursor.execute(f"select nroTarjeta, vencimiento, codigo, tipo, fechaInicio from clientes, tarjetas where tarjetas.id = clientes.idTarjeta and clientes.id = {idCliente};")
+        sql = ("select nroTarjeta, vencimiento, codigo, tipo, fechaInicio from clientes, tarjetas where tarjetas.id = clientes.idTarjeta and clientes.id = %s;")
+        valores = (idCliente,)
+        self.cursor.execute(sql, valores)
         tarjeta = self.cursor.fetchone()
         return tarjeta
-    '''
-    # --- MÉTODOS PARA DESTINATARIOS (AGENDA) ---
-    def agregar_destinatario(self, descripcion, cbu, alias, idCliente):
+    
+##################################################
+#CREACION METODO AGREGAR DESTINATARIO
+##################################################    
+    def agregar_destinatario(self, descripcion,   cbu, alias, idCliente):
         sql = "INSERT INTO destinatarios (descripcion, cbu, alias, idCliente) VALUES (%s, %s, %s, %s)"
         valores = (descripcion, cbu, alias, idCliente)
 
@@ -192,35 +202,23 @@ class Conexion:
         self.conn.commit()
         nuevo_destinatario_id = self.cursor.lastrowid
         return nuevo_destinatario_id
-    
+
+##################################################
+#CREACION METODO MOSTRAR DESTINATARIO
+##################################################
+
     def consultar_destinatarios(self, idCliente):
         sql = "SELECT d.descripcion, d.cbu, d.alias FROM destinatarios d RIGHT JOIN clientes c ON d.idCliente = c.id WHERE idCliente = %s;"
         valores = (idCliente,)
 
         self.cursor.execute(sql, valores)
-        destinatarios = self.cursor.fetchone()
+        destinatarios = self.cursor.fetchall()
         return destinatarios
     
-    def eliminar_destinatario(self, idDestinatario):
-        self.cursor.execute(f"DELETE FROM destinatarios WHERE idDestinatario = {idDestinatario}")
+##################################################
 
-        self.conn.commit()
-        return self.cursor.rowcount > 0
-
-    def modificar_destinatario(self, idDestinatario, nueva_descripcion, nuevo_cbu, nuevo_alias):
-        sql = "UPDATE destinatarios SET descripcion = %s, cbu = %s, alias = %s WHERE idDestinatario = %s"
-        valores = (nueva_descripcion,nuevo_cbu,nuevo_alias,idDestinatario)
-
-        self.cursor.execute(sql, valores)
-        self.conn.commit()
-        return self.cursor.rowcount > 0 
-    '''
-    # --- FIN METODOS DESTINATARIOS (AGENDA) ---
-
-# ----------------------------------------
-# ---------- PROGRAMA PRINCIPAL ----------
-# ----------------------------------------
-conexion = Conexion(host='localhost', user='root', password='', database='argentum')
+# Programa principal
+conexion = Conexion(host='localhost', user='root', password='1234', database='argentum')
 
 
 @app.route("/cuentas", methods=["POST"])
@@ -261,6 +259,8 @@ def generar_cbu():
     # Formar el CBU completo
     cbu = f'{base1}{verificador1}{numero_cuenta}{verificador2}'
     return cbu
+
+
 
 
 def generar_alias(longitud_min=6, longitud_max=20):
@@ -314,21 +314,21 @@ def mostrar_datos_cuenta(idCliente):
 
 @app.route("/tipoTarjeta/<int:idCliente>", methods=["GET"])
 def mostrar_datos_tarjeta(idCliente):
-    tarjeta = conexion.consultar_datos_tarjeta(idCliente) 
+    tarjeta = conexion.consultar_datos_tarjeta(idCliente)
     if tarjeta:
         return jsonify(tarjeta)
     else:
         return "Tarjeta no encontrada", 404
+##################################################
+#RUTEO AGREGAR DESTINATARIO
+##################################################
 
-'''
-# --- RUTAS PARA AGENDA ---
-
-@app.route("/destinatarios", methods=["POST"])
-def agregar_destinatario():
+@app.route("/destinatarios/<int:idCliente>", methods=["POST"])
+def agregar_destinatario(idCliente):
     descripcion = request.form['descripcion']
     cbu = request.form['cbu']
     alias = request.form['alias']
-    idCliente = request.args.get('idCliente')
+    #idCliente = request.args.get('idCliente')
 
     # Agregar el destinatario a la base de datos
     nuevo_destinatario_id = conexion.agregar_destinatario(descripcion,cbu,alias,idCliente)
@@ -339,6 +339,12 @@ def agregar_destinatario():
     else:
         return jsonify({"mensaje": "Error al agregar el destinatario."}), 500
 
+
+
+##################################################
+# RUTEO MOSTRAR DESTINATARIO
+##################################################
+
 @app.route("/destinatarios/<int:idCliente>", methods=["GET"])
 def mostrar_agenda(idCliente):
     agenda = conexion.consultar_destinatarios(idCliente)
@@ -346,9 +352,7 @@ def mostrar_agenda(idCliente):
         return jsonify(agenda)
     else:
         return "Agenda vacía", 404
-    
-# --- FIN RUTAS AGENDA ---
-'''
+
 
 if __name__ == "__main__":
     app.run(debug=True)

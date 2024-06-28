@@ -44,35 +44,23 @@
     <main>
         <section class="section">
             <div>
-                <h2 id="txtHola">Hola, <b>Nestor</b></h2>
+                <h2 id="txtHola"></h2>
             </div>
             <div>
                 <h3>Estado de cuenta <span class="fa-solid fa-eye-slash" id="viewSaldo"
                         onclick="changeViewSaldo()"></span></h3>
             </div>
             <div class="section-flex" id="section-cuentas">
-                <!-- <div class="card">
-                    <h4>Caja de Ahorro en Pesos</h4>
-                    <p>084-123456 / 3</p>
-                    <div class="card-saldo">$ <b>380.400,00</b></div>
+                <div class="card">
+                    <h4>Caja de ahorro en pesos</h4>
+                    <p id="nroCuenta"></p>
+                    <div class="card-saldo">$ <b id="saldo"></b></div>
                     <div class="card-dashed oculto">$ <b>--- --- --</b></div>
                     <div class="card-icon-flex">
                         <a href="movimientos.html"><i class="fa-solid fa-money-bill-transfer"></i> Ver Movimientos</a>
-                        <a href="#" onclick="verAliasCbu('pesos')"><i class="fa-solid fa-share-nodes"></i> CBU / Alias</a>
-
+                        <a href="#" onclick="verAliasCbu()"><i class="fa-solid fa-share-nodes"></i> CBU / Alias</a>
                     </div>
                 </div>
-                <div class="card">
-                    <h4>Caja de Ahorro en USD</h4>
-                    <p>084-123456 / 3</p>
-                    <div class="card-saldo">$<b>0,00</b></div>
-                    <div class="card-dashed oculto">$ <b>--- --- --</b></div>
-                    <div class="card-icon-flex">
-                        <a href="#"><i class="fa-solid fa-money-bill-transfer"></i> Ver Movimientos</a>
-                        <a href="#" onclick="verAliasCbu('dolar')"><i class="fa-solid fa-share-nodes"></i> CBU / Alias</a>
-
-                    </div>
-                </div> -->
             </div>
         </section>
         <section class="section">
@@ -81,46 +69,25 @@
                         onclick="changeViewTarjetas()"></span></h3>
             </div>
             <div class="section-flex" id="section-tarjetas">
-                <!-- <div class="card">
-                    <h4>Tarjeta Débito</h4>
+                <div class="card">
+                    <h4>Visa Débito</h4>
                     <div class="card-line-flex">
-                        <p>Número de tarjeta</p>
-                        <p><b>****2745</b></p>
+                        <p>Nro. de tarjeta</p>
+                        <p><b id="nroTarjeta">**********</b></p>
                     </div>
                     <div class="card-line-flex">
-                        <p>Límite de extracción</p>
-                        <p><b>$150.000</b></p>
+                        <p>Código de seguridad</p>
+                        <p><b id="codigoSeguridad">***</b></p>
                     </div>
-                    <p><b>Consumos</b></p>
+                    <div class="card-line-flex">
+                        <p>Nombre del titular</p>
+                        <p><b id="nombreTitularTarjeta">--------</b></p>
+                    </div>
                     <div class="card-line-flex align-end">
-                        <p>Vigencia hasta 08/25</p>
+                        <p id="fechaVigencia">Vigencia hasta -----</p>
                         <img src="../static/images/visaDebito.png" width="40px" alt="Visa Débito">
                     </div>
                 </div>
-                <div class="card">
-                    <h4>Consumo periodo actual</h4>
-                    <div>
-                        <div class="card-consumo">$<b>17.600,00</b></div>
-                        <div class="card-dashed-consumo oculto">$ <b>--- --- --</b></div>
-                        <p>****2745</p>
-                    </div>
-                    <div class="card-line-flex align-end">
-                        <p>Vence 11/28 | Cierre 28/06</p>
-                        <img src="../static/images/visa.png" width="40px" alt="Visa Crédito">
-                    </div>
-                </div>
-                <div class="card">
-                    <h4>Consumo periodo actual</h4>
-                    <div>
-                        <div class="card-consumo">$<b>0,00</b></div>
-                        <div class="card-dashed-consumo oculto">$ <b>--- --- --</b></div>
-                        <p>****58909</p>
-                    </div>
-                    <div class="card-line-flex align-end">
-                        <p>Vence 11/28 | Cierre 28/06</p>
-                        <img src="../static/images/American-Express.png" width="40px" alt="Visa Crédito">
-                    </div>
-                </div> -->
             </div>
         </section>
         <section class="section">

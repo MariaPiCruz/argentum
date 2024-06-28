@@ -144,4 +144,15 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+CREATE TABLE IF NOT EXISTS destinatarios (
+    idDestinatario int NOT NULL AUTO_INCREMENT,
+    descripcion varchar(45) NOT NULL,
+    cbu varchar(45) NOT NULL,
+    alias varchar(45) NOT NULL,
+	idCliente int,
+	PRIMARY KEY (`idDestinatario`),
+    KEY `cliente_destinatarios_idx` (`idCliente`),
+    CONSTRAINT `cliente_destinatarios` FOREIGN KEY (`idCliente`) REFERENCES `clientes` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+
 -- Dump completed on 2024-06-25 20:55:24
