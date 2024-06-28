@@ -52,7 +52,6 @@
             <section class="section-agenda">
                 <div class="table-agenda" id="table-agenda">
                     <table id="tabla-destinatarios">
-
                         <thead>
                             <tr>
                                 <th>Código</th>
@@ -168,39 +167,81 @@
         const URL = "http://127.0.0.1:5000/"
         let cliente = JSON.parse(sessionStorage.getItem("cliente_info"))
 
-        //OBTENER TABLA DE DESTINATARIOS
-        fetch(URL + 'destinatarios/' + cliente.idCliente)
+        obtenerDestinatarios()
+
+        function obtenerDestinatarios(){
+            fetch(URL + 'destinatarios/' + cliente.idCliente)
 
             .then(function (response) {
                 if (response.ok) {
                     return response.json();
                 } else {
-                    throw new Error('Error al obtener los destinatarios.');
+                    throw new Error('Error al obtener agenda.');
                 }
             })
-            //Esta función maneja los datos convertidos del JSON.
+
+            // .then(function (data) {
+            //     console.log(data)
+            //     let tableAgenda = document.getElementById('tabla-body');
+            //     for (let destinatario of data) {
+            //         let fila = document.createElement('tr');
+            //         //fila.innerHTML = '<td>' + destinatario[0] + '</td>' + '<td>' + destinatario[1] + '</td>' + '<td>' + destinatario[2] + '</td>' + '<td align="right">' + destinatario[3] + '</td>' + '<td>' + '<buttom class="fa-solid fa-pencil icon-grid" title="Modificar" id="icono-modificar"></buttom><buttom class="fa-solid fa-trash icon-grid" title="Eliminar" id="icono-eliminar"></buttom><buttom class="fa-solid fa-money-bill-transfer icon-grid" title="Tranferir"></buttom>' + '</td>';
+            //         fila.innerHTML = '<td>' + destinatario[0] + '</td>' + '<td>' + destinatario[1] + '</td>' + '<td>' + destinatario[2] + '</td>' + '<td align="right">' + destinatario[3] + '</td>' + '<td>' + '<buttom class="fa-solid fa-pencil icon-grid" title="Modificar" id="icono-modificar"></buttom><buttom class="fa-solid fa-trash icon-grid" title="Eliminar" onclick="eliminarDestinatario(${destinatario.idDestinatario})"></buttom><buttom class="fa-solid fa-money-bill-transfer icon-grid" title="Tranferir"></buttom>' + '</td>';
+            //         //Falta que en buton eliminar, se mande el codigo idDestinatario a la funcion de abajo
+            //         tableAgenda.appendChild(fila);
+            //     }
+            // })
+
+            //nuevo
             .then(function (data) {
                 console.log(data)
-                let tableAgenda =
-                    document.getElementById('tabla-body');
-
+                let tableBody = document.getElementById('tabla-body');
+                const fragment = document.createDocumentFragment();
                 for (let destinatario of data) {
                     let fila = document.createElement('tr');
-                    fila.innerHTML = '<td>' + destinatario[0] + '</td>' + '<td>' + destinatario[1] + '</td>' + '<td>' + destinatario[2] + '</td>' + '<td align="right">' + destinatario[3] + '</td>' + '<td>' + '<span class="fa-solid fa-pencil icon-grid" title="Modificar" id="icono-modificar"></span><span class="fa-solid fa-trash icon-grid" title="Eliminar" id="icono-eliminar"></span><span class="fa-solid fa-money-bill-transfer icon-grid" title="Tranferir"></span>' + '</td>';
-                    tableAgenda.appendChild(fila);
+                    fila.innerHTML = `
+                            <td>${destinatario[0]}</td>
+                            <td>${destinatario[1]}</td>
+                            <td>${destinatario[2]}</td>
+                            <td>${destinatario[3]}</td>
+                            <td>
+                                <button class="fa-solid fa-pencil icon-grid" title="Modificar" id="icono-modificar"></button>
+                                <button class="fa-solid fa-trash icon-grid" title="Eliminar" data-id="${destinatario[0]}"></button>
+                                <button class="fa-solid fa-money-bill-transfer icon-grid" title="Tranferir"></button>
+                            </td>
+                    `;
+                    fragment.appendChild(fila);
                 }
-            })
-            
+                tableBody.appendChild(fragment);
+                const deleteButtons = tableBody.querySelectorAll('button[data-id]');
+                    deleteButtons.forEach(button => button.addEventListener('click', eliminarDestinatario));
+                })
+
             .catch(function (error) {
-                alert('Error al obtener destinatarios.');
+                alert('Agenda vacia.');
             });
-        
+        }
+
         //ELIMINAR UN DESTINATARIO
+        function eliminarDestinatario(event) {
+            const idDestinatario = event.target.dataset.id;
 
-
-        //MODIFICAR UN DESTINATARIO
-        
-
+            if (confirm('¿Estás seguro de que quieres eliminar este contacto?')) {
+                fetch(URL + `destinatarios/${idDestinatario}`, {
+                    method: 'DELETE'
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            event.target.parentNode.parentNode.remove();
+                            alert('Contacto eliminado correctamente.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error al eliminar destinatario:', error);
+                        alert('Error al eliminar destinatario.');
+                    });
+            }
+        }
     </script>
 </body>
 

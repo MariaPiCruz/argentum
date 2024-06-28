@@ -214,9 +214,9 @@ class Conexion:
         self.conn.commit()
         return self.cursor.rowcount > 0 
     # ------------------------------------------------  
-    #           METODO CONSULTAR DESTINATARIO
+    #           METODO BUSCAR DESTINATARIO
     # ------------------------------------------------ 
-    def consultar_un_destinatario(self, idDestinatario):
+    def buscar_destinatario(self, idDestinatario):
         sql = "SELECT descripcion, cbu, alias FROM destinatarios WHERE idDestinatario = %s;"
         valores = (idDestinatario,)
         self.cursor.execute(sql, valores)
@@ -357,22 +357,23 @@ def mostrar_agenda(idCliente):
 
 @app.route("/destinatarios/<int:idDestinatario>", methods=["DELETE"])
 def eliminar_destinatario(idDestinatario):
-    destinatario = conexion.eliminar_destinatario(idDestinatario)
-    if destinatario:
-        return jsonify({"mensaje": "Contacto eliminado"}), 200
+    destinatario_borrado = conexion.eliminar_destinatario(idDestinatario)
+    if destinatario_borrado:
+        return jsonify({"mensaje": "Contacto eliminado."}), 200
     else:
-        return jsonify({"mensaje": "Error al eliminar el contacto"}), 500
+        return jsonify({"mensaje": "Error al eliminar el contacto."}), 500
 
 # ------------------------------------------------  
 #           RUTEO MODIFICAR DESTINATARIO
 # ------------------------------------------------ 
+'''
 @app.route("/destinatarios/<int:idDestinatario>", methods=["PUT"])
 def modificar_destinatario(idDestinatario):
     nueva_descripcion = request.form['descripcion']
     nuevo_cbu = request.form['cbu']
     nuevo_alias = request.form['alias']
 
-
+'''
 # ------------------------------------------------  
 #           RUTEO BUSCAR UN DESTINATARIO
 # ------------------------------------------------ 
