@@ -61,7 +61,11 @@
                 </div>
 
         <div class="msg" id="msg"></div>
-        <input type="submit" value="Agregar destinatario" />
+        <div class="btn-container">
+            <button type="submit" class="btn-agregar-contacto"><i class="fa-solid fa-heart"></i></button>
+            <button type="submit" class="btn-transferir" id="transferir">Transferir</button>
+        </div>
+        
         </form>
     </div>
     </main>
@@ -72,43 +76,61 @@
 
         document.getElementById('formulario').addEventListener('submit', function (event) {
             event.preventDefault();
-            var formData = new FormData(this);
-            // Realizamos la solicitud POST al servidor
-            fetch (URL + "destinatarios/" + cliente.idCliente,
-            {
-                method: 'POST',
-                body: formData
-            })
-            
-            .then(function (response) {
-                if (response.ok) {
-                    //Si la respuesta es exitosa, convierte los datos de la respuesta a formato JSON.
-                    return response.json();
-                } else {
-                    excepción
-                    throw new Error('Error al agregar destinatario.');
-                }
-            })
+            if (event.submitter.getAttribute("id") == "transferir"){
+                alert("Disculpe los incovenientes, todavia estamos trabajando en esta opción.");
+                return;
+            }
+            if (ValidarFormulario()){
+                var formData = new FormData(this);
+                // Realizamos la solicitud POST al servidor
+                fetch (URL + "destinatarios/" + cliente.idCliente,
+                {
+                    method: 'POST',
+                    body: formData
+                })
+                
+                .then(function (response) {
+                    if (response.ok) {
+                        //Si la respuesta es exitosa, convierte los datos de la respuesta a formato JSON.
+                        return response.json();
+                    } else {
+                        excepción
+                        throw new Error('Error al agregar destinatario.');
+                    }
+                })
 
-            //Respuesta OK
-            .then(function (data) {
-                alert('Destinatario agregado correctamente.');
-                window.location.href = 'transfer.html';
-            })
+                //Respuesta OK
+                .then(function (data) {
+                    alert('Destinatario agregado correctamente.');
+                    window.location.href = 'transfer.html';
+                })
 
-            // En caso de error, mostramos una alerta con un mensaje de error.
-            .catch(function (error) {
-                alert('Error al agregar destinatario.');
-            })
+                // En caso de error, mostramos una alerta con un mensaje de error.
+                .catch(function (error) {
+                    alert('Error al agregar destinatario.');
+                })
 
-            // Limpiar el formulario en ambos casos (éxito o error)
-            .finally(function () {
-                document.getElementById('descripcion').value = "";
-                document.getElementById('cbu').value = "";
-                document.getElementById('alias').value = "";
+                // Limpiar el formulario en ambos casos (éxito o error)
+                .finally(function () {
+                    document.getElementById('descripcion').value = "";
+                    document.getElementById('cbu').value = "";
+                    document.getElementById('alias').value = "";
 
-            });
+                });
+            }
+           
         })
+
+        function ValidarFormulario(){
+            let cbu = document.getElementById('cbu');
+            let alias = document.getElementById('alias');
+            let msg = document.getElementById('msg');
+            if (cbu.value.trim() == "" || alias.value.trim() == ""){
+                msg.textContent = "Debes completar todos los campos.";
+                return false;
+            }
+            return true;
+        }
     </script>
 </body>
 </html>

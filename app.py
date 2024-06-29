@@ -212,18 +212,18 @@ class Conexion:
         valores = (nueva_descripcion, nuevo_cbu, nuevo_alias, idDestinatario)
         self.cursor.execute(sql, valores)
         self.conn.commit()
-        return self.cursor.rowcount > 0 
+        return self.cursor.rowcount >= 0 
     # ------------------------------------------------  
     #           METODO BUSCAR DESTINATARIO
     # ----------------------------------------------
-    """
+
     def buscar_destinatario(self, idDestinatario):
         sql = "SELECT descripcion, cbu, alias FROM destinatarios WHERE idDestinatario = %s;"
         valores = (idDestinatario,)
         self.cursor.execute(sql, valores)
         destinatarios = self.cursor.fetchall()
         return destinatarios
-"""
+
 
 # ------------------------------------------------  
 #       PROGRAMA PRINCIPAL
@@ -367,35 +367,29 @@ def eliminar_destinatario(idDestinatario):
 # ------------------------------------------------  
 #           RUTEO MODIFICAR DESTINATARIO
 # ------------------------------------------------ 
-@app.route("/destinatarios/<int:idDestinatario>", methods=["PUT"])
+@app.route("/ModificarDestinatarios/<int:idDestinatario>", methods=["PUT"])
 def modificar_destinatario(idDestinatario):
     nueva_descripcion = request.form['descripcion']
     nuevo_cbu = request.form['cbu']
     nuevo_alias = request.form['alias']
 
-    if conexion.modificar_destinatario(idDestinatario, nueva_descripcion, nuevo_cbu, nuevo_alias ):
+    if conexion.modificar_destinatario(idDestinatario, nueva_descripcion, nuevo_cbu, nuevo_alias):
         return jsonify({"mensaje": "Destinatario modificado"}), 200
     else:
         return jsonify({"mensaje": "Destinatario no encontrado"}), 403
-    #destinatario_modificado = conexion.#buscar_destinatario(idDestinatario, #nueva_descripcion, nuevo_cbu, nuevo_alias)
-
-    #if destinatario_modificado:
-        #return jsonify({"mensaje": "Contacto modificado."}), 200
-    #else:
-        #return jsonify({"mensaje": "Contacto no encontrado."}), 404
     
 # ------------------------------------------------  
 #           RUTEO BUSCAR UN DESTINATARIO
 # ------------------------------------------------ 
-"""
-@app.route("/destinatarios/<int:idDestinatario>", methods=["GET"])
+
+@app.route("/Buscardestinatario/<int:idDestinatario>", methods=["GET"])
 def buscar_destinatario(idDestinatario):
     destinatario = conexion.buscar_destinatario(idDestinatario)
     if destinatario:
         return jsonify(destinatario), 201
     else:
         return "Contacto no encontrado.", 404
-    """
+
 # ------------------------------------------------  
 #               FIN RUTEOS DE AGENDA
 # ------------------------------------------------ 

@@ -54,7 +54,6 @@
                     <table id="tabla-destinatarios">
                         <thead>
                             <tr>
-                                <th>Código</th>
                                 <th>Descripción</th>
                                 <th>CBU</th>
                                 <th>Alias</th>
@@ -65,45 +64,12 @@
                         </tbody>
 
                     </table>
-                    <!--
-                    <div class="grid-item text-bold">Descripción/Nombre</div>
-                    <div class="grid-item text-bold">CBU/CVU</div>
-                    <div class="grid-item text-bold">Alias</div>
-                    <div class="grid-item text-bold"></div>
-                    <div class="grid-item text-bold"></div>
-                    <div class="grid-item">0</div>
-                    <div class="grid-item">0</div>
-                    <div class="grid-item">0</div>
-                    <div class="grid-item">
-                        <span class="fa-solid fa-pencil icon-grid" title="Modificar"></span>
-                        <span class="fa-solid fa-trash icon-grid" title="Eliminar"></span>
-                        <span class="fa-solid fa-money-bill-transfer icon-grid" title="Tranferir"></span>
-                    </div>-->
+            
                 </div>
             </section>
         </section>
     </main>
 
-    <!-- Modal Destinatario
-    <div class="overlay" style="display: none;" id="modal-destinatario">
-        <div class="modal-destinatario">
-            <div class="modal-header">
-                <div class="modal-line-flex">
-                    <h4 id="modal-tit-destinatario"></h4>
-                    <button class="btn-circle" onclick="cerrarModalDestinatario()">x</button>
-                </div>
-            </div>
-
-            <div class="msg" id="msg"></div>
-            <input type="submit" value="Agregar" />
-            </form>
-
-            <<div class="modal-footer">
-                <button class="btn cancel" onclick="cerrarModalDestinatario()">Cancelar</button>
-                <button class="btn" onclick="guardarDatos()" id="btnGrabar">Agregar</button>
-        </div>
-    </div>
-    </div>-->
     <!-- Modal Transferencia -->
     <div class="overlay" style="display: none;" id="modal-transfer">
         <div class="modal-transfer">
@@ -180,43 +146,26 @@
                 }
             })
 
-            // .then(function (data) {
-            //     console.log(data)
-            //     let tableAgenda = document.getElementById('tabla-body');
-            //     for (let destinatario of data) {
-            //         let fila = document.createElement('tr');
-            //         //fila.innerHTML = '<td>' + destinatario[0] + '</td>' + '<td>' + destinatario[1] + '</td>' + '<td>' + destinatario[2] + '</td>' + '<td align="right">' + destinatario[3] + '</td>' + '<td>' + '<buttom class="fa-solid fa-pencil icon-grid" title="Modificar" id="icono-modificar"></buttom><buttom class="fa-solid fa-trash icon-grid" title="Eliminar" id="icono-eliminar"></buttom><buttom class="fa-solid fa-money-bill-transfer icon-grid" title="Tranferir"></buttom>' + '</td>';
-            //         fila.innerHTML = '<td>' + destinatario[0] + '</td>' + '<td>' + destinatario[1] + '</td>' + '<td>' + destinatario[2] + '</td>' + '<td align="right">' + destinatario[3] + '</td>' + '<td>' + '<buttom class="fa-solid fa-pencil icon-grid" title="Modificar" id="icono-modificar"></buttom><buttom class="fa-solid fa-trash icon-grid" title="Eliminar" onclick="eliminarDestinatario(${destinatario.idDestinatario})"></buttom><buttom class="fa-solid fa-money-bill-transfer icon-grid" title="Tranferir"></buttom>' + '</td>';
-            //         //Falta que en buton eliminar, se mande el codigo idDestinatario a la funcion de abajo
-            //         tableAgenda.appendChild(fila);
-            //     }
-            // })
-
+      
             //nuevo
             .then(function (data) {
-                console.log(data)
                 let tableBody = document.getElementById('tabla-body');
-                const fragment = document.createDocumentFragment();
                 for (let destinatario of data) {
                     let fila = document.createElement('tr');
                     fila.innerHTML = `
-                            <td>${destinatario[0]}</td>
                             <td>${destinatario[1]}</td>
                             <td>${destinatario[2]}</td>
                             <td>${destinatario[3]}</td>
                             <td>
                                 <button class="fa-solid fa-pencil icon-grid" title="Modificar" id="icono-modificar" data-id="${destinatario[0]}" onclick="modificarDestinatario(this)"> 
                                 </button>
-                                <button class="fa-solid fa-trash icon-grid" title="Eliminar" data-id="${destinatario[0]}"></button>
+                                <button class="fa-solid fa-trash icon-grid" title="Eliminar" data-id="${destinatario[0]}" onclick=eliminarDestinatario(this)></button>
 
                                 <button class="fa-solid fa-money-bill-transfer icon-grid" title="Tranferir"></button>
                             </td>
                     `;
-                    fragment.appendChild(fila);
+                    tableBody.appendChild(fila);
                 }
-                tableBody.appendChild(fragment);
-                const deleteButtons = tableBody.querySelectorAll('button[data-id]');
-                    deleteButtons.forEach(button => button.addEventListener('click', eliminarDestinatario));
                 })
 
             .catch(function (error) {
@@ -225,17 +174,17 @@
         }
 
         //ELIMINAR UN DESTINATARIO
-        function eliminarDestinatario(event) {
-            const idDestinatario = event.target.dataset.id;
-
+        function eliminarDestinatario(buton) {
             if (confirm('¿Estás seguro de que quieres eliminar este contacto?')) {
+                let idDestinatario = parseInt(buton.getAttribute("data-id"));
                 fetch(URL + `destinatarios/${idDestinatario}`, {
                     method: 'DELETE'
                 })
                     .then(response => {
                         if (response.ok) {
-                            event.target.parentNode.parentNode.remove();
+                            // event.target.parentNode.parentNode.remove();
                             alert('Contacto eliminado correctamente.');
+                            buton.parentNode.parentNode.remove();
                         }
                     })
                     .catch(error => {
@@ -247,7 +196,7 @@
         //MODIFICAR DESTINATARIO
         function modificarDestinatario(buton) {
             idDestinatario=buton.getAttribute("data-id")
-            window.location="modificarDestinatario.html?idDestinatario="+idDestinatario
+            window.location="modificarDestinatario.html?idDestinatario="+idDestinatario;
         }
 
     </script>

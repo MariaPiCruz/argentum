@@ -47,27 +47,23 @@
             <h1>Modificar Destinatario</h1>
             <form class="form-guardar-cambios" id="form-guardar-cambios">
                 <div class="form-item">
-                    <label for="idDestinatario">Código</label>
-                    <input type="number" id="idDestinatario" readonly="true">
-                </div>
-                <div class="form-item">
-                    <label for="descripcionModificar">Nombre/Descripción:</label>
-                    <input type="text" placeholder="Nombre/Descripción" id="descripcionModificar" required name="cbuModificar"/>
+                    <label for="descripcion">Nombre/Descripción:</label>
+                    <input type="text" placeholder="Nombre/Descripción" id="descripcion" required name="descripcion"/>
                 </div>
 
                 <div class="form-item">
-                    <label for="cbuModificar">CBU:</label>
-                    <input type="text" placeholder="cbu" id="cbuModificar" required name="cbuModificar" />
+                    <label for="cbu">CBU:</label>
+                    <input type="text" placeholder="cbu" id="cbu" required name="cbu" />
                 </div>
 
                 <div class="form-item">
-                    <label for="aliasModificar">Alias:</label>
-                    <input type="text" placeholder="alias" id="aliasModificar" required name="aliasModificar" />
+                    <label for="alias">Alias:</label>
+                    <input type="text" placeholder="alias" id="alias" required name="alias" />
                 </div>
     
                 <div class="msg" id="msg"></div>
                 <button type="submit" id="guardarCambios">Guardar Cambios</button>
-                <a href="inicio.html">Cancelar</a>
+                <a href="transfer.html">Cancelar</a>
             </form>
         </div>
     </main>
@@ -75,72 +71,76 @@
     <script>
 
         const URL = "http://127.0.0.1:5000/"
+
+        
+        let campoDescripcion = document.getElementById('descripcion');
+        let campoCbu = document.getElementById('cbu');
+        let campoAlias = document.getElementById('alias');
         let idDestinatario;
 
         window.addEventListener("DOMContentLoaded", function() {
             const urlParams = new URLSearchParams(window.location.search);
 
             idDestinatario = parseInt(urlParams.get('idDestinatario'));
-            let campoIdDestinatario=document.getElementById('idDestinatario');
-            campoIdDestinatario.value=idDestinatario;
-            campoIdDestinatario.readonly=true;
-        })
-
-/*
-        document.getElementById('guardarCambios').addEventListener("click", function() {
-            guardarCambios()
-        })
-
-        document.getElementById('form-guardar-cambios').addEventListener('submit', guardarCambios);
-        //(event) {
-            //event.preventDefault(); // Evitamos que se envie el form 
-
-            var formData = new FormData(this);
-
-            // Realizamos la solicitud POST al servidor
-            fetch(URL + 'destinatarios'+ idDestinatario, {
-                method: 'POST',
-                body: formData // Aquí enviamos formData. Dado que formData puede contener archivos, no se utiliza JSON.
+              // Realizamos la solicitud POST al servidor
+              fetch(URL + `Buscardestinatario/${idDestinatario}`, {
+                method: 'GET'
             })
-    */    
+            //Después de realizar la solicitud, se utiliza el método then() para manejar la respuesta del servidor.
+            .then(function (response) {
+                    if (response.ok) { 
+                    //Si la respuesta es exitosa, convierte los datos de la respuesta a formato JSON.
+                        return response.json(); 
+                    } else {
+                        throw new Error('Error al buscar destinatario.');
+                    }
+            })
+            .then(function (data) {
+                //cargar campos
+                    campoDescripcion.value = data[0][0];
+                    campoCbu.value = data[0][1];
+                    campoAlias.value = data[0][2];
+                })
+                // En caso de error, mostramos una alerta con un mensaje de error.
+                .catch(function (error) {
+                    alert('Error al buscar el destinatario.');
+                })
+            
+        })
+
+   
         document.getElementById('form-guardar-cambios').addEventListener('submit', function (event) {
             event.preventDefault(); // Evitamos que se envie el form 
 
             var formData = new FormData(this);
     
             // Realizamos la solicitud POST al servidor
-            fetch(URL + 'destinatarios/'+ idDestinatario, {
-                method: 'POST',
+            fetch(URL + `ModificarDestinatarios/${idDestinatario}`, {
+                method: 'PUT',
                 body: formData // Aquí enviamos formData. Dado que formData puede contener archivos, no se utiliza JSON.
             })
             //Después de realizar la solicitud POST, se utiliza el método then() para manejar la respuesta del servidor.
             .then(function (response) {
                     if (response.ok) { 
-//Si la respuesta es exitosa, convierte los datos de la respuesta a formato JSON.
+                        //Si la respuesta es exitosa, convierte los datos de la respuesta a formato JSON.
                         return response.json(); 
                     } else {
-// Si hubo un error, lanzar explícitamente una excepción
-// para ser "catcheada" más adelante
+                    // Si hubo un error, lanzar explícitamente una excepción
+                    // para ser "catcheada" más adelante
                         throw new Error('Error al modificar destinatario.');
                     }
             })
 
-//Respuesta OK, muestra una alerta informando que el producto se agregó correctamente y limpia los campos del formulario para que puedan ser utilizados para un nuevo producto.
+                //Respuesta OK, muestra una alerta informando que el producto se agregó correctamente y limpia los campos del formulario para que puedan ser utilizados para un nuevo producto.
                 .then(function (data) {
                     alert('Destinatario modificado correctamente.');
+                    window.location = "transfer.html";
                 })
 
-// En caso de error, mostramos una alerta con un mensaje de error.
+                // En caso de error, mostramos una alerta con un mensaje de error.
                 .catch(function (error) {
                     alert('Error al intentar modificar destinatario.');
                 })
-
-// Limpiar el formulario en ambos casos (éxito o error)
-                .finally(function () {
-                    document.getElementById('descripcion').value = "";
-                    document.getElementById('cbu').value = "";
-                    document.getElementById('alias').value = "";
-                });
             })
 
     </script>

@@ -39,7 +39,11 @@
     margin-bottom: 20px;
     padding: 0 15px;
   }
-  .form-container input[type="submit"] {
+  .btn-container {
+    display: flex;
+    gap: 20px;
+  }
+  .btn-container button{
     width: 100%;
     padding: 15px;
     margin-top: 20px;
@@ -51,7 +55,7 @@
     transition: background-color 0.2s;
     border-radius: 0 0 5px 5px;
   }
-  .form-container input[type="submit"]:hover {
+  .btn-container button:hover {
     background-color: #7b59d0;
     transition: background-color 0.2s;
   }
