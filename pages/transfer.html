@@ -205,8 +205,10 @@
                             <td>${destinatario[2]}</td>
                             <td>${destinatario[3]}</td>
                             <td>
-                                <button class="fa-solid fa-pencil icon-grid" title="Modificar" id="icono-modificar"></button>
+                                <button class="fa-solid fa-pencil icon-grid" title="Modificar" id="icono-modificar" data-id="${destinatario[0]}" onclick="modificarDestinatario(this)"> 
+                                </button>
                                 <button class="fa-solid fa-trash icon-grid" title="Eliminar" data-id="${destinatario[0]}"></button>
+
                                 <button class="fa-solid fa-money-bill-transfer icon-grid" title="Tranferir"></button>
                             </td>
                     `;
@@ -242,6 +244,12 @@
                     });
             }
         }
+        //MODIFICAR DESTINATARIO
+        function modificarDestinatario(buton) {
+            idDestinatario=buton.getAttribute("data-id")
+            window.location="modificarDestinatario.html?idDestinatario="+idDestinatario
+        }
+
     </script>
 </body>
 

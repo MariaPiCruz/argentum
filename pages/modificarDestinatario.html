@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banco Argentum - Nuevo Destinatario</title>
+    <link rel="icon" type="image/x-icon" href="../static/images/logo.png">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:100,300,300i,400,700,900">
+    <link rel="stylesheet" href="../static/fontawesome/css/all.css">
+    <link rel="stylesheet" href="../static/css/fonts.css">
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <link rel="stylesheet" href="../static/css/destinatario.css">
+    <script src="../static/js/scripts.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="bar-title">
+            <div class="panel-title-flex">
+                <img src="../static/images/argenntum.fw.png" height="30px" alt="Banco Argentum">
+                <div class="panel-login-flex">
+                    <div>
+                        <p class="font-name" id="nombreUsuario"></p>
+                    </div>
+                    <i class="fa-solid fa-gear font-icon"></i>
+                    <button class="btn" onclick="logout()">Salir</button>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <ul class="menu">
+                <li class="mnu" onclick="window.location.href='inicio.html'"><span
+                        class="fa-solid fa-house-user"></span> Inicio</li>
+                <li class="mnu" onclick="window.location.href='transfer.html'"><span class="fa-light fa-money-bill-transfer"></span> Transferencias</li>
+                <li class="mnu"><span class="fa-thin fa-money-check-dollar"></span> Pagos</li>
+                <li class="mnu"><span class="fa-thin fa-file-invoice-dollar"></span> Recargas</li>
+                <li class="mnu"><span class="fa-thin fa-money-bill-trend-up"></span>Inversiones</li>
+                <li class="mnu"><span class="fa-solid fa-shield-halved"></span> Seguros</li>
+                <li class="mnu"><span class="fa-solid fa-clipboard-question"></span> Consultas y Solicitudes</li>
+                <li class="mnu"><span class="fa-solid fa-bars"></span> Más</li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="form-container">
+            <h1>Modificar Destinatario</h1>
+            <form class="form-guardar-cambios" id="form-guardar-cambios">
+                <div class="form-item">
+                    <label for="idDestinatario">Código</label>
+                    <input type="number" id="idDestinatario" readonly="true">
+                </div>
+                <div class="form-item">
+                    <label for="descripcionModificar">Nombre/Descripción:</label>
+                    <input type="text" placeholder="Nombre/Descripción" id="descripcionModificar" required name="cbuModificar"/>
+                </div>
+
+                <div class="form-item">
+                    <label for="cbuModificar">CBU:</label>
+                    <input type="text" placeholder="cbu" id="cbuModificar" required name="cbuModificar" />
+                </div>
+
+                <div class="form-item">
+                    <label for="aliasModificar">Alias:</label>
+                    <input type="text" placeholder="alias" id="aliasModificar" required name="aliasModificar" />
+                </div>
+    
+                <div class="msg" id="msg"></div>
+                <button type="submit" id="guardarCambios">Guardar Cambios</button>
+                <a href="inicio.html">Cancelar</a>
+            </form>
+        </div>
+    </main>
+
+    <script>
+
+        const URL = "http://127.0.0.1:5000/"
+        let idDestinatario;
+
+        window.addEventListener("DOMContentLoaded", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+
+            idDestinatario = parseInt(urlParams.get('idDestinatario'));
+            let campoIdDestinatario=document.getElementById('idDestinatario');
+            campoIdDestinatario.value=idDestinatario;
+            campoIdDestinatario.readonly=true;
+        })
+
+/*
+        document.getElementById('guardarCambios').addEventListener("click", function() {
+            guardarCambios()
+        })
+
+        document.getElementById('form-guardar-cambios').addEventListener('submit', guardarCambios);
+        //(event) {
+            //event.preventDefault(); // Evitamos que se envie el form 
+
+            var formData = new FormData(this);
+
+            // Realizamos la solicitud POST al servidor
+            fetch(URL + 'destinatarios'+ idDestinatario, {
+                method: 'POST',
+                body: formData // Aquí enviamos formData. Dado que formData puede contener archivos, no se utiliza JSON.
+            })
+    */    
+        document.getElementById('form-guardar-cambios').addEventListener('submit', function (event) {
+            event.preventDefault(); // Evitamos que se envie el form 
+
+            var formData = new FormData(this);
+    
+            // Realizamos la solicitud POST al servidor
+            fetch(URL + 'destinatarios/'+ idDestinatario, {
+                method: 'POST',
+                body: formData // Aquí enviamos formData. Dado que formData puede contener archivos, no se utiliza JSON.
+            })
+            //Después de realizar la solicitud POST, se utiliza el método then() para manejar la respuesta del servidor.
+            .then(function (response) {
+                    if (response.ok) { 
+//Si la respuesta es exitosa, convierte los datos de la respuesta a formato JSON.
+                        return response.json(); 
+                    } else {
+// Si hubo un error, lanzar explícitamente una excepción
+// para ser "catcheada" más adelante
+                        throw new Error('Error al modificar destinatario.');
+                    }
+            })
+
+//Respuesta OK, muestra una alerta informando que el producto se agregó correctamente y limpia los campos del formulario para que puedan ser utilizados para un nuevo producto.
+                .then(function (data) {
+                    alert('Destinatario modificado correctamente.');
+                })
+
+// En caso de error, mostramos una alerta con un mensaje de error.
+                .catch(function (error) {
+                    alert('Error al intentar modificar destinatario.');
+                })
+
+// Limpiar el formulario en ambos casos (éxito o error)
+                .finally(function () {
+                    document.getElementById('descripcion').value = "";
+                    document.getElementById('cbu').value = "";
+                    document.getElementById('alias').value = "";
+                });
+            })
+
+    </script>
+    
+</body> 
+</html>   
