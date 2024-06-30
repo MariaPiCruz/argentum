@@ -172,3 +172,47 @@ nav{
 .txt-align-right{
     text-align: right;
 }
+.menu-toggle{
+    display: none;
+}
+
+/* Estilos Responsivos */
+@media screen and (max-width: 768px) {
+    .bar-title {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 20px;
+    }
+
+    .panel-title-flex {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .panel-login-flex {
+        margin-top: 10px;
+    }
+    .menu-toggle {
+        display: block;
+        cursor: pointer;
+        font-size: 24px;
+        color: white;
+        padding: 10px 20px;
+    }
+    
+    .menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        margin: 0;
+    }
+    
+    .menu.active {
+        display: flex;
+    }
+    
+    .mnu {
+        padding: 10px;
+        text-align: center;
+    }
+}

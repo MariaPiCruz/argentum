@@ -1,10 +1,18 @@
+
+
 document.addEventListener("DOMContentLoaded", function () {
   //primero que todo, validar si hay un usuario ingresado, sino no se deja acceder a esta pagina, se redirige al loguin
   let usuarioAutenticado = sessionStorage.getItem("usuario_autenticado");
   if (usuarioAutenticado != "true") {
     window.location.href = "loguin.html"; // Redirigir al loguin
   }
+  const menuToggle = document.getElementById('mobile-menu');
+  const menu = document.querySelector('nav .menu');
+  menuToggle.addEventListener('click', function() {
+    menu.classList.toggle('active');
+  });
 });
+
 
 function formatDate(date) {
   // Extraer el día, el mes y el año de la fecha proporcionada
