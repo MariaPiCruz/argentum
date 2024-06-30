@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../static/fontawesome/css/all.css">
     <link rel="stylesheet" href="../static/css/fonts.css">
     <link rel="stylesheet" href="../static/css/styles.css">
-    <link rel="stylesheet" href="../static/css/destinatario.css">
+    <link rel="stylesheet" href="../static/css/modificarDestinatario.css">
     <script src="../static/js/scripts.js"></script>
 </head>
 
@@ -32,7 +32,8 @@
             <ul class="menu">
                 <li class="mnu" onclick="window.location.href='inicio.html'"><span
                         class="fa-solid fa-house-user"></span> Inicio</li>
-                <li class="mnu" onclick="window.location.href='transfer.html'"><span class="fa-light fa-money-bill-transfer"></span> Transferencias</li>
+                <li class="mnu" onclick="window.location.href='transfer.html'"><span
+                        class="fa-light fa-money-bill-transfer"></span> Transferencias</li>
                 <li class="mnu"><span class="fa-thin fa-money-check-dollar"></span> Pagos</li>
                 <li class="mnu"><span class="fa-thin fa-file-invoice-dollar"></span> Recargas</li>
                 <li class="mnu"><span class="fa-thin fa-money-bill-trend-up"></span>Inversiones</li>
@@ -44,26 +45,28 @@
     </header>
     <main>
         <div class="form-container">
+            <a class="cerrar-form" href="inicio.html"><i class="fa-solid fa-x"></i></a>
             <h1>Modificar Destinatario</h1>
             <form class="form-guardar-cambios" id="form-guardar-cambios">
                 <div class="form-item">
-                    <label for="descripcion">Nombre/Descripción:</label>
-                    <input type="text" placeholder="Nombre/Descripción" id="descripcion" required name="descripcion"/>
+                    <label for="descripcion">Nombre/<br>Descripción:</label>
+                    <input type="text" placeholder="Nombre/Descripción" id="descripcion" required name="descripcion" />
                 </div>
 
                 <div class="form-item">
                     <label for="cbu">CBU:</label>
-                    <input type="text" placeholder="cbu" id="cbu" required name="cbu" />
+                    <input type="text" placeholder="CBU" id="cbu" required name="cbu" />
                 </div>
 
                 <div class="form-item">
                     <label for="alias">Alias:</label>
-                    <input type="text" placeholder="alias" id="alias" required name="alias" />
+                    <input type="text" placeholder="Alias" id="alias" required name="alias" />
                 </div>
-    
+
                 <div class="msg" id="msg"></div>
-                <button type="submit" id="guardarCambios">Guardar Cambios</button>
-                <a href="transfer.html">Cancelar</a>
+                <div class="btn-container">
+                    <button type="submit" id="guardarCambios">Guardar Cambios</button>
+                </div>
             </form>
         </div>
     </main>
@@ -72,31 +75,31 @@
 
         const URL = "http://127.0.0.1:5000/"
 
-        
+
         let campoDescripcion = document.getElementById('descripcion');
         let campoCbu = document.getElementById('cbu');
         let campoAlias = document.getElementById('alias');
         let idDestinatario;
 
-        window.addEventListener("DOMContentLoaded", function() {
+        window.addEventListener("DOMContentLoaded", function () {
             const urlParams = new URLSearchParams(window.location.search);
 
             idDestinatario = parseInt(urlParams.get('idDestinatario'));
-              // Realizamos la solicitud POST al servidor
-              fetch(URL + `Buscardestinatario/${idDestinatario}`, {
+            // Realizamos la solicitud POST al servidor
+            fetch(URL + `Buscardestinatario/${idDestinatario}`, {
                 method: 'GET'
             })
-            //Después de realizar la solicitud, se utiliza el método then() para manejar la respuesta del servidor.
-            .then(function (response) {
-                    if (response.ok) { 
-                    //Si la respuesta es exitosa, convierte los datos de la respuesta a formato JSON.
-                        return response.json(); 
+                //Después de realizar la solicitud, se utiliza el método then() para manejar la respuesta del servidor.
+                .then(function (response) {
+                    if (response.ok) {
+                        //Si la respuesta es exitosa, convierte los datos de la respuesta a formato JSON.
+                        return response.json();
                     } else {
                         throw new Error('Error al buscar destinatario.');
                     }
-            })
-            .then(function (data) {
-                //cargar campos
+                })
+                .then(function (data) {
+                    //cargar campos
                     campoDescripcion.value = data[0][0];
                     campoCbu.value = data[0][1];
                     campoAlias.value = data[0][2];
@@ -105,31 +108,31 @@
                 .catch(function (error) {
                     alert('Error al buscar el destinatario.');
                 })
-            
+
         })
 
-   
+
         document.getElementById('form-guardar-cambios').addEventListener('submit', function (event) {
             event.preventDefault(); // Evitamos que se envie el form 
 
             var formData = new FormData(this);
-    
+
             // Realizamos la solicitud POST al servidor
             fetch(URL + `ModificarDestinatarios/${idDestinatario}`, {
                 method: 'PUT',
                 body: formData // Aquí enviamos formData. Dado que formData puede contener archivos, no se utiliza JSON.
             })
-            //Después de realizar la solicitud POST, se utiliza el método then() para manejar la respuesta del servidor.
-            .then(function (response) {
-                    if (response.ok) { 
+                //Después de realizar la solicitud POST, se utiliza el método then() para manejar la respuesta del servidor.
+                .then(function (response) {
+                    if (response.ok) {
                         //Si la respuesta es exitosa, convierte los datos de la respuesta a formato JSON.
-                        return response.json(); 
+                        return response.json();
                     } else {
-                    // Si hubo un error, lanzar explícitamente una excepción
-                    // para ser "catcheada" más adelante
+                        // Si hubo un error, lanzar explícitamente una excepción
+                        // para ser "catcheada" más adelante
                         throw new Error('Error al modificar destinatario.');
                     }
-            })
+                })
 
                 //Respuesta OK, muestra una alerta informando que el producto se agregó correctamente y limpia los campos del formulario para que puedan ser utilizados para un nuevo producto.
                 .then(function (data) {
@@ -141,9 +144,10 @@
                 .catch(function (error) {
                     alert('Error al intentar modificar destinatario.');
                 })
-            })
+        })
 
     </script>
-    
-</body> 
-</html>   
+
+</body>
+
+</html>
