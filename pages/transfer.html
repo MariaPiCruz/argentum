@@ -161,7 +161,7 @@
                                 </button>
                                 <button class="fa-solid fa-trash icon-grid" title="Eliminar" data-id="${destinatario[0]}" onclick=eliminarDestinatario(this)></button>
 
-                                <button class="fa-solid fa-money-bill-transfer icon-grid" title="Tranferir"></button>
+                                <button class="fa-solid fa-money-bill-transfer icon-grid" title="Tranferir" onclick="transferir()" ></button>
                             </td>
                     `;
                     tableBody.appendChild(fila);
@@ -199,6 +199,9 @@
             window.location="modificarDestinatario.html?idDestinatario="+idDestinatario;
         }
 
+        function transferir(){
+            alert("Disculpe los incovenientes, todavia estamos trabajando en esta opción.");
+        }
     </script>
 </body>
 

@@ -196,6 +196,11 @@ header {
 #menu button:hover {
     background: #fff;
     color: #7b59d0;
+    transition: 0;
+
+}
+#menu button a:hover{
+    color: #7b59d0;
 }
 
 /*boton menu desplegable*/

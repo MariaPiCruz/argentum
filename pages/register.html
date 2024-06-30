@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Argentum-Registro</title>
+    <link rel="icon" type="image/x-icon" href="../static/images/logo.png">
     <link rel="stylesheet" href="../static/css/loguin.css" />
     <script
       src="https://kit.fontawesome.com/2f8ba933a8.js"
@@ -12,7 +13,7 @@
   </head>
   <body>
     <div class="form-container">
-      <h1>Registrate</h1>
+      <h1>Regístrate</h1>
       <div class="links">
         <a href="loguin.html">Inicio de Sesión</a>
         <a href="#" class="active">Registro</a>
@@ -140,19 +141,6 @@
               .catch(function (error) {
                 alert("Error al crear la cuenta.");
               })
-
-              // Limpiar el formulario en ambos casos (éxito o error)
-            //   .finally(function () {
-            //     document.getElementById("nombre").value = "";
-            //     document.getElementById("apellido").value = "";
-            //     document.getElementById("dni").value = "";
-            //     document.getElementById("cuil").value = "";
-            //     document.getElementById("username").value = "";
-            //     document.getElementById("password").value = "";
-            //     document.getElementById("email").value = "";
-            //     document.getElementById("msg").textContent = "";
-            //     window.location = "loguin.html";
-            //   });
           }
         });
       function ValidarFormulario() {

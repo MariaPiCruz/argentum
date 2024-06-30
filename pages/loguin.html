@@ -1,99 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Argentum-Login</title>
     <link rel="stylesheet" href="../static/css/loguin.css" />
-    <script src="https://kit.fontawesome.com/2f8ba933a8.js" crossorigin="anonymous"></script>
-</head>
-<body>
+    <link rel="icon" type="image/x-icon" href="../static/images/logo.png">
+    <script
+      src="https://kit.fontawesome.com/2f8ba933a8.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
     <div class="form-container">
-        <h1>Home Banking</h1>
+      <h1>Home Banking</h1>
 
-        <div class="links">
-            <a href="#" class="active">Inicio sesión</a>
-            <a href="register.html">Registro</a>
+      <div class="links">
+        <a href="#" class="active">Inicio sesión</a>
+        <a href="register.html">Registro</a>
+      </div>
+      <form action="" id="formulario">
+        <div class="form-item">
+          <label for="username"><i class="fas fa-user"></i></label>
+          <input
+            type="text"
+            placeholder="Usuario"
+            id="username"
+            name="username"
+          />
         </div>
-        <form action="" id="formulario">
-            <div class="form-item">
-                <label for="username"><i class="fas fa-user"></i></label>
-                <input type="text" placeholder="Usuario" id="username" name="username" />
-            </div>
 
-            <div class="form-item">
-                <label for="password"><i class="fas fa-lock"></i></label>
-                <input type="password" placeholder="Contraseña" id="password" name="password" />
-            </div>
+        <div class="form-item">
+          <label for="password"><i class="fas fa-lock"></i></label>
+          <input
+            type="password"
+            placeholder="Contraseña"
+            id="password"
+            name="password"
+          />
+        </div>
 
-            <div class="msg" id="msg"></div>
-            <input type="submit" value="Ingresar" />
-        </form>
+        <div class="msg" id="msg"></div>
+        <input type="submit" value="Ingresar" />
+      </form>
     </div>
     <script>
-        let cliente = {};
-        document.addEventListener('DOMContentLoaded', function () {
-            let usuarioAutenticado = sessionStorage.getItem('usuario_autenticado');
-            if (usuarioAutenticado === 'true') {
-                window.location.href = 'inicio.html';
-            }
-        });
+        let campoMsg = document.getElementById("msg");
+      let cliente = {};
+      document.addEventListener("DOMContentLoaded", function () {
+        let usuarioAutenticado = sessionStorage.getItem("usuario_autenticado");
+        if (usuarioAutenticado === "true") {
+          window.location.href = "inicio.html";
+        }
+      });
 
-        const URL = "http://127.0.0.1:5000/";
+      const URL = "http://127.0.0.1:5000/";
 
-        document.getElementById('formulario').addEventListener('submit', function (event) {
-            event.preventDefault();
-
+      document
+        .getElementById("formulario")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          if (ValidarFormulario()) {
             var formData = new FormData(this);
 
-            fetch(URL + 'cuentas', {
-                method: 'POST',
-                body: formData
+            fetch(URL + "cuentas", {
+              method: "POST",
+              body: formData,
             })
-            .then(function (response) {
+              .then(function (response) {
                 if (response.ok) {
-                    return response.json();
+                  return response.json();
                 } else {
-                    throw new Error('Error al ingresar.');
+                    campoMsg.textContent = "Error al ingresar.";
+                //   throw new Error("Error al ingresar.");
                 }
-            })
-            .then(function (data) {
+              })
+              .then(function (data) {
                 cliente.idCliente = data.cliente_info[0];
                 cliente.nombreCliente = data.cliente_info[1];
                 cliente.apellidoCliente = data.cliente_info[2];
                 cliente.cbu = data.cliente_info[5];
                 cliente.alias = data.cliente_info[6];
                 cliente.saldo = data.cliente_info[7];
-                
+
                 return ObtenerDatosCuenta();
-            })
-            .then(function (datosCuenta) {
-                cliente.tipoCuenta = datosCuenta[0]; 
-                cliente.nroCuenta = datosCuenta[1]; 
+              })
+              .then(function (datosCuenta) {
+                cliente.tipoCuenta = datosCuenta[0];
+                cliente.nroCuenta = datosCuenta[1];
                 sessionStorage.setItem("cliente_info", JSON.stringify(cliente));
-                sessionStorage.setItem('usuario_autenticado', 'true');
-                window.location.href = 'inicio.html';
-            })
-            .catch(function (error) {
-                alert(error.message);
-            })
-            .finally(function () {
-                document.getElementById('username').value = "";
-                document.getElementById('password').value = "";
-            });
+                sessionStorage.setItem("usuario_autenticado", "true");
+                window.location.href = "inicio.html";
+              })
+              .catch(function (error) {
+                campoMsg.textContent = "Datos incorrectos.";
+                // alert(error.message);
+              })
+              .finally(function () {
+                document.getElementById("username").value = "";
+                document.getElementById("password").value = "";
+              });
+          }
         });
 
-        async function ObtenerDatosCuenta() {
-            const response = await fetch(URL + "tipoCuenta/" + cliente.idCliente);
+      async function ObtenerDatosCuenta() {
+        const response = await fetch(URL + "tipoCuenta/" + cliente.idCliente);
 
-            if (!response.ok) {
-                throw new Error("Error al obtener los datos de la cuenta.");
-            }
-
-            const data = await response.json();
-            console.log("Datos de cuenta bancaria:", data);
-            return data;
+        if (!response.ok) {
+          throw new Error("Error al obtener los datos de la cuenta.");
         }
+
+        const data = await response.json();
+        console.log("Datos de cuenta bancaria:", data);
+        return data;
+      }
+
+      function ValidarFormulario() {
+        let campoUsername = document.getElementById("username");
+        let campoPassword = document.getElementById("password");
+        if (
+          campoUsername.value.trim() == "" ||
+          campoPassword.value.trim() == ""
+        ) {
+          campoMsg.textContent = "Debes completar todos los campos";
+          return false;
+        }
+        return true;
+      }
     </script>
-</body>
+  </body>
 </html>

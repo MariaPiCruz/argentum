@@ -24,10 +24,11 @@ body {
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  width: 30%;
+  width: max-content;
   /*background-color: #ffffff;
     box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);*/
   margin: 100px auto;
+  padding: 10px;
 }
 .form-container h1 {
   text-align: center;
@@ -93,4 +94,11 @@ body {
 .form-container input[type="submit"]:hover {
   background-color: #7b59d0;
   transition: background-color 0.2s;
+}
+
+@media screen and (max-width: 375px){
+  .form-container{
+    width: 300px;
+  }
+  .form-item{width: 250px;}
 }
