@@ -133,6 +133,10 @@ class Conexion:
         nueva_cuenta_id = self.cursor.lastrowid
         return nueva_cuenta_id
     
+    def validarDni(self, dni):
+        self.cursor.execute(f"SELECT * FROM clientes WHERE dni = '{dni}';")
+        return self.cursor.fetchall()
+    
     def agregar_cliente(self, nombre, apellido, dni, cuil, cbu, alias, saldo, idTarjeta, idTipoCuenta):
         sql = "INSERT INTO  clientes (nombre, apellido, dni, cuil, cbu, alias, saldo, idTarjeta, idTipoCuenta) values (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
         valores = (nombre, apellido, dni, cuil, cbu, alias, saldo, idTarjeta, idTipoCuenta)
@@ -274,6 +278,15 @@ def generar_alias(longitud_min=6, longitud_max=20):
     longitud = random.randint(longitud_min, longitud_max)
     alias = ''.join(random.choice(caracteres) for _ in range(longitud))
     return alias
+
+@app.route("/validarDni/<dni>", methods=["GET"])
+def validarDni(dni):
+    if conexion.validarDni(dni):
+        #ya existe ese nro de documento
+        return jsonify({"validado": True}), 200
+    else:
+        #no existe ese nro de documento
+        return jsonify({"validado": False}), 200
 
 @app.route("/clientes", methods=["POST"])
 def agregar_cliente():
