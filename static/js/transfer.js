@@ -1,7 +1,7 @@
 'use strict';
 
-//const url = "http://maripilicruz.pythonanywhere.com/";
-const url = "http://127.0.0.1:5000/"
+const url = "https://maripilicruz.pythonanywhere.com/";
+//const url = "http://127.0.0.1:5000/"
 
 
 
