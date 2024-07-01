@@ -129,7 +129,12 @@
                 <div class="modal-text-line">
                     <div class="card-line-flex">
                         <p class="modal-text" contenteditable="false" id="txtAlias"></p>
-                        <span class="fa-solid fa-pencil" onclick="editAlias()"></span>
+                        <span class="fa-solid fa-pencil" id="aliasPencil" onclick="editAlias()"></span>
+                        <div class="oculto" id="btnEdit">
+                            <span class="fa-solid fa-floppy-disk" id="aliasDisk" onclick="saveAlias()" style="cursor:pointer; margin-right: 5px;"></span>
+                            <span class="fa-solid fa-xmark" id="aliasX" style="cursor:pointer;" onclick="cancelAlias()"></span>
+                        </div>
+
                     </div>
                     <p class="modal-label">Alias</p>
                 </div>
