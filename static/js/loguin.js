@@ -1,7 +1,7 @@
 'use strict';
 
-//const url = "http://maripilicruz.pythonanywhere.com/";
-const url = "http://127.0.0.1:5000/"
+const url = "http://maripilicruz.pythonanywhere.com/";
+//const url = "http://127.0.0.1:5000/"
 let formulario = document.querySelector("#form-login");
 let usuario = document.querySelector("#usuario");
 let clave = document.querySelector("#clave");
