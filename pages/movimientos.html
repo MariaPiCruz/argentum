@@ -54,14 +54,8 @@
             <div class="section-flex" id="section-cuentas">
                 <div class="card-btn card-selected" id="card-btn-pesos" onclick="changedMovimientos('pesos')">
                     <h4>Caja de Ahorro en Pesos</h4>
-                    <p>084-123456 / 3</p>
-                    <div class="card-saldo">$ <b>380.400,00</b></div>
-                    <div class="card-dashed oculto">$ <b>--- --- --</b></div>
-                </div>
-                <div class="card-btn" id="card-btn-dolar" onclick="changedMovimientos('dolar')">
-                    <h4>Caja de Ahorro en USD</h4>
-                    <p>084-123456 / 3</p>
-                    <div class="card-saldo">$<b>0,00</b></div>
+                    <p id="nroCuenta"></p>
+                    <div class="card-saldo">$ <b id="saldo"></b></div>
                     <div class="card-dashed oculto">$ <b>--- --- --</b></div>
                 </div>
             </div>
@@ -69,7 +63,7 @@
         <section class="section">
             <section class="section-movimientos">
                 <h4>MOVIMIENTO DE CUENTA</h4>
-                <p id="tittipoNumero">Caja de Ahorro en Pesos N° 084-123456 / 3</p>                
+                <p id="tittipoNumero"></p>                
                 <h4>Últimos Movimientos</h4>
                 <div class="table-movimientos" id="table-movimientos">
                     <div class="grid-item text-bold">Fecha</div>
