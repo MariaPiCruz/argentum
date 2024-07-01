@@ -89,74 +89,64 @@
 
     <script>
       const URL = "http://127.0.0.1:5000/";
-
+    
       // Capturamos el evento de envío del formulario
       document
         .getElementById("formulario")
-        .addEventListener("submit", function (event) {
+        .addEventListener("submit", async function (event) {
           event.preventDefault(); // Evitamos que se envie el form
-
+    
           if (ValidarFormulario()) {
             let dni = document.getElementById("dni");
-            if (ValidarDni(dni.value)) {
-              // Realizamos la solicitud POST al servidor
-              var formData = new FormData(this);
-              fetch(URL + "clientes", {
-                method: "POST",
-                body: formData, // Aquí enviamos formData. Dado que formData puede contener archivos, no se utiliza JSON.
-              })
-                //Después de realizar la solicitud POST, se utiliza el método then() para manejar la respuesta del servidor.
-                .then(function (response) {
-                  if (response.ok) {
-                    //Si la respuesta es exitosa, convierte los datos de la respuesta a formato JSON.
-                    return response.json();
-                  } else {
-                    // Si hubo un error, lanzar explícitamente una excepción
-                    // para ser "catcheada" más adelante
-                    throw new Error("Error al crear cuenta.");
-                  }
+            try {
+              let dniValidado = await ValidarDni(dni.value);
+              if (dniValidado) {
+                // Realizamos la solicitud POST al servidor
+                var formData = new FormData(this);
+                fetch(URL + "clientes", {
+                  method: "POST",
+                  body: formData, // Aquí enviamos formData. Dado que formData puede contener archivos, no se utiliza JSON.
                 })
-
-                //Respuesta OK, muestra una alerta informando que el producto se agregó correctamente y limpia los campos del formulario para que puedan ser utilizados para un nuevo producto.
-                .then(function (data) {
-                  alert("Cuenta creada correctamente.");
-                  window.location = "loguin.html";
-                })
-
-                // En caso de error, mostramos una alerta con un mensaje de error.
-                .catch(function (error) {
-                  alert("Error al crear la cuenta.");
-                });
+                  .then(function (response) {
+                    if (response.ok) {
+                      return response.json();
+                    } else {
+                      throw new Error("Error al crear cuenta.");
+                    }
+                  })
+                  .then(function (data) {
+                    alert("Cuenta creada correctamente.");
+                    window.location = "loguin.html";
+                  })
+                  .catch(function (error) {
+                    alert("Error al crear la cuenta.");
+                  });
+              }
+            } catch (error) {
+              console.error("Error al validar DNI:", error);
             }
-          }else{
-            return;
           }
         });
-      function ValidarDni(dni) {
-        fetch(URL + "validarDni/" + dni, {
-          method: "GET",
-        })
-          .then(function (response) {
-            return response.json(); // Parseamos la respuesta JSON del servidor
-          })
-          .then(function (data) {
-            if (data.validado === false) {
-              //no existe ese nro de documento, podemos registrarlo
-              return true;
-            } else {
-              alert("Ya existe una cuenta con este nro de documento.");
-              // window.location = "register.html";
-              document.getElementById('dni').style.borderColor = "red";
-              return false;
-            }
-          })
-          .catch(function (error) {
-            console.error("Error en la solicitud:", error);
-            // Aquí puedes manejar el error si la solicitud falla
-            return false; // Por ejemplo, podrías retornar false en caso de error
+    
+      async function ValidarDni(dni) {
+        try {
+          const response = await fetch(URL + "validarDni/" + dni, {
+            method: "GET",
           });
+          const data = await response.json();
+          if (data.validado === false) {
+            return true;
+          } else {
+            alert("Ya existe una cuenta con este número de documento.");
+            document.getElementById("dni").style.borderColor = "red";
+            return false;
+          }
+        } catch (error) {
+          console.error("Error en la solicitud:", error);
+          return false;
+        }
       }
-
+    
       function ValidarFormulario() {
         if (
           document.getElementById("nombre").value.trim() == "" ||
