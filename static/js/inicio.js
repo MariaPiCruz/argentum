@@ -1,7 +1,7 @@
 "use strict";
 
-//const url = "http://maripilicruz.pythonanywhere.com/";
-const URL = "http://127.0.0.1:5000/";
+const url = "https://maripilicruz.pythonanywhere.com/";
+//const URL = "http://127.0.0.1:5000/";
 // const URL = "JensonMedina.pythonanywhere.com/";
 
 
@@ -83,7 +83,7 @@ function copiarAlPortapapeles() {
     Número de CBU: ${cliente.cbu || "No disponible"} 
     Alias de CBU: ${cliente.alias || "No disponible"}
     Titular de la cuenta: ${cliente.nombreCliente || "No disponible"} ${cliente.apellidoCliente || "No disponible"}
-    Tipo y número de documento: DNI-18306188
+    Tipo y número de documento: 
   `;
 
   navigator.clipboard.writeText(texto)
@@ -93,6 +93,12 @@ function copiarAlPortapapeles() {
 
 function editAlias() {
   let txtAlias = document.querySelector("#txtAlias");
+  const pencil = document.querySelector('#aliasPencil');
+  const btnEdit = document.querySelector('#btnEdit');
+
+  pencil.classList.add('oculto');
+  btnEdit.classList.remove('oculto');
+  
   txtAlias.setAttribute("contenteditable", true);
   txtAlias.focus();
 }
@@ -109,6 +115,41 @@ function cerrarModalDC() {
   document.querySelector("#modal-CBUAlias").style.display = "none";
 }
 
+function saveAlias(){
+  let txtAlias = document.querySelector("#txtAlias");
+
+  const params = new FormData();
+  params.append('id', cliente.idCliente);
+  params.append('alias', txtAlias.innerHTML);
+
+  try {
+    fetch(URL+'alias',
+    {
+        method: 'PUT', 
+        body: params,
+        headers: {
+            "accept": 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('status', data.status);
+        cliente.alias = txtAlias.innerHTML;
+        console.log('cliente[]', cliente);
+        cancelAlias();
+    });
+  } catch (error) {
+      console.log('Se produjo un error:', error);
+  };
+};
+
+function cancelAlias(){
+  const pencil = document.querySelector('#aliasPencil');
+  const btnEdit = document.querySelector('#btnEdit');
+
+  pencil.classList.remove('oculto');
+  btnEdit.classList.add('oculto');
+};
 
 // function changedMovimientos(pTipo) {
 //   let pesos = document.querySelector("#card-btn-pesos");
