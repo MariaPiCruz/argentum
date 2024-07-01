@@ -3,6 +3,8 @@
 const url = "https://maripilicruz.pythonanywhere.com/";
 //const url = "http://127.0.0.1:5000/"
 
+let cliente = JSON.parse(sessionStorage.getItem("cliente_info")) || {};
+
 document.addEventListener('DOMContentLoaded', function() {
     let nombreUsuario = document.querySelector('#nombreUsuario');
     nombreUsuario.innerHTML = `${cliente.nombreCliente} ${cliente.apellidoCliente}`;
