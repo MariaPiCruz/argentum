@@ -46,13 +46,13 @@
           <label for="dni">
             <i class="fas fa-user"></i>
           </label>
-          <input type="text" name="dni" placeholder="Dni" id="dni" />
+          <input type="number" name="dni" placeholder="Dni" id="dni" />
         </div>
         <div class="form-item">
           <label for="cuil">
             <i class="fas fa-user"></i>
           </label>
-          <input type="text" name="cuil" placeholder="Cuil" id="cuil" />
+          <input type="number" name="cuil" placeholder="Cuil" id="cuil" />
         </div>
         <div class="form-item">
           <label for="username">
@@ -89,6 +89,7 @@
 
     <script>
       const URL = "http://127.0.0.1:5000/";
+      // const URL = "JensonMedina.pythonanywhere.com/";
     
       // Capturamos el evento de envío del formulario
       document
@@ -148,6 +149,8 @@
       }
     
       function ValidarFormulario() {
+        // let patron = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/;
+        let patron = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         if (
           document.getElementById("nombre").value.trim() == "" ||
           document.getElementById("apellido").value.trim() == "" ||
@@ -160,7 +163,22 @@
           document.getElementById("msg").textContent =
             "Debes completar todos los campos.";
           return false;
+        } if(document.getElementById("dni").value.trim() < 0 || document.getElementById("dni").value.trim() > 9999999999 || document.getElementById("dni").value.trim().length < 8){
+          document.getElementById("msg").textContent =
+            "Formato de DNI no permitido.";
+          return false;
         }
+          if(document.getElementById("cuil").value.trim() < 0 || document.getElementById("cuil").value.trim() > 9999999999999 || document.getElementById("cuil").value.trim().length < 8){
+          document.getElementById("msg").textContent =
+            "Formato de Cuil no permitido.";
+          return false;
+        }
+        if (!patron.test(document.getElementById('email').value.trim())){
+          document.getElementById("msg").textContent =
+            "Formato de correo no permitido.";
+          return false;
+        }
+        document.getElementById("msg").textContent = "";
         return true;
       }
     </script>
