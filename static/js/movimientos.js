@@ -85,5 +85,36 @@ async function getMovimientos(pCliente, pNroCta){
     }catch(e){
         console.log(e.message);
     };
-}
+};
 
+function searchMovimientos(){
+    let grilla = document.querySelector('#table-movimientos');
+    const search = document.querySelector('#searchClave');
+
+    let filtrado = dataMovi.filter(item => item[5].toLowerCase().includes(search.value));
+
+    console.log('filtrado:', filtrado);
+
+    if(filtrado==[]){
+        grilla.innerHTML = "";
+    }else{
+        let grdMovimientosHtml = `
+            <div class="grid-item text-bold">Fecha</div>
+            <div class="grid-item text-bold">Nro.Transacción</div>
+            <div class="grid-item text-bold">Descripcion</div>
+            <div class="grid-item text-bold">Importe</div>
+            <div class="grid-item text-bold">Saldo</div>
+        `;
+
+        filtrado.forEach(movi => {
+            grdMovimientosHtml += `
+                <div class="grid-item">${convertAndFormatDate(movi[3])}</div>
+                <div class="grid-item">${movi[0]}</div>
+                <div class="grid-item">${movi[5]}</div>
+                <div class="grid-item txt-align-right">${movi[6]}</div>
+                <div class="grid-item txt-align-right">${movi[7]}</div>
+            `;
+        });
+        grilla.innerHTML = grdMovimientosHtml;
+    };
+};
