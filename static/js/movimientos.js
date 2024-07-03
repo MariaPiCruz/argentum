@@ -46,6 +46,8 @@ function changeViewSaldo() {
     }
 }
 
+let dataMovi;
+
 async function getMovimientos(pCliente, pNroCta){
     try{
         let tipoNro = document.querySelector('#tittipoNumero');
@@ -60,6 +62,7 @@ async function getMovimientos(pCliente, pNroCta){
         const data = await response.json();
         
         if(typeof data === 'object'){
+            dataMovi = data;
             let grdMovimientosHtml = `
                 <div class="grid-item text-bold">Fecha</div>
                 <div class="grid-item text-bold">Nro.Transacción</div>
