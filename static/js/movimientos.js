@@ -96,8 +96,6 @@ function searchMovimientos(){
 
     let filtrado = dataMovi.filter(item => item[5].toLowerCase().includes(search.value));
 
-    console.log('filtrado:', filtrado);
-
     if(filtrado==[]){
         grilla.innerHTML = "";
     }else{
