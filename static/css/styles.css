@@ -176,6 +176,16 @@ nav{
     display: none;
 }
 
+.buscar-label{
+    font-size: 12px;
+}
+
+.buscar-combo, .buscar-input{
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 5px 10px;
+}
+
 /* Estilos Responsivos */
 @media screen and (max-width: 768px) {
     .bar-title {
