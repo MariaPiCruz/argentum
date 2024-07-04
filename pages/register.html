@@ -10,6 +10,12 @@
       src="https://kit.fontawesome.com/2f8ba933a8.js"
       crossorigin="anonymous"
     ></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
   <body>
     <div class="form-container">
@@ -86,28 +92,23 @@
         <input type="submit" value="Registrarse" />
       </form>
     </div>
-
     <script>
-      //const URL = "http://127.0.0.1:5000/";
-      // const URL = "JensonMedina.pythonanywhere.com/";
-      const URL = "https://maripilicruz.pythonanywhere.com/";
-    
-      // Capturamos el evento de envío del formulario
+      const URL = "https://jenson.pythonanywhere.com/";
+
       document
         .getElementById("formulario")
         .addEventListener("submit", async function (event) {
-          event.preventDefault(); // Evitamos que se envie el form
-    
+          event.preventDefault();
+
           if (ValidarFormulario()) {
             let dni = document.getElementById("dni");
             try {
               let dniValidado = await ValidarDni(dni.value);
               if (dniValidado) {
-                // Realizamos la solicitud POST al servidor
                 var formData = new FormData(this);
                 fetch(URL + "clientes", {
                   method: "POST",
-                  body: formData, // Aquí enviamos formData. Dado que formData puede contener archivos, no se utiliza JSON.
+                  body: formData,
                 })
                   .then(function (response) {
                     if (response.ok) {
@@ -117,11 +118,22 @@
                     }
                   })
                   .then(function (data) {
-                    alert("Cuenta creada correctamente.");
-                    window.location = "loguin.html";
+                    Swal.fire({
+                      title: "¡Cuenta creada!",
+                      text: "Cuenta creada correctamente.",
+                      icon: "success",
+                      confirmButtonText: "OK",
+                    }).then(() => {
+                      window.location = "loguin.html";
+                    });
                   })
                   .catch(function (error) {
-                    alert("Error al crear la cuenta.");
+                    Swal.fire({
+                      title: "Error",
+                      text: "Error al crear la cuenta.",
+                      icon: "error",
+                      confirmButtonText: "OK",
+                    });
                   });
               }
             } catch (error) {
@@ -129,17 +141,23 @@
             }
           }
         });
-    
+
       async function ValidarDni(dni) {
         try {
           const response = await fetch(URL + "validarDni/" + dni, {
             method: "GET",
           });
           const data = await response.json();
+          console.log(data);
           if (data.validado === false) {
             return true;
           } else {
-            alert("Ya existe una cuenta con este número de documento.");
+            Swal.fire({
+              title: "DNI Duplicado",
+              text: "Ya existe una cuenta con este número de documento.",
+              icon: "warning",
+              confirmButtonText: "OK",
+            });
             document.getElementById("dni").style.borderColor = "red";
             return false;
           }
@@ -148,9 +166,8 @@
           return false;
         }
       }
-    
+
       function ValidarFormulario() {
-        // let patron = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/;
         let patron = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         if (
           document.getElementById("nombre").value.trim() == "" ||
@@ -161,25 +178,49 @@
           document.getElementById("password").value.trim() == "" ||
           document.getElementById("email").value.trim() == ""
         ) {
-          document.getElementById("msg").textContent =
-            "Debes completar todos los campos.";
-          return false;
-        } if(document.getElementById("dni").value.trim() < 0 || document.getElementById("dni").value.trim() > 9999999999 || document.getElementById("dni").value.trim().length < 8){
-          document.getElementById("msg").textContent =
-            "Formato de DNI no permitido.";
-          return false;
-        }
-          if(document.getElementById("cuil").value.trim() < 0 || document.getElementById("cuil").value.trim() > 9999999999999 || document.getElementById("cuil").value.trim().length < 8){
-          document.getElementById("msg").textContent =
-            "Formato de Cuil no permitido.";
+          Swal.fire({
+            title: "Campos Vacíos",
+            text: "Debes completar todos los campos.",
+            icon: "warning",
+            confirmButtonText: "OK",
+          });
           return false;
         }
-        if (!patron.test(document.getElementById('email').value.trim())){
-          document.getElementById("msg").textContent =
-            "Formato de correo no permitido.";
+        if (
+          document.getElementById("dni").value.trim() < 0 ||
+          document.getElementById("dni").value.trim() > 9999999999 ||
+          document.getElementById("dni").value.trim().length < 8
+        ) {
+          Swal.fire({
+            title: "Formato Incorrecto",
+            text: "Formato de DNI no permitido.",
+            icon: "warning",
+            confirmButtonText: "OK",
+          });
           return false;
         }
-        document.getElementById("msg").textContent = "";
+        if (
+          document.getElementById("cuil").value.trim() < 0 ||
+          document.getElementById("cuil").value.trim() > 9999999999999 ||
+          document.getElementById("cuil").value.trim().length < 8
+        ) {
+          Swal.fire({
+            title: "Formato Incorrecto",
+            text: "Formato de Cuil no permitido.",
+            icon: "warning",
+            confirmButtonText: "OK",
+          });
+          return false;
+        }
+        if (!patron.test(document.getElementById("email").value.trim())) {
+          Swal.fire({
+            title: "Formato Incorrecto",
+            text: "Formato de correo no permitido.",
+            icon: "warning",
+            confirmButtonText: "OK",
+          });
+          return false;
+        }
         return true;
       }
     </script>

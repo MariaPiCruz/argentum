@@ -1,6 +1,7 @@
 'use strict';
 
-const url = "https://maripilicruz.pythonanywhere.com/";
+// const url = "https://maripilicruz.pythonanywhere.com/";
+const url = "https://jenson.pythonanywhere.com/";
 //const url = "http://127.0.0.1:5000/"
 
 let cliente = JSON.parse(sessionStorage.getItem("cliente_info")) || {};
